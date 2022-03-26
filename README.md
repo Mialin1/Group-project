@@ -1,7 +1,7 @@
 # Proposal
 
 - Group No. : 211
-- Group Members: Huang Leyang, Lin Liya
+- Group Members: Huang Leyang(3035845899), Lin Liya
 - Topic: Mr. Bomb
 
 
