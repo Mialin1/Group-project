@@ -1,8 +1,8 @@
 # Proposal
 
-Group No. : 211
-Group Members: Huang Leyang, Lin Liya
-Topic: Mr. Bomb
+- Group No. : 211
+- Group Members: Huang Leyang, Lin Liya
+- Topic: Mr. Bomb
 
 
 ## 1. Introduction of Game
@@ -12,7 +12,7 @@ The proposed game, "Mr. Bomb", is an adventure RPG game. The player can enjoy th
 
 ## 2. Rules of the Game
 
-### 2.1 rules for surviving
+### 2.1 rules for survival
 The player initially has one life. If the player can collect a "heart" prop, the player can add one more life. If the bomb hits the user, he will lose one life, and if the life status becomes zero, the user dies. After death, the game will calculate the total coin collected in this level, and if it meets the requirement for passing this level, the player can go to the next level.
 
 ### 2.2 rules for passing to next level
@@ -26,7 +26,7 @@ When the user survives from the bombs after a limited time, the game will compar
 5) spring: the player is able to directly walk though the wall within the next 20 seconds
 6) wood: the player can build a disposable wall which can protect itself from the bomb
 7) bomb: 
-  1. Placed by the user: the bomb's lethality is the nine boxes around it, but it can only explode the wooden boxes not the wall. There will be random coin, props or even bombs come out after explode the wooden boxes.
+  1.  Placed by the user: the bomb's lethality is the nine boxes around it, but it can only explode the wooden boxes not the wall. There will be random coin, props or even bombs come out after explode the wooden boxes.
   2. the automated bomb: the bomb's lethality is the nine boxes around it. It will only hurt the uer but will not explode any other boxes.
 8) seed: can be used to plant a tree
 
@@ -36,22 +36,34 @@ When the user survives from the bombs after a limited time, the game will compar
 3) press shift + (number) to use the prop in the according pocket number
 
 ### 2.5 rules for the setting
-1）map： 32x32 initially, and the map will enlarge with the level-up. 
-2）stone wall：solid square, which cannot be exploded
-3）wooden boxes: hollow square， which can be exploded and get game props,coin, or even bomb
-4) trees: they will automatically create coins, and can be exploded by bombs
-5) pocket: used to store the game props
-6) life bar: shows how many lives does the player has
-7) time: the limited time for this level
-8) coin requirement: the required coin for this level
-9) level number
+1. map： 32x32 initially, and the map will enlarge with the level-up.
+2. stone wall：solid square, which cannot be exploded
+3. wooden boxes: hollow square， which can be exploded and get game props,coin, or even bomb
+4. trees: they will automatically create coins, and can be exploded by bombs
+5. pocket: used to store the game props
+6. life bar: shows how many lives does the player has
+7. time: the limited time for this level
+8. coin requirement: the required coin for this level
+9. level number
 
 
 ## 3.Game Features and Requirement
 
 ### 3.1 Dynamic User Interface
+
+The user interface is the feature responsible for input and output, displaying the visualized game on the terminal and receiving the user input from the terminal. There will be three regions for display: status interface, main interface, and text interface, respectively. For user input, there will be only one region - the user input line. The status interface, main interface, text interface, and user input line are arranged in a top-down manner. 
+
+- The status interface is mainly for displaying instantaneous character-related and level-related information. It contains the level number, time, life bar, props inside the pocket.
+- The main interface is mainly for displaying instantaneous game content.
+- The text interface is used to display any notification, and story content.
+
 ### 3.2 Data storage and Loading
+
+Permanent data storage is manual storage that refreshes only if the specific user command is received(if press "store" in the main interface). During this process, all the character-related data, including status, time, location, level number,  pocket, will be exported to an external file and will have permanent storage. 
+
 ### 3.3 Data processing
+
+All the content displayed on the screen is based on continuously updated data. Therefore, we can conclude that all the displayed game content is actually regarding "Data Processing". With collective data processing functions, a different game feature can be created.
 
 ## 4. Code Requirement Implementation
 
