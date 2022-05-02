@@ -7,6 +7,7 @@
  */
 #include "structure.h"
 #include "interface.h"
+#include "IO.h"
 #include<cstdio>
 #include<iostream>
 #include<chrono>
@@ -22,12 +23,10 @@ int main(){
     
     //for player to choose room
     room_page(&player);
-    
-    //press space/enter to enter the game map
 
     game_page(player);
 
-    int x;//the input from the user
+    char x;//the input from the user
     
     while(1){       //refresh the interface when get a command or time refresh
         
@@ -35,7 +34,24 @@ int main(){
             quit_page();
         }
         else {
-            int x = 2;
+            x = get_input();
+            switch(x){
+                case 'W': //move upward
+                    player.position.move(0, -STEP);
+                case 'S': //move downware
+                    player.position.move(0, STEP);
+                case 'A': //move leftward
+                    player.position.move(-STEP, 0);
+                case 'D': //move rightward
+                    player.position.move(STEP, 0);
+                case 's': //uses props
+                    x = get_input();
+                case 'Q': //quit game
+                    check_page(&player);
+                    //check if sure to quit the game
+                    //if yes: player.if_quit = true
+
+            }
         }
         
     }

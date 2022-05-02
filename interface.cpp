@@ -1,6 +1,7 @@
 #include <iostream>
 #include "interface.h"
 #include "structure.h"
+#include "IO.h"
 using namespace std;
 
 //a page with welcome information
@@ -53,7 +54,12 @@ void quit_page(){
     //See you next time
 }
 
-
+void check_page(Player *player){
+    //are you sure to leave
+    //yes(y)            no(n)
+    char x = get_input();
+    if (x=='y') player -> if_quit = true;
+}
 
 
 
