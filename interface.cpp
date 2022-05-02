@@ -11,7 +11,7 @@ void welcome_page(Player *player){
     //ask player to input their name
 
 
-    player -> setname("name");
+    player -> set_name("name");
 
     //a new page:
     //Nice to meet you, XXX
@@ -21,6 +21,11 @@ void welcome_page(Player *player){
 };  
 
 void room_page(Player *player){
+    //if there is any, ask user if he/she want to load previously archieved game
+    //yes(y)      no(n)
+    //if yes, load the previous map, and quit room_page
+
+
     //list out all the maps for users to choose
     //higher level map may be locked, the locked map should be gray
 
@@ -57,8 +62,22 @@ void quit_page(){
 void check_page(Player *player){
     //are you sure to leave
     //yes(y)            no(n)
+
     char x = get_input();
-    if (x=='y') player -> if_quit = true;
+    if (x =='y') player -> if_quit = true;
+
+    //new page
+    //Do you want to archive your status?
+    //yes(y)            no(n)
+    
+    x = get_input();
+    if (x == 'y'){
+        //save the status to file
+        //status: Profile and Map
+    }
+
+    //newpage
+    //The status is succesfully saved
 }
 
 

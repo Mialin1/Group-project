@@ -26,8 +26,7 @@ struct Point{
     }
 };
 
-
-
+//
 struct Time{
     int min, sec;
     void set(int _min, int _sec){
@@ -36,6 +35,7 @@ struct Time{
     }
 };
 
+//
 struct Bomb{
 
 };
@@ -69,7 +69,8 @@ struct Map{
     unit ** map;
     int len_x, len_y;  //the size of the map
 
-    void readmap(){
+    //read maps from file
+    void read_map(){
         //cin << len_x << len_y;
         len_x = 100, len_y = 100;       
         map = new unit *[len_x];
@@ -83,7 +84,8 @@ struct Map{
         }
     }
 
-    void printmap(){
+    //print the map
+    void print_map(){
         for(int i = 0; i < len_x; i++){         //i-th row of the map
             for(int _i = 0; _i < RANGE; _i++)
                 for(int j = 0; j < len_y; j++) //j-th column of the map
@@ -95,49 +97,16 @@ struct Map{
     }
 
 
-    bool if_moveable(int x, int y){
+    bool if_moveable(int x, int y){     //if the target unit is moveable
         return map[x][y].walkable;
     }
-    bool if_breakable(int x, int y){
+    bool if_breakable(int x, int y){    //if the target unit is breakable
         return map[x][y].breakable;
     }
-    bool if_prop(int x, int y){
+    bool if_prop(int x, int y){         //if the target unit has a prop on it 
         return map[x][y].prop;          //if prop != 0, there is a prop on the map
     }
 };
-
-// class World{
-// public:
-//     //参考原作者的写法
-//     bool setted(int );//玩家是否加入游戏
-//     void gameroom();//游戏大厅
-//     void printroom();//输出游戏大厅
-//     string mapchosen;//选择地图
-//     void readmap(string);//读取地图
-//     void mainmap();//主要游戏界面
-//     void resetitem(int, int); //重设地图单位
-//     void setitem(string, int, int, int);//设置地地图
-//     string proptype();//处理道具
-//     void printitem(int, int); //输出地图单位
-//     void move(int, int, int, int, int, int);//玩家移动
-//     void sestbomb(int );//放置水球
-//     void checkbomb(int ); //检查水球状态
-//     void explode(int, int, Bomb *  );//水球爆炸
-//     void checkplayer();//检查玩家状态
-//     void quitgame();//退出游戏
-//     void outofrange(int, int);
-//     void end(int);//游戏结束
-//     void reset();//重新进入游戏大厅
-// private:
-//     // WINDOW *game, *room, *win, *quit, *mapch, *testw, *reminder;
-//     location **map;
-//     int ploc[4][2];
-//     // Player p[4];
-//     clock_t t;
-//     time_t now;
-//     struct tm * timeinfo;
-//     int range_x, range_y;
-// };
 
 
 //Props for player to use in the game
@@ -147,8 +116,6 @@ struct Map{
 //2: spring, jump over the wall once
 //3: seed, for plant trees, and trees will grow coins
 //4: wood, player can place a wooden wall to defend the bomb
-
-
 struct Prop{
 
     string name;
@@ -176,12 +143,12 @@ struct Player{
 
 
     //set the name of the player
-    void setname(string _name){
+    void set_name(string _name){
         name = _name;
     }
 
     //when user get a new prop
-    void additem(int num){
+    void add_item(int num){
         if (num == 0)
             live ++;
         else package[num].num ++;
@@ -230,7 +197,7 @@ struct Player{
             position.move(_x, _y);
 
             if (map -> if_prop(position.x, position.y)){                //if the target unit has a prop on it
-                additem(map -> map[position.x][position.y].prop);       //add the prop to the package
+                add_item(map -> map[position.x][position.y].prop);       //add the prop to the package
             }
         }
     }
