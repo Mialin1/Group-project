@@ -37,8 +37,10 @@ int main(){
             x = get_input();
             switch(x){
                 case 'W': //move upward
+                    player.move(0, -STEP);
                     player.position.move(0, -STEP);
-                case 'S': //move downware
+                case 'S': //move downward
+
                     player.position.move(0, STEP);
                 case 'A': //move leftward
                     player.position.move(-STEP, 0);

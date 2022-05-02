@@ -2,7 +2,7 @@
 #define INTERFACE_H
 
 #include "structure.h"
-#define STEP 3
+#define STEP 1
 
 
 void welcome_page(Player *player);

@@ -54,11 +54,24 @@ struct location{
 
 }; 
 
-
+struct unit{
+    bool breakable;
+    bool walkable;
+    int prop;
+    bool if_player;
+};
 
 struct Map{
-    char map[1000][1000];
-
+    unit ** map;
+    bool if_walkable(int x, int y){
+        return map[x][y].walkable;
+    }
+    bool if_breakable(int x, int y){
+        return map[x][y].breakable;
+    }
+    bool if_prop(int x, int y){
+        return map[x][y].prop; //if prop != 0, there is a prop on the map
+    }
 };
 
 // class World{
@@ -165,6 +178,16 @@ struct Player{
 
         if_quit = false;
     }
+
+    //when player want to move
+    void move(int _x, int _y){
+        if (map -> walkable(x + _x, y + _y)){
+
+        }
+            
+
+    }
+
 };
 
 struct Map{
