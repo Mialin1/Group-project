@@ -9,6 +9,7 @@
 #include "interface.h"
 #include<cstdio>
 #include<iostream>
+#include<chrono>
 using namespace std;
 
 
@@ -19,9 +20,8 @@ int main(){
 
     player.initialize();
     
-    welcome_page();    
-}
-
-void welcome_page(){
+    welcome_page(&player); 
+    
+    
 
 }
