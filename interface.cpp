@@ -47,7 +47,7 @@ void game_page(Player player){
     // life: 1    coin(s): 0/100
     // time remaining: 03: 00
 
-
+    
 }
 
 void quit_page(){

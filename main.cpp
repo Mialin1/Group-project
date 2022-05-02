@@ -37,15 +37,13 @@ int main(){
             x = get_input();
             switch(x){
                 case 'W': //move upward
-                    player.move(0, -STEP);
-                    player.position.move(0, -STEP);
+                    player.move(0, -1);
                 case 'S': //move downward
-
-                    player.position.move(0, STEP);
+                    player.move(0, 1);
                 case 'A': //move leftward
-                    player.position.move(-STEP, 0);
+                    player.move(-1, 0);
                 case 'D': //move rightward
-                    player.position.move(STEP, 0);
+                    player.move(1, 0);
                 case 's': //uses props
                     x = get_input();
                 case 'Q': //quit game

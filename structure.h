@@ -54,23 +54,55 @@ struct location{
 
 }; 
 
+#define RANGE 3     //the size of each unit
+
+//information of each unit on the map
 struct unit{
     bool breakable;
     bool walkable;
     int prop;
     bool if_player;
+    char image[RANGE][RANGE];
 };
 
 struct Map{
     unit ** map;
-    bool if_walkable(int x, int y){
+    int len_x, len_y;  //the size of the map
+
+    void readmap(){
+        //cin << len_x << len_y;
+        len_x = 100, len_y = 100;       
+        map = new unit *[len_x];
+        for(int i = 0; i < len_x; i++)
+            map[i] = new unit [len_y];
+        
+        for(int i = 0; i < len_x; i++){
+            for(int j = 0; j < len_y; j++){
+                //input information of unit [i, j]
+            }
+        }
+    }
+
+    void printmap(){
+        for(int i = 0; i < len_x; i++){         //i-th row of the map
+            for(int _i = 0; _i < RANGE; _i++)
+                for(int j = 0; j < len_y; j++) //j-th column of the map
+                    for(int _j = 0; _j < RANGE; _j++){
+                        // cout << map[i][j].image[_i][_j]; 
+                    }
+            // cout << endl;
+        }
+    }
+
+
+    bool if_moveable(int x, int y){
         return map[x][y].walkable;
     }
     bool if_breakable(int x, int y){
         return map[x][y].breakable;
     }
     bool if_prop(int x, int y){
-        return map[x][y].prop; //if prop != 0, there is a prop on the map
+        return map[x][y].prop;          //if prop != 0, there is a prop on the map
     }
 };
 
@@ -109,6 +141,14 @@ struct Map{
 
 
 //Props for player to use in the game
+//Porp list:
+//0: heart, add one life
+//1: sheild, defend the bomb for 5 sec
+//2: spring, jump over the wall once
+//3: seed, for plant trees, and trees will grow coins
+//4: wood, player can place a wooden wall to defend the bomb
+
+
 struct Prop{
 
     string name;
@@ -124,14 +164,14 @@ struct Prop{
 //Profile of the player
 struct Player{
 
-    string name;
-    Time time;
+    string name;            //name of the player
+    Time time;              //for game countdown
     bool if_protect;        //the remaining time player being protected
     Point position;         //position of the user
     int live;               //number of lives player owns
     int coins;              //number of coins that player owns
-    vector<Prop> props;     //props player owns
-    bool if_quit;
+    vector<Prop> package;   //props player owns
+    bool if_quit;           //if user is sure to quit the game
     Map *map;               //the chosen map
 
 
@@ -144,22 +184,27 @@ struct Player{
     void additem(int num){
         if (num == 0)
             live ++;
-        else props[num].num ++;
+        else package[num].num ++;
     }
 
     //initialize the package
     void initialize_props(){
-        Prop heart;
-        heart.set("heart", "description", 0);
-        Prop spring;
-        heart.set("spring", "description", 0);
-        Prop bomb;//用户炸弹无限多个,或给个100个？
-        bomb.set("bomb", "description", 100);
-        Prop seed;//这个应该也是要给很多个吧，不然很难达到硬币可持续增加
-        seed.set("seed", "description", 100);
-        Prop shield;
-        shield.set("shield", "description", 0);
-        //rocket我们没办法衡量速度，因为移动是靠按键盘的，所以玩家按一下就前进一步，比较顺畅一点，对因为一般有速度的是cs那种靠鼠标移动前进的i guess
+        Prop prop; 
+
+        prop.set("heart", "description", 0);
+        package.push_back(prop);
+
+        prop.set("shield", "description", 0);
+        package.push_back(prop);
+
+        prop.set("spring", "description", 0);
+        package.push_back(prop);
+
+        prop.set("seed", "description", 100);
+        package.push_back(prop);
+
+        prop.set("wood", "description", 100);
+        package.push_back(prop);
     }
 
     //initilaize the player
@@ -179,19 +224,16 @@ struct Player{
         if_quit = false;
     }
 
-    //when player want to move
+    //player try to move
     void move(int _x, int _y){
-        if (map -> walkable(x + _x, y + _y)){
+        if (map -> if_moveable(position.x + _x, position.y + _y)){      //if the target unit is moveable
+            position.move(_x, _y);
 
+            if (map -> if_prop(position.x, position.y)){                //if the target unit has a prop on it
+                additem(map -> map[position.x][position.y].prop);       //add the prop to the package
+            }
         }
-            
-
     }
-
-};
-
-struct Map{
-    int len_x, len_y;
 
 };
 
