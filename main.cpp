@@ -14,7 +14,7 @@ using namespace std;
 
 int main(){
 
-    Profile player;
+    Player player;
 
     player.initialize();
     
@@ -25,7 +25,7 @@ int main(){
     
     //press space/enter to enter the game map
 
-    game_page();
+    game_page(player);
 
     int x;//the input from the user
     

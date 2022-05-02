@@ -40,8 +40,6 @@ struct Bomb{
 
 };
 
-class Player;// to be deleted
-
 struct location{
     int x, y;
     string item;
@@ -58,43 +56,43 @@ struct location{
 
 
 
-struct map{
+struct Map{
     char map[1000][1000];
 
 };
 
-class World{
-public:
-    //参考原作者的写法
-    bool setted(int );//玩家是否加入游戏
-    void gameroom();//游戏大厅
-    void printroom();//输出游戏大厅
-    string mapchosen;//选择地图
-    void readmap(string);//读取地图
-    void mainmap();//主要游戏界面
-    void resetitem(int, int); //重设地图单位
-    void setitem(string, int, int, int);//设置地地图
-    string proptype();//处理道具
-    void printitem(int, int); //输出地图单位
-    void move(int, int, int, int, int, int);//玩家移动
-    void sestbomb(int );//放置水球
-    void checkbomb(int ); //检查水球状态
-    void explode(int, int, Bomb *  );//水球爆炸
-    void checkplayer();//检查玩家状态
-    void quitgame();//退出游戏
-    void outofrange(int, int);
-    void end(int);//游戏结束
-    void reset();//重新进入游戏大厅
-private:
-    // WINDOW *game, *room, *win, *quit, *mapch, *testw, *reminder;
-    location **map;
-    int ploc[4][2];
-    // Player p[4];
-    clock_t t;
-    time_t now;
-    struct tm * timeinfo;
-    int range_x, range_y;
-};
+// class World{
+// public:
+//     //参考原作者的写法
+//     bool setted(int );//玩家是否加入游戏
+//     void gameroom();//游戏大厅
+//     void printroom();//输出游戏大厅
+//     string mapchosen;//选择地图
+//     void readmap(string);//读取地图
+//     void mainmap();//主要游戏界面
+//     void resetitem(int, int); //重设地图单位
+//     void setitem(string, int, int, int);//设置地地图
+//     string proptype();//处理道具
+//     void printitem(int, int); //输出地图单位
+//     void move(int, int, int, int, int, int);//玩家移动
+//     void sestbomb(int );//放置水球
+//     void checkbomb(int ); //检查水球状态
+//     void explode(int, int, Bomb *  );//水球爆炸
+//     void checkplayer();//检查玩家状态
+//     void quitgame();//退出游戏
+//     void outofrange(int, int);
+//     void end(int);//游戏结束
+//     void reset();//重新进入游戏大厅
+// private:
+//     // WINDOW *game, *room, *win, *quit, *mapch, *testw, *reminder;
+//     location **map;
+//     int ploc[4][2];
+//     // Player p[4];
+//     clock_t t;
+//     time_t now;
+//     struct tm * timeinfo;
+//     int range_x, range_y;
+// };
 
 
 //Props for player to use in the game
@@ -111,7 +109,7 @@ struct Prop{
 };
 
 //Profile of the player
-struct Profile{
+struct Player{
 
     string name;
     Time time;
@@ -121,7 +119,7 @@ struct Profile{
     int coins;              //number of coins that player owns
     vector<Prop> props;     //props player owns
     bool if_quit;
-    map *map;               //the chosen map
+    Map *map;               //the chosen map
 
 
     //set the name of the player

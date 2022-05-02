@@ -4,15 +4,15 @@
 #include "structure.h"
 
 
-void welcome_page(Profile *player);
+void welcome_page(Player *player);
 
-void game_page();
+void game_page(Player player);
 
 void quit_page();
 
-void room_page(Profile *player);
+void room_page(Player *player);
 
-bool quit_game(Profile player);
+bool quit_game(Player player);
 
 
 #endif

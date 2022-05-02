@@ -4,7 +4,7 @@
 using namespace std;
 
 //a page with welcome information
-void welcome_page(Profile *player){
+void welcome_page(Player *player){
     
     //Your name is: 
     //ask player to input their name
@@ -19,7 +19,7 @@ void welcome_page(Profile *player){
     //press space/enter to quit welcome__page
 };  
 
-void room_page(Profile *player){
+void room_page(Player *player){
     //list out all the maps for users to choose
     //higher level map may be locked, the locked map should be gray
 
@@ -27,7 +27,7 @@ void room_page(Profile *player){
     //press ____ to choose the map and quit room_page
 }
 
-void game_page(){
+void game_page(Player player){
 
     //我觉得大致长这样
 
@@ -57,6 +57,6 @@ void quit_page(){
 
 
 
-bool quit_game(Profile player){
+bool quit_game(Player player){
     return player.if_quit;
 }
