@@ -21,7 +21,7 @@ When the user survives from the bombs after a limited time, the game will compar
 ### 2.3 rules for game props
 
 1) heart: add one more life
-2) //shield: the player will be in invincible mode for 5 seconds
+2) shield: the player will be in invincible mode for 5 seconds
 3) coin: count for the final grade
 4) //rocket: increase the speed of the player within the next 20 seconds
 5) spring: the player is able to directly walk though the wall once

@@ -12,8 +12,6 @@
 #include<chrono>
 using namespace std;
 
-
-
 int main(){
 
     Profile player;
@@ -22,6 +20,8 @@ int main(){
     
     welcome_page(&player); 
     
-    
-
-}
+    //press space/enter to enter the game map
+    while(1){
+        
+    }
+++
