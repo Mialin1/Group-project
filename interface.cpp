@@ -4,22 +4,31 @@
 using namespace std;
 
 //a page with welcome information
-void welcome_page(Profile* player){
+void welcome_page(Profile *player){
     
     //Your name is: 
     //ask player to input their name
-    player -> setname("name");
-    //Nice to meet you, XXX
 
+
+    player -> setname("name");
 
     //a new page:
+    //Nice to meet you, XXX
     //list out the rule of the game
 
-    //press space/enter to quit welcome page
+    //press space/enter to quit welcome__page
 };  
 
+void room_page(Profile *player){
+    //list out all the maps for users to choose
+    //higher level map may be locked, the locked map should be gray
 
-void map_interface(){
+    //player->map = ;
+    //press ____ to choose the map and quit room_page
+}
+
+void game_page(){
+
     //我觉得大致长这样
 
     //level: 1
@@ -38,4 +47,16 @@ void map_interface(){
     // time remaining: 03: 00
 
 
+}
+
+void quit_page(){
+    //See you next time
+}
+
+
+
+
+
+bool quit_game(Profile player){
+    return player.if_quit;
 }

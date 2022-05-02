@@ -20,8 +20,23 @@ int main(){
     
     welcome_page(&player); 
     
+    //for player to choose room
+    room_page(&player);
+    
     //press space/enter to enter the game map
-    while(1){
+
+    game_page();
+
+    int x;//the input from the user
+    
+    while(1){       //refresh the interface when get a command or time refresh
+        
+        if (quit_game(player)){
+            quit_page();
+        }
+        else {
+            int x = 2;
+        }
         
     }
-++
+}

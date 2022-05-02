@@ -40,7 +40,7 @@ struct Bomb{
 
 };
 
-class Player;
+class Player;// to be deleted
 
 struct location{
     int x, y;
@@ -57,6 +57,11 @@ struct location{
 }; 
 
 
+
+struct map{
+    char map[1000][1000];
+
+};
 
 class World{
 public:
@@ -105,7 +110,9 @@ struct Prop{
     }
 };
 
+//Profile of the player
 struct Profile{
+
     string name;
     Time time;
     bool if_protect;        //the remaining time player being protected
@@ -113,16 +120,23 @@ struct Profile{
     int live;               //number of lives player owns
     int coins;              //number of coins that player owns
     vector<Prop> props;     //props player owns
+    bool if_quit;
+    map *map;               //the chosen map
 
+
+    //set the name of the player
     void setname(string _name){
         name = _name;
     }
+
+    //when user get a new prop
     void additem(int num){
         if (num == 0)
             live ++;
         else props[num].num ++;
-
     }
+
+    //initialize the package
     void initialize_props(){
         Prop heart;
         heart.set("heart", "description", 0);
@@ -137,6 +151,7 @@ struct Profile{
         //rocket我们没办法衡量速度，因为移动是靠按键盘的，所以玩家按一下就前进一步，比较顺畅一点，对因为一般有速度的是cs那种靠鼠标移动前进的i guess
     }
 
+    //initilaize the player
     void initialize(){
 
         // setname("name");
@@ -149,6 +164,8 @@ struct Profile{
         coins = 0;
         
         initialize_props();
+
+        if_quit = false;
     }
 };
 
