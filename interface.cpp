@@ -80,8 +80,10 @@ void check_page(Player *player){
     //The status is succesfully saved
 }
 
-
-
 bool quit_game(Player player){
     return player.if_quit;
+}
+
+bool warning_game_cannot(){
+    //bomb cannot be placed here
 }

@@ -46,7 +46,7 @@ When the user survives from the bombs after a limited time, the game will compar
 3. wooden boxes: hollow square， which can be exploded and get game props,coin, or even bomb
 4. trees: they will automatically create coins, and can be exploded by bombs
 5. pocket: used to store the game props
-6. life bar: shows how manb y lives does the player has
+6. life bar: shows how many lives does player has
 7. time: the limited time for this level
 8. coin requirement: the required coin for this level
 9. level number

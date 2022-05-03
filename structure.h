@@ -5,6 +5,7 @@
 #include<cstdio>
 #include<string>
 #include<vector>
+#include<ctime>
 using namespace std;
 
 //a position on the 2D map
@@ -26,33 +27,11 @@ struct Point{
     }
 };
 
-//
-struct Time{
-    int min, sec;
-    void set(int _min, int _sec){
-        min = _min;
-        sec = _sec;
-    }
-};
-
-//
+//Bombs
 struct Bomb{
-
+    bool set;
+    clock_t set_time; //the time when the bomb was setted
 };
-
-struct location{
-    int x, y;
-    string item;
-    Player *p;
-    Player *temp;
-    Bomb *bptr;
-    bool prop;
-    bool breaked;
-    bool walkable;
-    bool breakable;
-    bool pushable;
-
-}; 
 
 #define RANGE 3     //the size of each unit
 
@@ -60,9 +39,13 @@ struct location{
 struct unit{
     bool breakable;
     bool walkable;
+    bool empty;
+    
+    Bomb *bomb;     //point to the bomb on this unit(if any)
+    
     int prop;
-    bool if_player;
     char image[RANGE][RANGE];
+    
 };
 
 struct Map{
@@ -96,14 +79,28 @@ struct Map{
         }
     }
 
-
-    bool if_moveable(int x, int y){     //if the target unit is moveable
+    //set a bomb
+    //input: the position of the bomb
+    void set_bomb(Point p){
+        map[p.x][p.y].bomb = new Bomb;
+        map[p.x][p.y].bomb -> set = true;
+        map[p.x][p.y].bomb-> set_time = clock();
+        map[p.x][p.y].empty = false;
+    }
+    
+    
+    //if the target unit is moveable
+    bool if_moveable(int x, int y){     
         return map[x][y].walkable;
     }
-    bool if_breakable(int x, int y){    //if the target unit is breakable
+    
+    //if the target unit is breakable
+    bool if_breakable(int x, int y){    
         return map[x][y].breakable;
     }
-    bool if_prop(int x, int y){         //if the target unit has a prop on it 
+    
+    //if the target unit has a prop on it
+    bool if_prop(int x, int y){          
         return map[x][y].prop;          //if prop != 0, there is a prop on the map
     }
 };
@@ -111,7 +108,7 @@ struct Map{
 
 //Props for player to use in the game
 //Porp list:
-//0: heart, add one life
+//0: heart, add one life, not in the package
 //1: sheild, defend the bomb for 5 sec
 //2: spring, jump over the wall once
 //3: seed, for plant trees, and trees will grow coins
@@ -130,17 +127,17 @@ struct Prop{
 
 //Profile of the player
 struct Player{
-
     string name;            //name of the player
-    Time time;              //for game countdown
+    clock_t time;              //for game countdown
     bool if_protect;        //the remaining time player being protected
     Point position;         //position of the user
-    int live;               //number of lives player owns
+    int life;               //number of lives player owns
     int coins;              //number of coins that player owns
     vector<Prop> package;   //props player owns
     bool if_quit;           //if user is sure to quit the game
     Map *map;               //the chosen map
 
+    clock_t time_protect;      //the time used
 
     //set the name of the player
     void set_name(string _name){
@@ -150,7 +147,7 @@ struct Player{
     //when user get a new prop
     void add_item(int num){
         if (num == 0)
-            live ++;
+            life ++;
         else package[num].num ++;
     }
 
@@ -179,11 +176,11 @@ struct Player{
 
         // setname("name");
 
-        time.set(0,0);
+        // time.set(0,0);
         
         if_protect = false;
         position.set(0,0);
-        live = 1;
+        life = 1;
         coins = 0;
         
         initialize_props();
@@ -200,6 +197,29 @@ struct Player{
                 add_item(map -> map[position.x][position.y].prop);       //add the prop to the package
             }
         }
+    }
+
+    //player set a porp on the map
+    //input: which prop is used
+    void use_prop(int p){
+        if (p == 1){            //player use a shield
+            if_protect = true;
+            time_protect = clock();
+        }
+
+        if (package[p].num != 0){
+            // map -> set_porp(p, position.x, position.y);
+            package[p].num -= 1;
+        }
+    }
+
+    //player set a bomb on the map
+    bool set_bomb(){
+        //可能需要判断是否可放
+        if (!map -> map[position.x][position.y].empty)
+            return false;
+        map -> set_bomb(position);
+        return true;
     }
 
 };
