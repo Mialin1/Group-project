@@ -17,7 +17,7 @@ bool quit_game(Player player);
 
 void check_page(Player *player);
 
-void warning_bomb_cannot();
+void warning();
 
 
 #endif
