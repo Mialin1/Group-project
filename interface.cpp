@@ -84,6 +84,6 @@ bool quit_game(Player player){
     return player.if_quit;
 }
 
-bool warning_game_cannot(){
-    //bomb cannot be placed here
+void warning(){
+    //invalid move/operation
 }

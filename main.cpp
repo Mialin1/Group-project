@@ -41,11 +41,30 @@ int main(){
                 case 'D': //move rightward
                     player.move(1, 0);
                 case 's': //uses props
-                    int _x = get_input() - '0';
-                    player.use_prop(_x);
+                    
+                    int _ = get_input() - '0';
+                    if(_ == 1){                 //use a shield
+                        player.use_shield();
+                    }
+
+                    if(_ == 2){                 //use a spring
+                        int __ = get_input();   //the direction he face
+                        int _x, _y = 0;
+                        if (__ == 'W')  _x = 0,  _y = -2;
+                        if (__ == 'S')  _x = 0,  _y = 2;
+                        if (__ == 'A')  _x = -2, _y = 0;
+                        if (__ == 'D')  _x = 2,  _y = 0;
+                        if (!player.jump(_x, _y))
+                            warning();
+                    }
+
+                    if(_ == 3){                 //use a seed
+                        if (!player.use_seed())
+                            warning();
+                    }
                 case ' ': //user set bomb
                     if(!player.set_bomb())
-                        warning_bomb_cannot();
+                        warning();
                 case 'Q': //quit game
                     check_page(&player);
                     //check if sure to quit the game

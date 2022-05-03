@@ -29,22 +29,30 @@ struct Point{
 
 //Bombs
 struct Bomb{
-    bool set;
     clock_t set_time; //the time when the bomb was setted
 };
 
-#define RANGE 3     //the size of each unit
+struct Tree{
+    bool seed;
+    bool tree;
+    bool box;
+    clock_t set_time;
+};
+
+#define RANGE_X 3     //the size of each unit
+#define RANGE_Y 3
 
 //information of each unit on the map
 struct unit{
-    bool breakable;
-    bool walkable;
-    bool empty;
+    bool breakable; //wooden_box
+    bool walkable;  //props, bombs, and spaces
+    bool empty;     //nothing on this unit
     
     Bomb *bomb;     //point to the bomb on this unit(if any)
+    Tree *tree;
     
-    int prop;
-    char image[RANGE][RANGE];
+    int prop;       //the prop on this unit
+    char image[RANGE_X][RANGE_Y];
     
 };
 
@@ -70,9 +78,9 @@ struct Map{
     //print the map
     void print_map(){
         for(int i = 0; i < len_x; i++){         //i-th row of the map
-            for(int _i = 0; _i < RANGE; _i++)
+            for(int _i = 0; _i < RANGE_X; _i++)
                 for(int j = 0; j < len_y; j++) //j-th column of the map
-                    for(int _j = 0; _j < RANGE; _j++){
+                    for(int _j = 0; _j < RANGE_Y; _j++){
                         // cout << map[i][j].image[_i][_j]; 
                     }
             // cout << endl;
@@ -83,7 +91,14 @@ struct Map{
     //input: the position of the bomb
     void set_bomb(Point p){
         map[p.x][p.y].bomb = new Bomb;
-        map[p.x][p.y].bomb -> set = true;
+        map[p.x][p.y].bomb-> set_time = clock();
+        map[p.x][p.y].empty = false;
+    }
+
+    //set a seed
+    //input: the position of the seed
+    void set_seed(Point p){
+        map[p.x][p.y].tree = new Tree;
         map[p.x][p.y].bomb-> set_time = clock();
         map[p.x][p.y].empty = false;
     }
@@ -164,20 +179,16 @@ struct Player{
         prop.set("spring", "description", 0);
         package.push_back(prop);
 
-        prop.set("seed", "description", 100);
+        prop.set("seed", "description", 20);//not too much, but have a few
         package.push_back(prop);
 
-        prop.set("wood", "description", 100);
+        prop.set("wooden wall", "description", 100);//infinite num of wooden wall
         package.push_back(prop);
     }
 
     //initilaize the player
     void initialize(){
-
-        // setname("name");
-
-        // time.set(0,0);
-        
+        //how to initial time?? to be decided
         if_protect = false;
         position.set(0,0);
         life = 1;
@@ -199,18 +210,26 @@ struct Player{
         }
     }
 
-    //player set a porp on the map
-    //input: which prop is used
-    void use_prop(int p){
-        if (p == 1){            //player use a shield
+    //player use a spring jump
+    //output: whether the jump is succeeded
+    bool jump(int _x, int _y){
+        if (package[2].num == 0)   //has no spring
+            return false;
+        if (map -> if_moveable(position.x + _x, position.y + _y)){      //if the target unit is moveable
+            position.move(_x, _y);
+
+            if (map -> if_prop(position.x, position.y)){                //if the target unit has a prop on it
+                add_item(map -> map[position.x][position.y].prop);       //add the prop to the package
+            }
+            return true;
+        }
+        return false;
+    }
+
+    //player use a shield
+    void use_shield(){
             if_protect = true;
             time_protect = clock();
-        }
-
-        if (package[p].num != 0){
-            // map -> set_porp(p, position.x, position.y);
-            package[p].num -= 1;
-        }
     }
 
     //player set a bomb on the map
@@ -222,6 +241,16 @@ struct Player{
         return true;
     }
 
+    //player use a seed(seed--5s-->tree--10s-->(wooden)treasure box, and when the boxes are exploded, there will be coins or props)
+    bool use_seed(){
+        if (package[3].num == 0 )
+            return false;
+        if (map -> map[position.x][position.y].empty){
+
+            return true;
+        }
+        return false;
+    }
 };
 
 
