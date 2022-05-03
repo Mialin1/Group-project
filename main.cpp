@@ -1,5 +1,6 @@
 #include "structure.h"
 #include "interface.h"
+#include "map_update.h"
 #include "IO.h"
 #include <cstdio>
 #include <iostream>
@@ -19,10 +20,11 @@ int main(){
     //for player to choose room
     room_page(&player);
 
-    game_page(player);
+    //one more thread to update the screen per_sec no matter the player moves or not
+    thread update (map_update, &player);
+    update.detach();
 
     char x;//the input from the user
-    
     while(1){       //refresh the interface when get a command or time refresh
 
         if (quit_game(player)){
