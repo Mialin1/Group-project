@@ -133,8 +133,8 @@ struct unit{
     
     Bomb *bomb;     //the bomb on this unit(if any)
     Tree *tree;
-    
-    int prop;       //the prop on this unit
+    Prop *prop;
+
     char image[RANGE_X][RANGE_Y];
     
 };
@@ -168,9 +168,9 @@ struct Map{
 //3: seed, for plant trees, and trees will grow coins
 //4: wood, player can place a wooden wall to defend the bomb
 struct Prop{
-
     string name;
     string description;
+    int no_;
     int num;
     void set(string _name, string _descrip, int _num){
         name = _name;
@@ -192,7 +192,7 @@ struct Player{
     Map *map;               //the chosen map
 
     //about props
-    vector<Prop> package;   //props player owns
+    Prop package[10];   //props player owns
     bool if_protect;        //the remaining time player being protected
     Time time_protect;      //the moment when the shield start to work
 

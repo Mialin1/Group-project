@@ -1,36 +1,9 @@
 #include "player.h"
 using namespace std;
 
-//when user get a new prop
-void Player::add_item(int num){
-    if (num == 0)
-        life ++;
-    else package[num].num ++;
-}
-
-//initialize the package
-void Player::initialize_props(){
-    Prop prop; 
-
-    prop.set("heart", "description", 0);
-    package.push_back(prop);
-
-    prop.set("shield", "description", 0);
-    package.push_back(prop);
-
-    prop.set("spring", "description", 0);
-    package.push_back(prop);
-
-    prop.set("seed", "description", 20);  //not too much, but have a few
-    package.push_back(prop);
-
-    prop.set("wooden wall", "description", 100); //infinite num of wooden wall
-    package.push_back(prop);
-}
-
 //initilaize the player
 void Player::initialize(){
-    //how to initial time?? to be decided
+
     if_protect = false;
     position.set(0,0);
     life = 1;
@@ -41,13 +14,36 @@ void Player::initialize(){
     if_quit = false;
 }
 
+//initialize the package
+void Player::initialize_props(){
+    
+    package[0].set("heart", "description", 0);
+
+    package[1].set("shield", "description", 0);
+
+    package[2].set("spring", "description", 0);
+
+    package[3].set("seed", "description", 20);  //not too much, but have a few
+
+    package[4].set("wooden wall", "description", 100); //infinite num of wooden wall
+}
+
+//when user get a new prop
+void Player::add_item(int num){
+    if (num == 0)
+        life ++;
+    else package[num].num ++;
+}
+
+
+
 //player try to move
 void Player::move(int _x, int _y){
-    if (map -> map[position.x + _x][position.y + _y].walkable){      //if the target unit is moveable
+    if (map -> map[position.x + _x][position.y + _y].walkable){         //if the target unit is moveable
         position.move(_x, _y);
 
-        if (map -> map[position.x + _x][position.y + _y].prop){                //if the target unit has a prop on it
-            add_item(map -> map[position.x][position.y].prop);       //add the prop to the package
+        if (map -> map[position.x + _x][position.y + _y].prop != NULL){ //if the target unit has a prop on it
+            add_item(map -> map[position.x][position.y].prop->no_);     //add the prop to the package
         }
     }
 }
@@ -57,11 +53,11 @@ void Player::move(int _x, int _y){
 bool Player::jump(int _x, int _y){
     if (package[2].num == 0)   //has no spring
         return false;
-    if (map -> map[position.x + _x][position.y + _y].walkable){      //if the target unit is moveable
+    if (map -> map[position.x + _x][position.y + _y].walkable){         //if the target unit is moveable
         position.move(_x, _y);
 
-        if (map -> map[position.x + _x][position.y + _y].prop){                //if the target unit has a prop on it
-            add_item(map -> map[position.x][position.y].prop);       //add the prop to the package
+        if (map -> map[position.x + _x][position.y + _y].prop){         //if the target unit has a prop on it
+            add_item(map -> map[position.x][position.y].prop->no_);     //add the prop to the package
         }
         return true;
     }
@@ -70,8 +66,9 @@ bool Player::jump(int _x, int _y){
 
 //player use a shield
 void Player::use_shield(){
-        if_protect = true;
-        time_protect = time_remain;
+
+    if_protect = true;
+    time_protect = time_remain;
 }
 
 //player set a bomb on the map

@@ -56,15 +56,15 @@ void game_page(Player player){
 
     //player: Player_Name
     //level: 1
-    // -------------------------
-    //|                         |
-    //|                         |
-    //|                         |
-    //|                         |
-    //|                         |
-    //|                         |
-    //|                         |
-    //|                         |
+    // -------------------------    
+    //|                         |   up (W)
+    //|                         |   down (S)
+    //|                         |   left (A)
+    //|                         |   right (D)
+    //|                         |   shield (shift+1): 5
+    //|                         |   spring (shift+2): 3   
+    //|                         |   seed   (shift+3): -
+    //|                         |   bomb   (space): -
     //|                         |
     // -------------------------
     // life: 1    coin(s): 0/100
