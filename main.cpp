@@ -31,6 +31,7 @@ int main(){
 
         if (quit_game(player)){
             quit_page();
+            break;
         }
         else {
             x = get_input();
