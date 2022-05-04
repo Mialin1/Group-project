@@ -55,50 +55,71 @@ struct Time{
         sec --;
     }
 
+    bool equal(int _sec){
+        if(min == 0 && sec == _sec)
+            return true;
+        return false;
+    }
+
     //it times up
-    bool if_over(){
+    bool if_time_up(){
         return(min == 0 && sec == 0);
     }
 
-    //if its time to set a bomb randomly
+    //time span between two system bombs
     bool bomb_span(){
-        if(min == 0 && sec == 15)   //set a bomb every 15s
-            return true;
-        return false;
+        return equal(5);
     }
 
     //for check the shield
     bool shield_up(){
-        if(min == 0 && sec == 5)
-            return true;
-        return false;
+        return equal(5);
     }
 
     //if seed is turning into tree
     bool seed_to_tree(){
-        if(min == 0 && sec == 5)
-            return true;
-        return false;
+        return equal(5);
     }
 
     //if tree is turning into treasure box
     bool tree_to_box(){
-        if(min == 0 && sec == 15)
-            return true;
-        return false;
+        return equal(15);
     }
 };
 
 //Bombs
 struct Bomb{
-    clock_t set_time; //the time when the bomb was setted
+    Time set_time; //the time when the bomb was setted
+
+    //functions that 
+    
+    bool effect1(Time t){
+        return set_time.diff(t).equal(0);
+    }
+
+    bool effect2(Time t){
+        return set_time.diff(t).equal(1);
+    }
+
+    bool explode(Time t){
+        return set_time.diff(t).equal(2);
+    }
+
+    bool release(Time t){
+        return set_time.diff(t).equal(5);
+    }
 };
 
 struct Tree{
-    bool seed;
-    bool tree;
-    bool box;
-    clock_t set_time;
+    Time set_time;
+
+    bool to_tree(Time t){
+        return set_time.diff(t).equal(0);
+    }
+
+    bool to_box(Time t){
+        return set_time.diff(t).equal(1);
+    }
 };
 
 #define RANGE_X 3     //the size of each unit
@@ -151,17 +172,17 @@ struct Map{
 
     //set a bomb
     //input: the position of the bomb
-    void set_bomb(Point p){
+    void set_bomb(Point p, Time t){
         map[p.x][p.y].bomb = new Bomb;
-        map[p.x][p.y].bomb-> set_time = clock();
+        map[p.x][p.y].bomb-> set_time = t;
         map[p.x][p.y].empty = false;
     }
 
     //set a seed
     //input: the position of the seed
-    void set_seed(Point p){
+    void set_seed(Point p, Time t){
         map[p.x][p.y].tree = new Tree;
-        map[p.x][p.y].bomb-> set_time = clock();
+        map[p.x][p.y].bomb-> set_time = t;
         map[p.x][p.y].empty = false;
     }
     
@@ -299,7 +320,7 @@ struct Player{
         //可能需要判断是否可放
         if (!map -> map[position.x][position.y].empty)
             return false;
-        map -> set_bomb(position);
+        map -> set_bomb(position, time_remain);
         return true;
     }
 
@@ -308,7 +329,7 @@ struct Player{
         if (package[3].num == 0 )
             return false;
         if (map -> map[position.x][position.y].empty){
-
+            map -> set_seed(position, time_remain);
             return true;
         }
         return false;
