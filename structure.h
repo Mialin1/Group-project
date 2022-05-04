@@ -1,11 +1,11 @@
 #ifndef STRUCTURE_H
 #define STRUCTURE_H
 
-#include<iostream>
-#include<cstdio>
-#include<string>
-#include<vector>
-#include<ctime>
+#include <iostream>
+#include <cstdio>
+#include <string>
+#include <vector>
+#include <ctime>
 using namespace std;
 
 //a position on the 2D map
@@ -144,63 +144,33 @@ struct Map{
     int len_x, len_y;  //the size of the map
 
     //read maps from file
-    void read_map(){
-        //cin << len_x << len_y;
-        len_x = 100, len_y = 100;       
-        map = new unit *[len_x];
-        for(int i = 0; i < len_x; i++)
-            map[i] = new unit [len_y];
-        
-        for(int i = 0; i < len_x; i++){
-            for(int j = 0; j < len_y; j++){
-                //input information of unit [i, j]
-            }
-        }
-    }
+    void read_map();
 
     //print the map
-    void print_map(){
-        for(int i = 0; i < len_x; i++){         //i-th row of the map
-            for(int _i = 0; _i < RANGE_X; _i++)
-                for(int j = 0; j < len_y; j++) //j-th column of the map
-                    for(int _j = 0; _j < RANGE_Y; _j++){
-                        // cout << map[i][j].image[_i][_j]; 
-                    }
-            // cout << endl;
-        }
-    }
+    void print_map();
 
     //set a bomb
     //input: the position of the bomb
-    void set_bomb(Point p, Time t){
-        map[p.x][p.y].bomb = new Bomb;
-        map[p.x][p.y].bomb-> set_time = t;
-        map[p.x][p.y].empty = false;
-    }
+    void set_bomb(Point p, Time t);
 
     //set a seed
     //input: the position of the seed
-    void set_seed(Point p, Time t){
-        map[p.x][p.y].tree = new Tree;
-        map[p.x][p.y].bomb-> set_time = t;
-        map[p.x][p.y].empty = false;
-    }
+    void set_seed(Point p, Time t);
     
+    // //if the target unit is moveable
+    // bool if_moveable(int x, int y){     
+    //     return map[x][y].walkable;
+    // }
     
-    //if the target unit is moveable
-    bool if_moveable(int x, int y){     
-        return map[x][y].walkable;
-    }
+    // //if the target unit is breakable
+    // bool if_breakable(int x, int y){    
+    //     return map[x][y].breakable;
+    // }
     
-    //if the target unit is breakable
-    bool if_breakable(int x, int y){    
-        return map[x][y].breakable;
-    }
-    
-    //if the target unit has a prop on it
-    bool if_prop(int x, int y){          
-        return map[x][y].prop;          //if prop != 0, there is a prop on the map
-    }
+    // //if the target unit has a prop on it
+    // bool if_prop(int x, int y){          
+    //     return map[x][y].prop;          //if prop != 0, there is a prop on the map
+    // }
 };
 
 
@@ -225,22 +195,20 @@ struct Prop{
 
 //Profile of the player
 struct Player{
+
+    //basic information
     string name;            //name of the player
     Time time_remain;       //for countdown
-    bool if_protect;        //the remaining time player being protected
     Point position;         //position of the user
     int life;               //number of lives player owns
     int coins;              //number of coins that player owns
-    vector<Prop> package;   //props player owns
     bool if_quit;           //if user is sure to quit the game
     Map *map;               //the chosen map
 
+    //about props
+    vector<Prop> package;   //props player owns
+    bool if_protect;        //the remaining time player being protected
     Time time_protect;      //the moment when the shield start to work
-
-    //set the name of the player
-    void set_name(string _name){
-        name = _name;
-    }
 
     //when user get a new prop
     void add_item(int num){

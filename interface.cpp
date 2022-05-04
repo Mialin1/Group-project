@@ -20,7 +20,7 @@ void welcome_page(Player *player){
     print_page();
 
 
-    player -> set_name("name");
+    player -> name = "NAME";
 
     //a new page:
     //Nice to meet you, XXX
