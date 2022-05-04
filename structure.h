@@ -75,24 +75,14 @@ struct Time{
     bool shield_up(){
         return equal(5);
     }
-
-    //if seed is turning into tree
-    bool seed_to_tree(){
-        return equal(5);
-    }
-
-    //if tree is turning into treasure box
-    bool tree_to_box(){
-        return equal(15);
-    }
 };
 
 //Bombs
 struct Bomb{
+    
     Time set_time; //the time when the bomb was setted
 
     //functions that 
-    
     bool effect1(Time t){
         return set_time.diff(t).equal(0);
     }
@@ -141,7 +131,8 @@ struct unit{
 
 struct Map{
     unit ** map;
-    int len_x, len_y;  //the size of the map
+    int len_x, len_y;   //the size of the map
+    int coins_need;     //the number of coins needed to pass the map
 
     //read maps from file
     void read_map();

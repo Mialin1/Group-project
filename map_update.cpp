@@ -3,6 +3,7 @@
 #include "map_update.h"
 #include "interface.h"
 #include "structure.h"
+#include "IO.h"
 using namespace std;
 
 //update the screen per_sec
@@ -56,7 +57,27 @@ void map_update(Player *player){
                     if(u.bomb -> explode(remain)){
                         //3*3 all to empty(except for stone walls)
                         //boxes became coins / props
-                        //
+                        for(int _i = max(0, i-1); _i <= min(RANGE_X, i+1); _i ++)
+                            for(int _j = max(0, j-1); _j <= min(RANGE_Y, j+1); _j ++){
+                                unit u1 = map -> map[_i][_j];
+
+                                //check if user is in this zone
+                                if (player -> position.x == _i && player -> position.y == _j){
+                                    player -> life --;
+                                    if (player -> life == 0){
+                                        dead(*player);
+                                        if(get_input())
+                                            check_page(*player);
+                                    }
+                                        
+                                }
+                                    
+
+                                //destroy all the breakables
+                                //break the boxes and release the random coins/porps
+                            }
+                        
+                        
                     }
 
                     //effect3
@@ -70,7 +91,14 @@ void map_update(Player *player){
 
 
                 //check for tree growing(seed->tree->wooden boxes)
-                
+                if (u.tree != NULL){
+                    if(u.tree -> to_tree(remain)){
+                        //the image of this unit turn into tree
+                    }
+                    else if(u.tree -> to_box(remain)){
+                        //the image turn into tree
+                    }
+                }
             
             }
         }

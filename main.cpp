@@ -1,6 +1,8 @@
 #include "structure.h"
 #include "interface.h"
 #include "map_update.h"
+#include "player.h"
+#include "map.h"
 #include "IO.h"
 #include <cstdio>
 #include <iostream>
@@ -67,9 +69,9 @@ int main(){
                 case ' ': //user set bomb
                     if(!player.set_bomb())
                         warning();
-                        
+
                 case 'Q': //quit game
-                    check_page(&player);
+                    leave_page(&player);
 
             }
         }

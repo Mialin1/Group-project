@@ -15,7 +15,11 @@ void room_page(Player *player);
 
 bool quit_game(Player player);
 
-void check_page(Player *player);
+void leave_page(Player *player);
+
+void check_page(Player player);
+
+void dead(Player player);
 
 void warning();
 

@@ -36,6 +36,7 @@ void room_page(Player *player){
     //if there is any, ask user if he/she want to load previously archieved game
     //yes(y)      no(n)
     print_page();
+
     //if yes, load the previous map(map.readmap()), and quit room_page
     //maybe a loading page
     for(int i = 0; i < 10; i ++){
@@ -82,8 +83,8 @@ void quit_page(){
     print_page();
 }
 
-void check_page(Player *player){
-    //are you sure to leave
+void leave_page(Player *player){
+    //Do you want to leave the game?
     //yes(y)            no(n)
     print_page();
 
@@ -91,7 +92,7 @@ void check_page(Player *player){
     if (x =='y') player -> if_quit = true;
 
     //new page
-    //Do you want to archive your status?
+    //Do you want to save your game?
     //yes(y)            no(n)
     print_page();
     
@@ -108,6 +109,32 @@ void check_page(Player *player){
 
 bool quit_game(Player player){
     return player.if_quit;
+}
+
+void dead(Player player){
+    //small window: Sorry, you are dead
+    //press any key to continue
+}
+
+void check_page(Player player){
+    
+    //You need (player.map->coins_need) coins to pass this round
+    //you have (player.coins) coins
+    print_page();
+
+    if (player.coins >= player.map -> coins_need){
+        //Congratulations! .....
+        //do you want to enter a bigger map?
+        //yes(y)  no(n)
+        print_page();
+
+        //if yes
+        room_page(&player);
+
+        //if no
+        leave_page(&player);
+    }
+    
 }
 
 void warning(){
