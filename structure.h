@@ -27,6 +27,68 @@ struct Point{
     }
 };
 
+//time structure for countdown
+struct Time{
+    int min;
+    int sec;
+
+    //set the time structure
+    void set(int _m, int _s){
+        min = _m;
+        sec = _s;
+    }
+    
+    //calculate the time span between itself and the input time
+    //tip: input time is smaller
+    Time diff(Time _time){
+        Time diff;
+        if (sec < _time.sec)
+            sec += 60, min -= 1;
+        diff.set(min - _time.min, sec - _time.sec);
+        return diff;
+    }
+
+    //time tick once (1 sec)
+    void tick(){
+        if (sec == 0)
+            sec = 60, min -= 1;
+        sec --;
+    }
+
+    //it times up
+    bool if_over(){
+        return(min == 0 && sec == 0);
+    }
+
+    //if its time to set a bomb randomly
+    bool bomb_span(){
+        if(min == 0 && sec == 15)   //set a bomb every 15s
+            return true;
+        return false;
+    }
+
+    //for check the shield
+    bool shield_up(){
+        if(min == 0 && sec == 5)
+            return true;
+        return false;
+    }
+
+    //if seed is turning into tree
+    bool seed_to_tree(){
+        if(min == 0 && sec == 5)
+            return true;
+        return false;
+    }
+
+    //if tree is turning into treasure box
+    bool tree_to_box(){
+        if(min == 0 && sec == 15)
+            return true;
+        return false;
+    }
+};
+
 //Bombs
 struct Bomb{
     clock_t set_time; //the time when the bomb was setted
@@ -48,7 +110,7 @@ struct unit{
     bool walkable;  //props, bombs, and spaces
     bool empty;     //nothing on this unit
     
-    Bomb *bomb;     //point to the bomb on this unit(if any)
+    Bomb *bomb;     //the bomb on this unit(if any)
     Tree *tree;
     
     int prop;       //the prop on this unit
@@ -143,7 +205,7 @@ struct Prop{
 //Profile of the player
 struct Player{
     string name;            //name of the player
-    clock_t time;              //for game countdown
+    Time time_remain;       //for countdown
     bool if_protect;        //the remaining time player being protected
     Point position;         //position of the user
     int life;               //number of lives player owns
@@ -152,7 +214,7 @@ struct Player{
     bool if_quit;           //if user is sure to quit the game
     Map *map;               //the chosen map
 
-    clock_t time_protect;      //the time used
+    Time time_protect;      //the moment when the shield start to work
 
     //set the name of the player
     void set_name(string _name){
@@ -179,10 +241,10 @@ struct Player{
         prop.set("spring", "description", 0);
         package.push_back(prop);
 
-        prop.set("seed", "description", 20);//not too much, but have a few
+        prop.set("seed", "description", 20);  //not too much, but have a few
         package.push_back(prop);
 
-        prop.set("wooden wall", "description", 100);//infinite num of wooden wall
+        prop.set("wooden wall", "description", 100); //infinite num of wooden wall
         package.push_back(prop);
     }
 
@@ -229,7 +291,7 @@ struct Player{
     //player use a shield
     void use_shield(){
             if_protect = true;
-            time_protect = clock();
+            time_protect = time_remain;
     }
 
     //player set a bomb on the map

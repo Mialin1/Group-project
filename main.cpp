@@ -67,10 +67,9 @@ int main(){
                 case ' ': //user set bomb
                     if(!player.set_bomb())
                         warning();
+                        
                 case 'Q': //quit game
                     check_page(&player);
-                    //check if sure to quit the game
-                    //if yes: player.if_quit = true
 
             }
         }
