@@ -25,15 +25,17 @@ void map_update(Player *player){
 
         Map *map = player->map;
 
+        Time remain = player -> time_remain;
+
         //every few seconds drop a bomb randomly
-        if (last_bomb.diff(player -> time_remain).bomb_span()){
+        if (last_bomb.diff(remain).bomb_span()){
             Point bomb;
             //randomly pick an empty unit and place a bomb
             //the bomb will be explode in 1 sec
         }
 
         //check if there is any shield expire
-        if (player -> time_protect.diff( player->time_remain).shield_up()){
+        if (player -> time_protect.diff(remain).shield_up()){
             player -> if_protect = false;
         }
 
@@ -43,10 +45,30 @@ void map_update(Player *player){
                 unit u = map -> map[i][j]; 
             
                 //check if there is any bomb to bang
-                //release the dynamic memory after explosion
+                //can add explosion effect here
                 if (u.bomb != NULL){
+                    //effect1
+                    if(u.bomb -> effect1(remain)){}
+                    //effect2
+                    if(u.bomb -> effect2(remain)){}
+
+                    //time to explode
+                    if(u.bomb -> explode(remain)){
+                        //3*3 all to empty(except for stone walls)
+                        //boxes became coins / props
+                        //
+                    }
+
+                    //effect3
+                    //effect4
+
+                    //release dynamic memory
+                    if(u.bomb -> release(remain))
+                        delete u.bomb;
 
                 }
+
+
                 //check for tree growing(seed->tree->wooden boxes)
                 
             
