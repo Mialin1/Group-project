@@ -5,8 +5,17 @@
 using namespace std;
 
 //all the pages are printed by this function
-void print_page(){
-
+void print_page(string passage[], int length){
+    for(int i=0; i<length;i++){
+        cout<<"-";
+    }
+    cout<<endl;
+    for(int i=0; i<sizeof(passage);i++){
+        cout<<"|  "<<format_string(passage[0],length-4)<<"|"<<endl;
+    }
+    for(int i=0; i<length;i++){
+        cout<<"-";
+    }
 }
 
 //functions below are page generator
@@ -14,36 +23,133 @@ void print_page(){
 
 //a page with welcome information
 void welcome_page(Player *player){
-    
-    //Your name is: 
-    //ask player to input their name
-    print_page();
+    //first ask the user to input his/her name.
 
+    string name;
+    string command;
+    bool valid=true;
+  
+    while (1){
+        refresh(100);
+        logo_interface();
+        if (valid=true){
+            cout<<"===============================================================";
+            cout<<"||  Welcome to MR.BOMBER !                                   ||";
+            cout<<"||  Please input your name(begin with letter/number):        ||";
+            cout<<"===============================================================";
+        }
+        else{
+            cout<<"===============================================================";
+            cout<<"||  Welcome to MR.BOMBER !                                   ||";
+            cout<<"||  Invalid input,                                           ||";
+            cout<<"||  Please input your name again(begin with letter/number):  ||";
+            cout<<"===============================================================";
+        }
+        cin >> name;
+        if (isalnum(name[0])){
+            player->name =name;
+            valid=true;
+            break;
+        }
+        else{
+            valid=false;
+        }
 
-    player -> name = "NAME";
-
-    //a new page:
-    //Nice to meet you, XXX
-    //list out the rule of the game
-    print_page();
-
-    //press space/enter to quit welcome__page
-    print_page();
-
+    }
+    while(1){
+        refresh(100);
+        logo_interface();
+        cout<<"==============================================================="<<endl;
+        cout<<"||  Nice to meet you, "<<name;
+        for(int i=0; i<39-name.length();i++){
+            cout<<" ";
+        }
+        cout<<"||"<<endl;
+        cout<<"||  Kind Reminder!                                           ||"<<endl;
+        cout<<"||                                                           ||"<<endl;
+        cout<<"||  Here are the rules, please read them carefully:          ||"<<endl;
+        cout<<"||    1. Your Mr. Bomber initially has one life. Watch out   ||"<<endl;
+        cout<<"||       for the bomb! You will lose 1 life if hurt by it.   ||"<<endl;
+        cout<<"||    2. You will have to restart the same level if you      ||"<<endl;
+        cout<<"||       Lose all your life / Don't meet the requirement.    ||"<<endl;
+        cout<<"||    3. Your main goal in passing each level is to collect  ||"<<endl;  
+        cout<<"||       enough coins within a limited time. The difficulty  ||"<<endl; 
+        cout<<"||       will increase with the level up.                    ||"<<endl;
+        cout<<"||    4. You can use bombs to explode the white boxes, but   ||"<<endl;
+        cout<<"||       they will not affect the wall. When the boxes are   ||"<<endl;
+        cout<<"||       demolished, there might be some surprise.           ||"<<endl;
+        cout<<"||       (props, even a coin!)                               ||"<<endl;
+        cout<<"||                                                           ||"<<endl;
+        cout<<"||  Wait! Don't forget how to make use of those props!       ||"<<endl;      
+        cout<<"||  (Trust me. They can make your life a lot easier :P)      ||"<<endl;
+        cout<<"||    1.heart: add one more life                             ||"<<endl;
+        cout<<"||    2.shield: the player will be in invincible mode for 5s ||"<<endl;
+        cout<<"||    3.coin: count for the final grade                      ||"<<endl;
+        cout<<"||    4.spring: the player can directly walk through the     ||"<<endl;
+        cout<<"||      wall once                                            ||"<<endl;
+        cout<<"==============================================================="<<endl;
+        cout<<""<<endl;
+        if (valid==true){
+            cout<<"---------------------------------------------------------------"<<endl;
+            cout<<"Are ready to start!?                                      "<<endl;
+            cout<<"Enter 'y' to start the game!!!                          "<<endl;
+        }
+        else{
+            cout<<"---------------------------------------------------------------"<<endl;
+            cout<<"Invalid input.                                          "<<endl;
+            cout<<"Please enter 'y' to start the game! Press 'e' to exit the game."<<endl;
+        }
+        cin>>command;
+        if(command=="y"){
+            break;
+        }
+        else if(command=="e"){
+            quit_page;
+        }
+        else{
+            valid=false;
+        }
+    }
 };  
 
 void room_page(Player *player){
-    //if there is any, ask user if he/she want to load previously archieved game
-    //yes(y)      no(n)
-    print_page();
+    
+    string command;
+    string lines[4];
 
-    //if yes, load the previous map(map.readmap()), and quit room_page
-    //maybe a loading page
+    lines[0]="Please Enter the number: ";
+    lines[1]="1: Start a new game";
+    lines[2]="2: Load from save";
+    lines[3]="3: Exit the game";
+
+    while(1){
+        refresh(100);
+        logo_interface();
+        print_page(lines,sizeof(lines[0])+2);
+        cin>>command;
+        if(command=="1"||command=="2"){
+            break;
+        }
+        else if(command=="3"){
+            quit_page();
+        }
+        else{
+            lines[0]="Invalid Input! Please Enter the number again: ";
+        }
+    }
+    
+   
     for(int i = 0; i < 10; i ++){
         //generate the loading bar by time
-        print_page();
+        refresh(100);
+        string load[1];
+        load[0]="Loading.........";
+        print_page(load,sizeof(load[0]));
     }
 
+    if (command=="1"){
+        map(map.readmap());
+    }
 
     //list out all the maps for users to choose
     //higher level map may be locked, the locked map should be gray
@@ -79,8 +185,10 @@ void game_page(Player player){
 }
 
 void quit_page(){
+
     //See you next time
-    print_page();
+    print_page;
+    quit_game;
 }
 
 void leave_page(Player *player){
@@ -139,4 +247,61 @@ void check_page(Player player){
 
 void warning(){
     //invalid move/operation
+    string warning[2];
+    warning[0]="invalid move/operation";
+    warning[1]="Please input again!";
+    print_page(warning,sizeof(warning[0]));
+
 }
+
+
+
+// Function: to format the string into our expected length
+string format_string(string str, const int & new_len)
+{
+	while ( str.length() < new_len )
+		str += " ";
+	return str.substr(0, new_len);
+}
+
+
+
+//print our logo "MR. BOMBER" is the main interface
+void logo_interface(void){
+    string line[13];
+
+    line[0]= " ";
+    line[1]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
+    line[2]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
+    line[3]= "OOOO                                                                OOOO";
+    line[4]= "OOOO                                                                OOOO";
+    line[5]= "OOOO     ░█▀▄▀█ █▀▀█      ░█▀▀█ ░█▀▀▀█ ░█▀▄▀█ ░█▀▀█ ░█▀▀▀ ░█▀▀█     OOOO";
+    line[6]= "OOOO     ░█░█░█ █▄▄▀      ░█▀▀▄ ░█──░█ ░█░█░█ ░█▀▀▄ ░█▀▀▀ ░█▄▄▀     OOOO";
+    line[7]= "OOOO     ░█──░█ █─▀█ █    ░█▄▄█ ░█▄▄▄█ ░█──░█ ░█▄▄█ ░█▄▄▄ ░█─░█     OOOO";  
+    line[8]= "OOOO                                                                OOOO";
+    line[9]= "OOOO                                                                OOOO"; 
+    line[10]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"; 
+    line[11]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"; 
+    line[12]= " ";
+
+    for(int i=0; i<13; i++){
+        cout<<line[i]<<endl;
+    }
+
+}
+
+
+// Function: to format the string
+string format_string(string str, const int & new_len)
+{
+	while ( str.length() < new_len )
+		str += " ";
+	return str.substr(0, new_len);
+}
+
+//represh the screen
+void refresh(int num){
+    system("clear");
+    cout<<endl;
+}
+
