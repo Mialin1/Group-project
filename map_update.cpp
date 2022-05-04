@@ -66,8 +66,14 @@ void map_update(Player *player){
                                     player -> life --;
                                     if (player -> life == 0){
                                         dead(*player);
-                                        if(get_input())
+                                        if(get_input()){
                                             check_page(*player);
+
+                                            if(player->if_quit) //if player has quit the game
+                                                return;
+                                            
+                                        }
+                                            
                                     }
                                         
                                 }
