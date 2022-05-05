@@ -120,6 +120,7 @@ struct unit{
     bool breakable; //wooden_box
     bool walkable;  //props, bombs, and spaces
     bool empty;     //nothing on this unit
+    bool if_box;
     Point position;
     
     Bomb *bomb;     //the bomb on this unit(if any)
@@ -130,16 +131,31 @@ struct unit{
 
     void set(int _, int x, int y){
         //if _ == stone
-        breakable = false;
-        walkable = false;
-        empty = false;
-        position.x = x;
-        position.y = y;
-        bomb = NULL;
-        tree = NULL;
-        prop = NULL;
+        if (_ == 1){
+            breakable = false;
+            walkable = false;
+            empty = false;
+            if_box = false;
+            position.x = x;
+            position.y = y;
+            bomb = NULL;
+            tree = NULL;
+            prop = NULL;
+        }
 
-        //
+        //if _ == box
+        if (_ == 2){
+            breakable = true;
+            walkable = false;
+            empty = false;
+            if_box = true;
+            position.x = x;
+            position.y = y;
+            bomb = NULL;
+            tree = NULL;
+            prop = NULL;
+        }
+
     }
     
 };
