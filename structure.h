@@ -109,13 +109,22 @@ struct Box{
     }
 };
 
-//the struct which stores the image of each unit
+
+
+
 #define RANGE_X 3     //the size of each unit
 #define RANGE_Y 3
+//extern const int range_x = 3;
 
+//the struct which stores the image of each unit
 struct Image{
     string s[RANGE_Y];
     void set_bomb(){
+        s[0] = "///";
+        s[1] = "///";
+        s[2] = "///";
+    }
+    void set_tree(){
         s[0] = "///";
         s[1] = "///";
         s[2] = "///";
