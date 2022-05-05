@@ -46,7 +46,7 @@ to be discussed
     我
 
 6. 想在print好的地图右边再print一个方块写instruction的方法我好像搜不到，不知道你有啥高见吗
-    不行的话我只能把他放在
+    不行的话我只能把他放在地图下面
     
 7. 我们每关所需的coin数 要不要弄个list 可以看我在structure player那边写的 
 
