@@ -47,5 +47,15 @@ to be discussed
 
     
 7. 我们每关所需的coin数 要不要弄个list 可以看我在structure player那边写的 
+    可以是可以，但是好像不需要放到player那里去？一般一个struct的member和这个struct是从属关系
+    但是coins_needed和player无关，甚至与单一个的map也无关
+    
+    话说我的想法是开二维vector装map
+    比如说
+    vector<vector<map>> maps;
+    maps[i][j]  //i 是level数，j是这个level里面的第j个map
+    
 
 8. 顺便我们可以讨论下每关的时间，再根据时间定一下coin_needed    :))
+    时间我的意思是不要太长，第一关like三五分钟一局这样子我觉得比较符合这个游戏的定义，
+    毕竟这个游戏规则很简单，如果定位成那种快速的小游戏应该比较合理c
