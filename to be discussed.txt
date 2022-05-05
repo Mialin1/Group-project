@@ -1,7 +1,4 @@
 to be discussed
-讨论完的我就会删掉
-
-last edit: Huang Leyang(用于判断是否有回复)
 
 1. 结束条件：
     我们现在的过关条件是收集到一定数量的硬币，但是让当前round结束的条件有点模糊，
@@ -18,6 +15,9 @@ last edit: Huang Leyang(用于判断是否有回复)
     一般游戏也都是这么设置的，不然我觉得前面几关一下就通了也没什么意思，
     有些人可能就是想多赚一点儿钱，即使没有用哈哈哈。
 
+    噢 好
+    那死了也进行硬币的比较？
+
 
 2. 地图生成方式：
     我很担心随机生成会很bug，比如出现封闭图形这种很无厘头的地图
@@ -28,14 +28,27 @@ last edit: Huang Leyang(用于判断是否有回复)
     这种多少很难判断，我们把这个留到最后，有时间就手动generate几个好了，用我写的
     那个read_map应该还是比较好导入的，然后每次进入一个level就randomly pick one 
     map among maps for this level
-    
-3. read_map里面的_可以改成char或者string，任何你觉得方便的都行
 
-4. 键位
+
+
+
+
+
+
+
+
+
+
+
+3. (done)read_map里面的_可以改成char或者string，任何你觉得方便的都行
+
+4. (done)键位
     键位我建议改一下，就是在wasd是移动的情况下还要shift加1234有点别扭，
     我建议就是直接给每一个prop一个字母算了
 
     可以的
 
-5. Level是设定在哪里呢？ 如果还没设的话我直接用integer行吗？
+5. (done)Level是设定在哪里呢？ 如果还没设的话我直接用integer行吗？
     到时候自动放炸弹的时间可以根据这个level_num计算，金币也是同理
+
+    我给map加了个int叫level
