@@ -169,6 +169,7 @@ struct Map{
     unit ** map;
     int len_x, len_y;   //the size of the map
     int coins_need;     //the number of coins needed to pass the map
+    int level;
     vector<unit*> empty;
 
     //read maps from file

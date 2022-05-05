@@ -70,6 +70,7 @@ void map_update(Player *player){
                                 //check if user is in this zone
                                 if (player -> position.x == _i && player -> position.y == _j){
                                     player -> life --;
+
                                     if (player -> life == 0){
                                         dead(*player);
                                         if(get_input()){
@@ -88,22 +89,27 @@ void map_update(Player *player){
                                 }
                                 //destroy all the breakables
                                 if(u1.breakable){
-                                    //if it was a box
+                                    //break the boxes and release the random coins/porps
                                     if(u1.if_box){
-                                        u1.prop = new Prop;
+                                        //0 heart, 1 shield, 2 spring, 3 seed
+                                        //4 to 9, coins
                                         int _ = rand()%20; 
-                                        
-                                        if(_ < 4)                   //0 heart, 1 shield, 2 spring, 3 seed
-                                            u1.prop->set(_ , 1);
-                                        else if(_ < 10)             //4 to 9, coins
+                                        if(_ < 4){
+                                            u1.prop = new Prop;
+                                            u1.prop->set(_, 1);
+                                        }
+                                        else if(_ < 10){
+                                            u1.prop = new Prop;
                                             u1.prop->set(_, _ - 3);
+                                        }
+                                            
                                     }
                                     else{
-                                        
+                                        u1.set(3, _i, _j); //set to space
                                     }
                                 }
 
-                                //break the boxes and release the random coins/porps
+                                
                             }
                         
                         
@@ -118,10 +124,11 @@ void map_update(Player *player){
 
                 //check for tree growing(seed->tree->wooden boxes)
                 if (u.tree != NULL){
-                    if(u.tree -> to_tree(remain)){
-                        //the image of this unit turn into tree
-                    }
-                    else if(u.tree -> to_box(remain)){
+                    // if(u.tree -> to_tree(remain)){
+                    //     //the image of this unit turn into tree
+                    // }
+                    // else 
+                    if(u.tree -> to_box(remain)){
                         //the image turn into tree
                     }
                 }
