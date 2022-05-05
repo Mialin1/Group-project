@@ -100,65 +100,67 @@ struct Bomb{
     }
 };
 
-struct Tree{
+struct Box{
     Time set_time;
-
-    bool to_tree(Time t){
-        return set_time.diff(t).equal(0);
-    }
+    bool if_box;
 
     bool to_box(Time t){
-        return set_time.diff(t).equal(1);
+        return set_time.diff(t).equal(1);///////////////////////////////////////////////to be set
     }
 };
 
+//the struct which stores the image of each unit
 #define RANGE_X 3     //the size of each unit
 #define RANGE_Y 3
+
+struct Image{
+    string s[RANGE_Y];
+    void set_bomb(){
+        s[0] = "///";
+        s[1] = "///";
+        s[2] = "///";
+    }
+};
 
 //information of each unit on the map
 struct unit{
     bool breakable; //wooden_box
     bool walkable;  //props, bombs, and spaces
     bool empty;     //nothing on this unit
-    bool if_box;
-    Point position;
     
     Bomb *bomb;     //the bomb on this unit(if any)
-    Tree *tree;
-    Prop *prop;
+    Box *box;       //the treasure box on this unit(if any)
+    Prop *prop;     //the prop on this unit(if any)
 
-    char image[RANGE_X][RANGE_Y];
+    Image image; 
 
     //for map generation
-    void set(int _, int x, int y){
-        position.x = x;
-        position.y = y;
+    void set(string _, int x, int y){
         bomb = NULL;
-        tree = NULL;
+        box = NULL;
         prop = NULL;
         
         //if _ == stone
-        if (_ == 1){
+        if (_ == "stone"){
             breakable = false;
             walkable = false;
             empty = false;
-            if_box = false;
         }
 
         //if _ == box
-        if (_ == 2){
+        if (_ == "box"){
             breakable = true;
             walkable = false;
             empty = false;
-            if_box = true;
+            box = new Box;
+            box->if_box = true;
         }
 
         //if _ == space
-        if (_ == 3){
+        if (_ == "space"){
             breakable = false;
             walkable = true;
             empty = true;
-            if_box = false;
         }
 
     }
@@ -170,7 +172,7 @@ struct Map{
     int len_x, len_y;   //the size of the map
     int coins_need;     //the number of coins needed to pass the map
     int level;
-    vector<unit*> empty;
+    vector<Point> empty;
 
     //read maps from file
     void read_map();
@@ -244,7 +246,7 @@ struct Player{
     //player set a bomb on the map
     bool set_bomb();
 
-    //player use a seed(seed--5s-->tree--10s-->(wooden)treasure box, and when the boxes are exploded, there will be coins or props)
+    //player use a seed(seed--10s-->(wooden)treasure box, and when the boxes are exploded, there will be coins or props)
     bool use_seed();
 };
 

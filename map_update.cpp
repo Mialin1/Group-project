@@ -35,8 +35,8 @@ void map_update(Player *player){
         if (last_bomb.diff(remain).bomb_span()){
             Point bomb;
             //randomly pick an empty unit and place a bomb
-            unit *u = map->empty[rand() % map->empty.size()];
-            map->set_bomb(u->position, remain);
+            Point p = map->empty[rand() % map->empty.size()];
+            map->set_bomb(p, remain);
             //the bomb will be explode in 1 sec
         }
 
@@ -44,6 +44,8 @@ void map_update(Player *player){
         if (player -> time_protect.diff(remain).shield_up()){
             player -> if_protect = false;
         }
+        
+        bool restart = false;
 
         //check for map units changes
         for(int i = 0; i < map->len_x; i ++){
@@ -62,7 +64,7 @@ void map_update(Player *player){
                     if(u.bomb -> explode(remain)){
                         //3*3 all to empty(except for stone walls)
                         //boxes became coins / props
-                        for(int _i = max(0, i-1); _i <= min(RANGE_X, i+1); _i ++)
+                        for(int _i = max(0, i-1); _i <= min(RANGE_X, i+1); _i ++){
                             for(int _j = max(0, j-1); _j <= min(RANGE_Y, j+1); _j ++){
 
                                 unit u1 = map -> map[_i][_j];
@@ -73,26 +75,18 @@ void map_update(Player *player){
 
                                     if (player -> life == 0){
                                         dead(*player);
-                                        if(get_input()){
-                                            check_page(*player);
-
-                                            if(player->if_quit) //if player has quit the game
-                                                return;
-                                            
-                                            //else 
-                                            //if the player doesnt quit, regenerate the map
-                                            //to be continued!!!!!!!!!!!!!!!!!!
-                                        }
-                                            
+                                        restart = true;
+                                        break;
                                     }
                                         
                                 }
+
                                 //destroy all the breakables
                                 if(u1.breakable){
                                     //break the boxes and release the random coins/porps
-                                    if(u1.if_box){
+                                    if(u1.box != NULL && u1.box->if_box ){
                                         //0 heart, 1 shield, 2 spring, 3 seed
-                                        //4 to 9, coins
+                                        //4 to 9, (_ - 3)coins
                                         int _ = rand()%20; 
                                         if(_ < 4){
                                             u1.prop = new Prop;
@@ -102,17 +96,19 @@ void map_update(Player *player){
                                             u1.prop = new Prop;
                                             u1.prop->set(_, _ - 3);
                                         }
-                                            
+                                        u1.set("space", _i, _j);
                                     }
                                     else{
-                                        u1.set(3, _i, _j); //set to space
+                                        u1.set("space", _i, _j); //set to space
                                     }
                                 }
 
                                 
                             }
-                        
-                        
+                            if (restart) break;
+                        }
+                            
+                        if (restart) break;
                     }
 
                     //release dynamic memory
@@ -122,18 +118,23 @@ void map_update(Player *player){
                 }
 
 
-                //check for tree growing(seed->tree->wooden boxes)
-                if (u.tree != NULL){
-                    // if(u.tree -> to_tree(remain)){
-                    //     //the image of this unit turn into tree
-                    // }
-                    // else 
-                    if(u.tree -> to_box(remain)){
+                //check for seed growing(seed->wooden boxes)
+                if (u.box != NULL && !u.box->if_box){
+                    if(u.box -> to_box(remain)){
+                        u.box->if_box = true;
                         //the image turn into tree
                     }
                 }
             
             }
+            if (restart) break;
+        }
+
+        if(restart){
+            /////////////////////////////////////////////////////////////////////////////
+            //release all the dynamic memory
+            //reset the whole map
+            //if the user want to quit then just quit
         }
 
         game_page(*player);//print the page after update

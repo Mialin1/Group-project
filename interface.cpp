@@ -236,6 +236,7 @@ void game_page(Player player){
     //maybe also use struct func (map.print_map())
     //or turn the struct func to a generator and also use the print_page() functoin
    
+    print_page;
     
     
 }
@@ -258,37 +259,49 @@ void leave_page(Player *player){
     print_page();
 
     char x = get_input();
-    if (x =='y') player -> if_quit = true;
+    if (x =='y') {
+        player -> if_quit = true;
+        //new page
+        //Do you want to save your game?
+        //yes(y)            no(n)
 
-    //new page
-    //Do you want to save your game?
-    //yes(y)            no(n)
-    print_page();
-    
-    x = get_input();
-    if (x == 'y'){
-        //save the status to file
-        //status: Profile and Map
+        x = get_input();
+        if (x == 'y'){
+            //save the status to file
+            //to be saved: 
+            //status: Profile and Map
+        }
+        //new page
+        //The status is succesfully saved
     }
+        
 
-    //newpage
-    //The status is succesfully saved
-    print_page();
+    
+    
+    
+    
+
+    
+    
 }
 
-bool quit_game(Player player){
-    return player.if_quit;
-}
+// bool quit_game(Player player){
+//     return player.if_quit;
+// }
 
 void dead(Player player){
     //small window: Sorry, you are dead
     //press any key to continue
+    player.initialize();
+    room_page(&player);
 }
 
+//when time is up, check whether the coins meet the requirement
 void check_page(Player player){
     
     //You need (player.map->coins_need) coins to pass this round
     //you have (player.coins) coins
+    
     print_page();
 
     if (player.coins >= player.map -> coins_need){

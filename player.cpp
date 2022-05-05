@@ -1,11 +1,11 @@
 #include "structure.h"
 using namespace std;
 
-//initilaize the player
+//initilaize the player for a round
 void Player::initialize(){
 
     if_protect = false;
-    position.set(0,0);
+    position.set(0,0);///////////////////////////////////////////////to be set
     life = 1;
     coins = 0;
         
@@ -45,7 +45,7 @@ void Player::move(int _x, int _y){
         position.move(_x, _y);
         if (u.prop != NULL){ //if the target unit has a prop on it
             add_item(u.prop);     //add the prop to the package
-            u.set(3, _x, _y);     //set the unit to space
+            u.set("space", _x, _y);     //set the unit to space
         }
     }
 }
@@ -64,7 +64,7 @@ bool Player::jump(int _x, int _y){
 
         if (u.prop != NULL){         //if the target unit has a prop on it
             add_item(u.prop);     //add the prop to the package
-            u.set(3, _x, _y);       //set the unit to space
+            u.set("space", _x, _y);       //set the unit to space
         }
         return true;
     }
@@ -85,13 +85,10 @@ bool Player::set_bomb(){
     return true;
 }
 
-//player use a seed(seed--5s-->tree--10s-->(wooden)treasure box, and when the boxes are exploded, there will be coins or props)
+//player use a seed(seed--10s-->(wooden)treasure box, and when the boxes are exploded, there will be coins or props)
 bool Player::use_seed(){
-    if (package[3].num == 0 )
+    if (!map -> map[position.x][position.y].empty)
         return false;
-    if (map -> map[position.x][position.y].empty){
-        map -> set_seed(position, time_remain);
-        return true;
-    }
-    return false;
+    map -> set_seed(position, time_remain);
+    return true;
 }
