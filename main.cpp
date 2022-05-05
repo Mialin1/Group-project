@@ -10,7 +10,7 @@
 
 using namespace std;
 
-extern vector<vector<Map>> maps;
+extern vector<vector<Map> > maps;
 
 int main(){
 
