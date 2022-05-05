@@ -3,33 +3,6 @@
 #include <fstream>
 using namespace std;
 
-//read maps from file
-void Map::read_map(){
-    // fin << len_x << len_y;
-    len_x = 100, len_y = 100;       
-    map = new unit *[len_x];
-    for(int i = 0; i < len_x; i++)
-        map[i] = new unit [len_y];
-        
-    for(int i = 0; i < len_x; i++){
-        for(int j = 0; j < len_y; j++){
-            //input information of unit [i, j]
-            string _;  //_ denotes what kind of unit it is
-            cin >> _;
-            map[i][j].set(_, i, j);
-
-            //add the empty ones to the queue
-            if (map[i][j].empty){
-                unit *u = &map[i][j];
-                Point p;
-                p.set(i,j);
-                empty.push_back(p);
-            }
-
-        }
-    }
-}
-
 //print the map
 void Map::print_map(){
     for(int i = 0; i < len_x; i++){         //i-th row of the map

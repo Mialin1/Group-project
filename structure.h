@@ -182,9 +182,6 @@ struct Map{
     int level;
     vector<Point> empty;
 
-    //read maps from file
-    void read_map();
-
     //print the map
     void print_map();
 
