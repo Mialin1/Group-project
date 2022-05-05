@@ -376,7 +376,7 @@ void check_page(Player &player){
     ts.tv_sec = 3;
     nanosleep(&ts, &ts1);
     refresh();
-    if (player.coins >= player.map -> coins_need){
+    if (player.coins >= maps[player.level]){
         refresh();
         player.level+=1;
         string win[3];
