@@ -10,8 +10,7 @@ to be discussed
     player initial position:
 
 
-2. 玩到一半的游戏可以save不？如果可以的话我们整一个地图信息都要存
-    我们不如就只允许他save他的等级算了……
+
 
 3. 地图生成方式：
     我很担心随机生成会很bug，比如出现封闭图形这种很无厘头的地图
@@ -43,4 +42,4 @@ to be discussed
 5. (done)给map加了个int叫level， 
     自动放炸弹的时间可以根据这个level_num计算，金币也是同理
 
-    我
+2. 只save他的等级
