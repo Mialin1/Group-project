@@ -131,7 +131,7 @@ void room_page(Player *player){
             break;
         }
         else if(command=="3"){
-            quit_page();
+            leave_page();
         }
         else{
             lines[0]="Invalid Input! Please Enter the number again: ";
@@ -247,33 +247,34 @@ void quit_page(){
     quit[0]="░█▀▀▀█ ░█▀▀▀ ░█▀▀▀  ░█──░█ ░█▀▀▀█ ░█─░█  ░█▄ ░█ ░█▀▀▀ ▀▄░▄▀ ▀▀█▀▀";
     quit[1]="─▀▀▀▄▄ ░█▀▀▀ ░█▀▀▀  ░█▄▄▄█ ░█──░█ ░█─░█  ░█░█░█ ░█▀▀▀ ─░█──  ░█  ";
     quit[2]="░█▄▄▄█ ░█▄▄▄ ░█▄▄▄    ░█   ░█▄▄▄█  ▀▄▄▀  ░█  ▀█ ░█▄▄▄ ▄▀░▀▄  ░█  ";
-    //See you next time
+    
     print_page(quit,sizeof(quit[0]));
     quit_game;
 }
 
 void leave_page(Player *player){
-    
-    //Do you want to leave the game?
-    //yes(y)            no(n)
-    print_page();
-
-    char x = get_input();
-    if (x =='y') {
-        player -> if_quit = true;
-        //new page
-        //Do you want to save your game?
-        //yes(y)            no(n)
-
-        x = get_input();
-        if (x == 'y'){
-            //save the status to file
-            //to be saved: 
-            //status: Profile and Map
+    string leave[2];
+    leave[0]="Do you want to leave the game?    ";
+    leave[1]="enter 'y' if yes; enter 'n' if no ";
+    while(1){
+        print_page(leave,sizeof(leave[0]));
+        
+        char x = get_input();
+        if (x =='y') {
+            player -> if_quit = true;
+            //////////存status
+            quit_page();
         }
-        //new page
-        //The status is succesfully saved
+        else if(x=='n'){
+            room_page(player);
+        }
+        else{
+
+        }
+
+            
     }
+}
         
 
     
@@ -281,9 +282,6 @@ void leave_page(Player *player){
     
     
 
-    
-    
-}
 
 // bool quit_game(Player player){
 //     return player.if_quit;
