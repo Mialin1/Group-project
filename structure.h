@@ -8,6 +8,7 @@
 #include <ctime>
 using namespace std;
 
+
 //a position on the 2D map
 struct Point{
     int x, y;//coordinates
@@ -196,6 +197,8 @@ struct Map{
 
 };
 
+extern int coin_needed[20]={30,35,40,45,50,55,60,65,70,75,80,85,90,90,91,92,93,94,95,99};
+
 extern vector<vector<Map> > maps;
 
 //Props for player to use in the game
@@ -203,7 +206,7 @@ extern vector<vector<Map> > maps;
 //0: heart, add one life, not in the package
 //1: sheild, defend the bomb for 5 sec
 //2: spring, jump over the wall once
-//3: seed, for plant trees, and trees will grow coins
+//3: seed, growing up and become a box
 struct Prop{
     int no;
     int num;
