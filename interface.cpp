@@ -30,7 +30,7 @@ void welcome_page(Player *player){
     bool valid=true;
   
     while (1){
-        refresh(100);
+        refresh();
         logo_interface();
         if (valid=true){
             cout<<"===============================================================";
@@ -57,7 +57,7 @@ void welcome_page(Player *player){
 
     }
     while(1){
-        refresh(100);
+        refresh();
         logo_interface();
         cout<<"==============================================================="<<endl;
         cout<<"||  Nice to meet you, "<<name;
@@ -304,4 +304,5 @@ void refresh(int num){
     system("clear");
     cout<<endl;
 }
+
 
