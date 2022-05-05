@@ -68,10 +68,12 @@ void welcome_page(Player *player){
         cout<<"||  Kind Reminder!                                           ||"<<endl;
         cout<<"||                                                           ||"<<endl;
         cout<<"||  Here are the rules, please read them carefully:          ||"<<endl;
-        cout<<"||    1. Your Mr. Bomber initially has one life. Watch out   ||"<<endl;//only has one life initially,...but of course, you will have chances to earn more life in the game!
+        cout<<"||    1. Your Mr. Bomber initially has one life. Watch out   ||"<<endl;
         cout<<"||       for the bombs! You will lose 1 life if hurt by it.  ||"<<endl;
+        cout<<"||       but of course, you will have chances to earn more   ||"<<endl;
+        cout<<"||       life in the game                                    ||"<<endl;
         cout<<"||    2. You will have to restart the same level if you      ||"<<endl;
-        cout<<"||       Lose all your life / Don't meet the requirement.    ||"<<endl;//结束条件讨论
+        cout<<"||       Lose all your life / Don't meet the requirement.    ||"<<endl;
         cout<<"||    3. Your main goal in passing each level is to collect  ||"<<endl;  
         cout<<"||       enough coins within a limited time. The difficulty  ||"<<endl; 
         cout<<"||       will increase with the level up.                    ||"<<endl;
@@ -131,13 +133,15 @@ void room_page(Player *player){
             break;
         }
         else if(command=="3"){
-            leave_page();
+            player->if_quit=true;
+            break;
         }
         else{
             lines[0]="Invalid Input! Please Enter the number again: ";
         }
     }
-    
+    if(player->if_quit=true)
+        leave_page(player);
    
     for(int i = 0; i < 10; i ++){
         //generate the loading bar by time
@@ -145,9 +149,14 @@ void room_page(Player *player){
         string load[1];
         load[0]="Loading.........";
         print_page(load,sizeof(load[0]));
+        struct timespec ts, ts1;
+        ts.tv_nsec = 0;
+        ts.tv_sec = 3;
+        nanosleep(&ts, &ts1);
+        refresh();
     }
 
-    if (command=="1"){
+    if (command=="2"){
         int level;
         print_level(player->level);
         cin>>level;
@@ -161,19 +170,20 @@ void room_page(Player *player){
                 cin>>level;
             }
         }
-        game_page
+        game_page();
     }
 
-    //list out all the maps for users to choose
     //higher level map may be locked, the locked map should be gray
-    if (command=="2"){
-
+    if (command=="1"){
+        player->level=1;
+        game_page();
     }
 
     //player->map = ;
-    //press ____ to choose the map and quit room_page
 }
 
+
+    //list out all the levels for users to choose
 void print_level(int l){
     string level[6];
     string line;
@@ -214,7 +224,7 @@ void print_status(Player player){
 
 void game_page(Player player){
     print_name(player);
-
+    player.*map.print_map();
     print_status(player);
     
     //player: Player_Name
@@ -236,7 +246,7 @@ void game_page(Player player){
     //maybe also use struct func (map.print_map())
     //or turn the struct func to a generator and also use the print_page() functoin
    
-    print_page;
+
     
     
 }
@@ -244,9 +254,9 @@ void game_page(Player player){
 void quit_page(){
     refresh();
     string quit[3];
-    quit[0]="░█▀▀▀█ ░█▀▀▀ ░█▀▀▀  ░█──░█ ░█▀▀▀█ ░█─░█  ░█▄ ░█ ░█▀▀▀ ▀▄░▄▀ ▀▀█▀▀";
-    quit[1]="─▀▀▀▄▄ ░█▀▀▀ ░█▀▀▀  ░█▄▄▄█ ░█──░█ ░█─░█  ░█░█░█ ░█▀▀▀ ─░█──  ░█  ";
-    quit[2]="░█▄▄▄█ ░█▄▄▄ ░█▄▄▄    ░█   ░█▄▄▄█  ▀▄▄▀  ░█  ▀█ ░█▄▄▄ ▄▀░▀▄  ░█  ";
+    quit[0]="░█▀▀▀█ ░█▀▀▀ ░█▀▀▀  ░█──░█ ░█▀▀▀█ ░█─░█  ░█▄ ░█ ░█▀▀▀ ▀▄░▄▀ ▀▀█▀▀ ▀▀█▀▀ ▀█▀ ░█▀▄▀█ ░█▀▀▀ ";
+    quit[1]="─▀▀▀▄▄ ░█▀▀▀ ░█▀▀▀  ░█▄▄▄█ ░█──░█ ░█─░█  ░█░█░█ ░█▀▀▀  ░█    ░█    ░█   ░█  ░█░█░█ ░█▀▀▀ ";
+    quit[2]="░█▄▄▄█ ░█▄▄▄ ░█▄▄▄    ░█   ░█▄▄▄█  ▀▄▄▀  ░█  ▀█ ░█▄▄▄ ▄▀░▀▄  ░█    ░█   ▄█▄ ░█  ░█ ░█▄▄▄ ";
     
     print_page(quit,sizeof(quit[0]));
     //quit and 存状态
