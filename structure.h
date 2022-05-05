@@ -117,9 +117,9 @@ struct Box{
 struct Image{
     string s[RANGE_Y];
     void set_bomb(){
-        s[0] = "///";
-        s[1] = "///";
-        s[2] = "///";
+        s[0] = "";
+        s[1] = "\u2739";
+        s[2] = "";
     }
     void set_tree(){
         s[0] = "///";
