@@ -170,16 +170,16 @@ void room_page(Player *player){
                 cin>>level;
             }
         }
-        game_page();
+        game_page(*player);
     }
 
     //higher level map may be locked, the locked map should be gray
     if (command=="1"){
         player->level=1;
-        game_page();
+        game_page(*player);
     }
 
-    //player->map = ;
+    
 }
 
 //room page for entering next level
@@ -367,16 +367,16 @@ void dead(Player & player){
 //when time is up, check whether the coins meet the requirement
 void check_page(Player &player){
     string check[2];
-    check[0]="You need "+to_string(coin_needed[player.level-1])+ " coins to pass this level.";
+    Map *map=player.map;
+    check[0]="You need "+to_string(map->coins_need)+ " coins to pass this level.";
     check[1]="You have "+to_string(player.coins)+" coins.";
-    
     print_page(check,sizeof(check[0]));
     struct timespec ts, ts1;
     ts.tv_nsec = 0;
     ts.tv_sec = 3;
     nanosleep(&ts, &ts1);
     refresh();
-    if (player.coins >= maps[player.level]){
+    if (player.coins >= map->coins_need){
         refresh();
         player.level+=1;
         string win[3];
@@ -400,7 +400,7 @@ void check_page(Player &player){
             leave_page(&player);
     }
     else{
-        no_pass(&player);
+        no_pass(player);
     }
     
 }
