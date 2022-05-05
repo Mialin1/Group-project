@@ -314,6 +314,10 @@ void check_page(Player player){
     print_page(check,sizeof(check[0]));
 
     if (player.coins >= player.map -> coins_need){
+        refresh();
+        string win[];
+        win[0]="Congratulations! "+player.name;
+        win[1]="Do you want to "
         //Congratulations! .....
         //do you want to enter a bigger map?
         //yes(y)  no(n)
