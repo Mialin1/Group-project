@@ -31,4 +31,7 @@
     我很担心随机生成会很bug，比如出现封闭图形这种很无厘头的地图
 
     我们尽量少建一点wall，多一点box，这样都可以炸开，应该就没问题了
+
+    这种多少很难判断，我们把这个留到最后，有时间就手动generate几个好了，然后每次进入一个
+    level就randomly pick one map among maps for this level
     
