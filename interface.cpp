@@ -68,17 +68,17 @@ void welcome_page(Player *player){
         cout<<"||  Kind Reminder!                                           ||"<<endl;
         cout<<"||                                                           ||"<<endl;
         cout<<"||  Here are the rules, please read them carefully:          ||"<<endl;
-        cout<<"||    1. Your Mr. Bomber initially has one life. Watch out   ||"<<endl;
-        cout<<"||       for the bomb! You will lose 1 life if hurt by it.   ||"<<endl;
+        cout<<"||    1. Your Mr. Bomber initially has one life. Watch out   ||"<<endl;//only has one life initially,...but of course, you will have chances to earn more life in the game!
+        cout<<"||       for the bombs! You will lose 1 life if hurt by it.  ||"<<endl;
         cout<<"||    2. You will have to restart the same level if you      ||"<<endl;
-        cout<<"||       Lose all your life / Don't meet the requirement.    ||"<<endl;
+        cout<<"||       Lose all your life / Don't meet the requirement.    ||"<<endl;//结束条件讨论
         cout<<"||    3. Your main goal in passing each level is to collect  ||"<<endl;  
         cout<<"||       enough coins within a limited time. The difficulty  ||"<<endl; 
         cout<<"||       will increase with the level up.                    ||"<<endl;
         cout<<"||    4. You can use bombs to explode the white boxes, but   ||"<<endl;
         cout<<"||       they will not affect the wall. When the boxes are   ||"<<endl;
         cout<<"||       demolished, there might be some surprise.           ||"<<endl;
-        cout<<"||       (props, even a coin!)                               ||"<<endl;
+        cout<<"||       (props, or even coins!)                             ||"<<endl;
         cout<<"||                                                           ||"<<endl;
         cout<<"||  Wait! Don't forget how to make use of those props!       ||"<<endl;      
         cout<<"||  (Trust me. They can make your life a lot easier :P)      ||"<<endl;
@@ -104,7 +104,7 @@ void welcome_page(Player *player){
             break;
         }
         else if(command=="e"){
-            quit_page;
+            quit_page();
         }
         else{
             valid=false;
@@ -299,7 +299,7 @@ string format_string(string str, const int & new_len)
 	return str.substr(0, new_len);
 }
 
-//represh the screen
+//refresh the screen
 void refresh(int num){
     system("clear");
     cout<<endl;

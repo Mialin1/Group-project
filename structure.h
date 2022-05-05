@@ -120,6 +120,7 @@ struct unit{
     bool breakable; //wooden_box
     bool walkable;  //props, bombs, and spaces
     bool empty;     //nothing on this unit
+    Point position;
     
     Bomb *bomb;     //the bomb on this unit(if any)
     Tree *tree;
@@ -133,6 +134,7 @@ struct Map{
     unit ** map;
     int len_x, len_y;   //the size of the map
     int coins_need;     //the number of coins needed to pass the map
+    vector<unit*> empty;
 
     //read maps from file
     void read_map();
