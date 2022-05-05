@@ -196,6 +196,7 @@ struct Map{
 
 };
 
+extern vector<vector<Map>> maps;
 
 //Props for player to use in the game
 //Porp list:
