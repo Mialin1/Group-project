@@ -166,15 +166,17 @@ void choose_level_page(){
     }
     
 }
-void name_bar(){
+void name_bar(Player player){
     string name_bar[3];
     name_bar[0]="Player: "+player.name;
-    name_bar[0]="LEVEL "+;
-    print_page(name_bar,)
+    name_bar[1]="LEVEL "+;
+    print_page(name_bar,sizeof(name_bar[0]));
 }
+
+void status_bar()
 void game_page(Player player){
+    name_bar(player);
     
-    print(page)
     //player: Player_Name
     //level: 1
     // -------------------------    
