@@ -19,7 +19,9 @@ void Map::read_map(){
             //add the empty ones to the queue
             if (map[i][j].empty){
                 unit *u = &map[i][j];
-                empty.push_back(u);
+                Point p;
+                p.set(i,j);
+                empty.push_back(p);
             }
 
         }
@@ -49,7 +51,7 @@ void Map::set_bomb(Point p, Time t){
 //set a seed
 //input: the position of the seed
 void Map::set_seed(Point p, Time t){
-    map[p.x][p.y].tree = new Tree;
+    map[p.x][p.y].box = new Box;
     map[p.x][p.y].bomb-> set_time = t;
     map[p.x][p.y].empty = false;
 }

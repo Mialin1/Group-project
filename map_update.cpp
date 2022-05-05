@@ -35,8 +35,8 @@ void map_update(Player *player){
         if (last_bomb.diff(remain).bomb_span()){
             Point bomb;
             //randomly pick an empty unit and place a bomb
-            unit *u = map->empty[rand() % map->empty.size()];
-            map->set_bomb(u->position, remain);
+            Point p = map->empty[rand() % map->empty.size()];
+            map->set_bomb(p, remain);
             //the bomb will be explode in 1 sec
         }
 
@@ -92,7 +92,7 @@ void map_update(Player *player){
                                     //break the boxes and release the random coins/porps
                                     if(u1.if_box){
                                         //0 heart, 1 shield, 2 spring, 3 seed
-                                        //4 to 9, coins
+                                        //4 to 9, (_ - 3)coins
                                         int _ = rand()%20; 
                                         if(_ < 4){
                                             u1.prop = new Prop;
@@ -123,12 +123,8 @@ void map_update(Player *player){
 
 
                 //check for tree growing(seed->tree->wooden boxes)
-                if (u.tree != NULL){
-                    // if(u.tree -> to_tree(remain)){
-                    //     //the image of this unit turn into tree
-                    // }
-                    // else 
-                    if(u.tree -> to_box(remain)){
+                if (u.box != NULL && !u.box->if_box){
+                    if(u.box -> to_box(remain)){
                         //the image turn into tree
                     }
                 }
