@@ -195,7 +195,7 @@ void game_page(Player player){
 
     //maybe also use struct func (map.print_map())
     //or turn the struct func to a generator and also use the print_page() functoin
-    print_page();
+    print_page;
     
     
 }
@@ -239,9 +239,9 @@ void leave_page(Player *player){
     
 }
 
-bool quit_game(Player player){
-    return player.if_quit;
-}
+// bool quit_game(Player player){
+//     return player.if_quit;
+// }
 
 void dead(Player player){
     //small window: Sorry, you are dead
@@ -250,10 +250,12 @@ void dead(Player player){
     room_page(&player);
 }
 
+//when time is up, check whether the coins meet the requirement
 void check_page(Player player){
     
     //You need (player.map->coins_need) coins to pass this round
     //you have (player.coins) coins
+    
     print_page();
 
     if (player.coins >= player.map -> coins_need){
