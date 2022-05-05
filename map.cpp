@@ -12,15 +12,9 @@ void Map::read_map(){
     for(int i = 0; i < len_x; i++){
         for(int j = 0; j < len_y; j++){
             //input information of unit [i, j]
-
-            //breakable
-            //walkable
-            //empty
-            //position      （i, j）
-            //*bomb
-            //*tree
-            //*prop
-            //image[][]
+            int _;  //_ denotes what kind of unit it is
+            cin >> _;
+            map[i][j].set(_, i, j);
 
             //add the empty ones to the queue
             if (map[i][j].empty){

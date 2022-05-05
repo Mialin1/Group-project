@@ -19,6 +19,12 @@
 
     我们尽量少建一点wall，多一点box，这样都可以炸开，应该就没问题了
 
-    这种多少很难判断，我们把这个留到最后，有时间就手动generate几个好了，然后每次进入一个
-    level就randomly pick one map among maps for this level
+    这种多少很难判断，我们把这个留到最后，有时间就手动generate几个好了，用我写的
+    那个read_map应该还是比较好导入的，然后每次进入一个level就randomly pick one 
+    map among maps for this level
     
+3. read_map里面的_可以改成char或者string，任何你觉得方便的都行
+
+4. 键位
+    键位我建议改一下，就是在wasd是移动的情况下还要shift加1234有点别扭，我建议就是直接
+    给每一个prop一个字母算了

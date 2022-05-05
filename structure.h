@@ -127,6 +127,20 @@ struct unit{
     Prop *prop;
 
     char image[RANGE_X][RANGE_Y];
+
+    void set(int _, int x, int y){
+        //if _ == stone
+        breakable = false;
+        walkable = false;
+        empty = false;
+        position.x = x;
+        position.y = y;
+        bomb = NULL;
+        tree = NULL;
+        prop = NULL;
+
+        //
+    }
     
 };
 
