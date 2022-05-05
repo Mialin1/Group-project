@@ -58,7 +58,7 @@ void map_update(Player *player){
                     //effect2
                     if(u.bomb -> effect2(remain)){}
 
-                    //time to explode
+                    //the moment after explosion(the outcome)
                     if(u.bomb -> explode(remain)){
                         //3*3 all to empty(except for stone walls)
                         //boxes became coins / props
@@ -88,7 +88,19 @@ void map_update(Player *player){
                                 }
                                 //destroy all the breakables
                                 if(u1.breakable){
-                                    
+                                    //if it was a box
+                                    if(u1.if_box){
+                                        u1.prop = new Prop;
+                                        int _ = rand()%20; 
+                                        
+                                        if(_ < 4)                   //0 heart, 1 shield, 2 spring, 3 seed
+                                            u1.prop->set(_ , 1);
+                                        else if(_ < 10)             //4 to 9, coins
+                                            u1.prop->set(_, _ - 3);
+                                    }
+                                    else{
+                                        
+                                    }
                                 }
 
                                 //break the boxes and release the random coins/porps
@@ -96,9 +108,6 @@ void map_update(Player *player){
                         
                         
                     }
-
-                    //effect3
-                    //effect4
 
                     //release dynamic memory
                     if(u.bomb -> release(remain))
@@ -119,6 +128,8 @@ void map_update(Player *player){
             
             }
         }
+
+        game_page(*player);//print the page after update
     }
     
     

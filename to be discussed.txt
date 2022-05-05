@@ -1,7 +1,7 @@
 to be discussed
 讨论完的我就会删掉
 
-
+last edit: Huang Leyang(用于判断是否有回复)
 
 1. 结束条件：
     我们现在的过关条件是收集到一定数量的硬币，但是让当前round结束的条件有点模糊，

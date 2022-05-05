@@ -45,12 +45,14 @@ int main(){
                     player.move(1, 0);
                 case 's': //uses props
                     
-                    int _ = get_input() - '0';
-                    if(_ == 1){                 //use a shield
+                    int _ = get_input();
+                    if (player.package[_].num == 0){
+                        warning();
+                    }
+                    else if(_ == 1){                 //use a shield
                         player.use_shield();
                     }
-
-                    if(_ == 2){                 //use a spring
+                    else if(_ == 2){                 //use a spring
                         int __ = get_input();   //the direction he face
                         int _x, _y = 0;
                         if (__ == 'W')  _x = 0,  _y = -2;
@@ -60,8 +62,7 @@ int main(){
                         if (!player.jump(_x, _y))
                             warning();
                     }
-
-                    if(_ == 3){                 //use a seed
+                    else if(_ == 3){                 //use a seed
                         if (!player.use_seed())
                             warning();
                     }
