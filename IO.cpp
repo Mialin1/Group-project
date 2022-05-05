@@ -7,7 +7,7 @@ char get_input(){
     return 'w';
 }
 
-extern vector<vector<Map>> maps;
+extern vector<vector<Map> > maps;
 
 void input_maps(){
 
