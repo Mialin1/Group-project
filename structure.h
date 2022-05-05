@@ -194,15 +194,11 @@ struct Map{
 //1: sheild, defend the bomb for 5 sec
 //2: spring, jump over the wall once
 //3: seed, for plant trees, and trees will grow coins
-//4: wood, player can place a wooden wall to defend the bomb
 struct Prop{
-    string name;
-    string description;
-    int no_;
+    int no;
     int num;
-    void set(string _name, string _descrip, int _num){
-        name = _name;
-        description = _descrip;
+    void set(int _no, int _num){
+        no = _no;
         num = _num;
     }
 };
@@ -225,7 +221,7 @@ struct Player{
     Time time_protect;      //the moment when the shield start to work
 
     //when user get a new prop
-    void add_item(int num);
+    void add_item(Prop*p);
 
     //initialize the package
     void initialize_props();
