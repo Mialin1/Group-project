@@ -235,7 +235,7 @@ struct Player{
     //player set a bomb on the map
     bool set_bomb();
 
-    //player use a seed(seed--5s-->tree--10s-->(wooden)treasure box, and when the boxes are exploded, there will be coins or props)
+    //player use a seed(seed--10s-->(wooden)treasure box, and when the boxes are exploded, there will be coins or props)
     bool use_seed();
 };
 

@@ -85,13 +85,10 @@ bool Player::set_bomb(){
     return true;
 }
 
-//player use a seed(seed--5s-->tree--10s-->(wooden)treasure box, and when the boxes are exploded, there will be coins or props)
+//player use a seed(seed--10s-->(wooden)treasure box, and when the boxes are exploded, there will be coins or props)
 bool Player::use_seed(){
-    if (package[3].num == 0 )
+    if (!map -> map[position.x][position.y].empty)
         return false;
-    if (map -> map[position.x][position.y].empty){
-        map -> set_seed(position, time_remain);
-        return true;
-    }
-    return false;
+    map -> set_seed(position, time_remain);
+    return true;
 }

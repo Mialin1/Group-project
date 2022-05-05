@@ -63,8 +63,7 @@ int main(){
                             warning();
                     }
                     else if(_ == 3){                 //use a seed
-                        if (!player.use_seed())
-                            warning();
+                        player.use_seed();
                     }
                 case ' ': //user set bomb
                     if(!player.set_bomb())
