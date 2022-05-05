@@ -119,7 +119,7 @@ void room_page(Player *player){
     string command;
     string lines[4];
 
-    lines[0]="Please Enter the number: ";
+    lines[0]="Please Enter the number you want to choose ";
     lines[1]="1: Start a new game";
     lines[2]="2: Load from save";
     lines[3]="3: Exit the game";
@@ -180,6 +180,24 @@ void room_page(Player *player){
     }
 
     //player->map = ;
+}
+
+//room page for entering next level
+void next_level_room_page(Player *player){
+    refresh();
+    int level;
+    print_level(player->level);
+    cin>>level;
+    while(1){
+        if (level<player->level){
+            break;
+        }
+        else{
+            refresh();
+            print_level(player->level);
+            cin>>level;
+        }
+    }
 }
 
 
@@ -271,7 +289,8 @@ void leave_page(Player *player){
         refresh();
         print_page(leave,sizeof(leave[1]));
         
-        char x = get_input();
+        char x;
+        cin>>x;
         if (x =='y') {
             player -> if_quit = true;
             break;
@@ -290,44 +309,98 @@ void leave_page(Player *player){
 
 }
         
-
-    
+//if coin number doesn't meet the requirement
+void no_pass(Player &player){
+    player.initialize();
+    refresh();
+    string c;
+    string nopass[3];
+    nopass[0]="Sorry, your coin number doesn't meet the requirement.";
+    nopass[1]="Cheer up! ";
+    nopass[2]="Enter 'r' to choose level and restart; Enter'e' to exit";
+    while(1){
+        print_page(nopass,sizeof(nopass[0]));
+        cin>>c;
+        if(c=="r"||c=="e"){
+            break;
+        }
+        else{
+            nopass[1]="Invalid Input!";
+        }
+    }
+    if(c=="r"){
+        next_level_room_page(&player);
+    }
+    else{
+        leave_page;
+    }
+}    
     
     
 
 void dead(Player & player){
-    string dead[2];
-    dead[0]="Sorry, your mr.bomb is dead.";
-    dead[1]="Cheer up! Press any key to continue.";
-    print_page(dead,sizeof(dead[1]));
-    //////press any key to continue
     player.initialize();
-    room_page(&player);
+    string dead[2];
+    string c;
+    dead[0]="Sorry, your mr.bomb is dead.";
+    dead[1]="Cheer up! ";
+    dead[2]="Enter 'r' to choose level and restart;  Enter'e' to exit";
+    while(1){
+        print_page(dead,sizeof(dead[2]));
+        cin>>c;
+        if(c=="r"||c=="e"){
+            break;
+        }
+        else{
+            dead[1]="Invalid Input!";
+        }
+    }
+    if(c=="r"){
+        next_level_room_page(&player);
+    }
+    else{
+        leave_page;
+    }
+    
 }
 
 //when time is up, check whether the coins meet the requirement
-void check_page(Player player){
+void check_page(Player &player){
     string check[2];
-    check[0]="You need "+to_string(player.coins_needed[player.level])+ " coins to pss this level.";
+    check[0]="You need "+to_string(player.coins_needed[player.level])+ " coins to pass this level.";
     check[1]="You have "+to_string(player.coins)+" coins.";
     
     print_page(check,sizeof(check[0]));
-
-    if (player.coins >= player.map -> coins_need){
+    struct timespec ts, ts1;
+    ts.tv_nsec = 0;
+    ts.tv_sec = 3;
+    nanosleep(&ts, &ts1);
+    refresh();
+    if (player.coins >= maps[player.level]){
         refresh();
-        string win[];
+        player.level+=1;
+        string win[3];
+        string input;
         win[0]="Congratulations! "+player.name;
-        win[1]="Do you want to "
-        //Congratulations! .....
-        //do you want to enter a bigger map?
-        //yes(y)  no(n)
-        print_page();
-
-        //if yes
-        room_page(&player);
-
-        //if no
-        leave_page(&player);
+        win[1]="Enter next level? ";
+        win[2]="\033[1myes(y)     no(n)\033[0m";  
+        while(1){
+            refresh();
+            print_page(win,sizeof(win[0]));
+            cin>>input;
+            if(input=="y"||input=="n"){
+                break;
+            }
+            else
+                win[0]="Invalid input! Please input again: ";
+        }
+        if(input=="y")
+            next_level_room_page(&player);
+        else
+            leave_page(&player);
+    }
+    else{
+        no_pass(&player);
     }
     
 }
@@ -357,17 +430,17 @@ void logo_interface(void){
     string line[13];
 
     line[0]= " ";
-    line[1]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
-    line[2]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
-    line[3]= "OOOO                                                                OOOO";
-    line[4]= "OOOO                                                                OOOO";
-    line[5]= "OOOO     ░█▀▄▀█ █▀▀█      ░█▀▀█ ░█▀▀▀█ ░█▀▄▀█ ░█▀▀█ ░█▀▀▀ ░█▀▀█     OOOO";
-    line[6]= "OOOO     ░█░█░█ █▄▄▀      ░█▀▀▄ ░█──░█ ░█░█░█ ░█▀▀▄ ░█▀▀▀ ░█▄▄▀     OOOO";
-    line[7]= "OOOO     ░█──░█ █─▀█ █    ░█▄▄█ ░█▄▄▄█ ░█──░█ ░█▄▄█ ░█▄▄▄ ░█─░█     OOOO";  
-    line[8]= "OOOO                                                                OOOO";
-    line[9]= "OOOO                                                                OOOO"; 
-    line[10]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"; 
-    line[11]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"; 
+    line[1]= "            OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
+    line[2]= "            OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
+    line[3]= "            OOOO                                                                OOOO";
+    line[4]= "            OOOO                                                                OOOO";
+    line[5]= "            OOOO     ░█▀▄▀█ █▀▀█      ░█▀▀█ ░█▀▀▀█ ░█▀▄▀█ ░█▀▀█ ░█▀▀▀ ░█▀▀█     OOOO";
+    line[6]= "            OOOO     ░█░█░█ █▄▄▀      ░█▀▀▄ ░█──░█ ░█░█░█ ░█▀▀▄ ░█▀▀▀ ░█▄▄▀     OOOO";
+    line[7]= "            OOOO     ░█──░█ █─▀█ █    ░█▄▄█ ░█▄▄▄█ ░█──░█ ░█▄▄█ ░█▄▄▄ ░█─░█     OOOO";  
+    line[8]= "            OOOO                                                                OOOO";
+    line[9]= "            OOOO                                                                OOOO"; 
+    line[10]= "            OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"; 
+    line[11]= "            OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"; 
     line[12]= " ";
 
     for(int i=0; i<13; i++){
