@@ -1,9 +1,11 @@
 #include "structure.h"
+#include <iostream>
+#include <fstream>
 using namespace std;
 
 //read maps from file
 void Map::read_map(){
-    //cin << len_x << len_y;
+    // fin << len_x << len_y;
     len_x = 100, len_y = 100;       
     map = new unit *[len_x];
     for(int i = 0; i < len_x; i++)

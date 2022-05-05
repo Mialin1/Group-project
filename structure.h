@@ -8,6 +8,7 @@
 #include <ctime>
 using namespace std;
 
+#define Max_Level 3 ////////////////////////////////////////////to be set
 
 //a position on the 2D map
 struct Point{
