@@ -57,9 +57,9 @@ void map_update(Player *player){
                 if (u.bomb != NULL){
                     //effect1
                     if(u.bomb -> effect1(remain)){
-                        map -> map[i][j].image[0] = 
-                        map -> map[i][j].image[1] = 
-                        map -> map[i][j].image[2] = 
+                        map -> map[i][j].image.s[0] = "   "
+                        map -> map[i][j].image.s[1] = "\033[34m\u2739\033[0m"
+                        map -> map[i][j].image.s[2] = "   "
                     }
                     //effect2
                     if(u.bomb -> effect2(remain)){}
