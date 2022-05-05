@@ -249,31 +249,34 @@ void quit_page(){
     quit[2]="░█▄▄▄█ ░█▄▄▄ ░█▄▄▄    ░█   ░█▄▄▄█  ▀▄▄▀  ░█  ▀█ ░█▄▄▄ ▄▀░▀▄  ░█  ";
     
     print_page(quit,sizeof(quit[0]));
-    quit_game;
+    //quit and 存状态
 }
 
 void leave_page(Player *player){
     string leave[2];
     leave[0]="Do you want to leave the game?    ";
-    leave[1]="enter 'y' if yes; enter 'n' if no ";
+    leave[1]="Enter 'y' if yes; Enter 'n' if no ";
     while(1){
-        print_page(leave,sizeof(leave[0]));
+        refresh();
+        print_page(leave,sizeof(leave[1]));
         
         char x = get_input();
         if (x =='y') {
             player -> if_quit = true;
-            //////////存status
-            quit_page();
+            break;
         }
         else if(x=='n'){
             room_page(player);
+            break;
         }
         else{
-
-        }
-
-            
+            leave[0]="Invalid Input.";
+        }       
     }
+    if (player->if_quit){
+        quit_page();
+    }
+
 }
         
 
@@ -317,13 +320,12 @@ void check_page(Player player){
     
 }
 
+//function: output message of invalid move/operation
 void warning(){
-    //invalid move/operation
     string warning[2];
     warning[0]="invalid move/operation";
     warning[1]="Please input again!";
     print_page(warning,sizeof(warning[0]));
-
 }
 
 
