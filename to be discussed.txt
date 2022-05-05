@@ -2,9 +2,12 @@ to be discussed
 
 
 1. 时间相关（可能有漏，想起来就补充）：
-    每一局多长：
+    totle time for a round：
     seed to box：
-    bomb set to explode：
+    bomb effect：
+    bomb span:
+    shield:
+
 
 
 
