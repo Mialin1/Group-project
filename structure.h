@@ -109,9 +109,6 @@ struct Box{
     }
 };
 
-
-
-
 #define RANGE_X 3     //the size of each unit
 #define RANGE_Y 3
 //extern const int range_x = 3;
