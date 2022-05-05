@@ -118,14 +118,17 @@ struct Box{
 struct Image{
     string s[RANGE_Y];
     void set_bomb(){
-        s[0] = "";
-        s[1] = "\u2739";
-        s[2] = "";
+        s[0] = "   ";
+        s[1] = " \033[34m\u2739\033[0m ";
+        s[2] = "   ";
     }
-    void set_tree(){
-        s[0] = "///";
-        s[1] = "///";
-        s[2] = "///";
+    void set_seed(){
+        s[0] = "\033[32m。。。";
+        s[1] = "\033[32m。。。";
+        s[2] = "\033[32m。。。\033[0m";
+    }
+    void set_box(){
+        
     }
 };
 
