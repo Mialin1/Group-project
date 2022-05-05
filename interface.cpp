@@ -294,23 +294,21 @@ void leave_page(Player *player){
     
     
     
-    
 
-
-// bool quit_game(Player player){
-//     return player.if_quit;
-// }
-
-void dead(Player player){
-    //small window: Sorry, you are dead
-    //press any key to continue
+void dead(Player & player){
+    string dead[2];
+    dead[0]="Sorry, your mr.bomb is dead.";
+    dead[1]="Cheer up! Press any key to continue.";
+    print_page(dead,sizeof(dead[1]));
+    //////press any key to continue
     player.initialize();
     room_page(&player);
 }
 
 //when time is up, check whether the coins meet the requirement
 void check_page(Player player){
-    
+    string check[];
+    check[0]="You need "+
     //You need (player.map->coins_need) coins to pass this round
     //you have (player.coins) coins
     
