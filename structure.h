@@ -119,9 +119,9 @@ struct Box{
 struct Image{
     string s[RANGE_Y];
     void set_bomb(){
-        s[0] = "///";
-        s[1] = "///";
-        s[2] = "///";
+        s[0] = "";
+        s[1] = "\u2739";
+        s[2] = "";
     }
     void set_tree(){
         s[0] = "///";
@@ -198,14 +198,15 @@ struct Map{
 
 };
 
-extern vector<vector<Map>> maps;
+
+extern vector<vector<Map> > maps;
 
 //Props for player to use in the game
 //Porp list:
 //0: heart, add one life, not in the package
 //1: sheild, defend the bomb for 5 sec
 //2: spring, jump over the wall once
-//3: seed, for plant trees, and trees will grow coins
+//3: seed, growing up and become a box
 struct Prop{
     int no;
     int num;
