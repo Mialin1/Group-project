@@ -120,6 +120,7 @@ struct unit{
     bool breakable; //wooden_box
     bool walkable;  //props, bombs, and spaces
     bool empty;     //nothing on this unit
+    bool if_box;
     Point position;
     
     Bomb *bomb;     //the bomb on this unit(if any)
@@ -127,6 +128,40 @@ struct unit{
     Prop *prop;
 
     char image[RANGE_X][RANGE_Y];
+
+    //for map generation
+    void set(int _, int x, int y){
+        position.x = x;
+        position.y = y;
+        bomb = NULL;
+        tree = NULL;
+        prop = NULL;
+        
+        //if _ == stone
+        if (_ == 1){
+            breakable = false;
+            walkable = false;
+            empty = false;
+            if_box = false;
+        }
+
+        //if _ == box
+        if (_ == 2){
+            breakable = true;
+            walkable = false;
+            empty = false;
+            if_box = true;
+        }
+
+        //if _ == space
+        if (_ == 3){
+            breakable = false;
+            walkable = true;
+            empty = true;
+            if_box = false;
+        }
+
+    }
     
 };
 

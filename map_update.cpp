@@ -64,6 +64,7 @@ void map_update(Player *player){
                         //boxes became coins / props
                         for(int _i = max(0, i-1); _i <= min(RANGE_X, i+1); _i ++)
                             for(int _j = max(0, j-1); _j <= min(RANGE_Y, j+1); _j ++){
+
                                 unit u1 = map -> map[_i][_j];
 
                                 //check if user is in this zone
@@ -77,14 +78,19 @@ void map_update(Player *player){
                                             if(player->if_quit) //if player has quit the game
                                                 return;
                                             
+                                            //else 
+                                            //if the player doesnt quit, regenerate the map
+                                            //to be continued!!!!!!!!!!!!!!!!!!
                                         }
                                             
                                     }
                                         
                                 }
                                 //destroy all the breakables
-                                
-                                
+                                if(u1.breakable){
+                                    
+                                }
+
                                 //break the boxes and release the random coins/porps
                             }
                         
