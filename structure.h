@@ -127,7 +127,7 @@ struct unit{
     //for map generation
     void set(int _, int x, int y){
         bomb = NULL;
-        tree = NULL;
+        box = NULL;
         prop = NULL;
         
         //if _ == stone
@@ -135,7 +135,6 @@ struct unit{
             breakable = false;
             walkable = false;
             empty = false;
-            if_box = false;
         }
 
         //if _ == box
@@ -143,7 +142,8 @@ struct unit{
             breakable = true;
             walkable = false;
             empty = false;
-            if_box = true;
+            box = new Box;
+            box->if_box = true;
         }
 
         //if _ == space
@@ -151,7 +151,6 @@ struct unit{
             breakable = false;
             walkable = true;
             empty = true;
-            if_box = false;
         }
 
     }
