@@ -1,17 +1,19 @@
 to be discussed
 
 
-1. 时间相关（可能有漏，想起来就补充）：
+1. 需要确定的变量（可能有漏，想起来就补充）：
     totle time for a round：
-    seed to box：
+    time from seed to box：
     bomb effect：
     bomb span:
-    shield:
+    shield time:
+    player initial position:
 
 
+2. 玩到一半的游戏可以save不？如果可以的话我们整一个地图信息都要存
+    我们不如就只允许他save他的等级算了……
 
-
-2. 地图生成方式：
+3. 地图生成方式：
     我很担心随机生成会很bug，比如出现封闭图形这种很无厘头的地图
 
     我们尽量少建一点wall，多一点box，这样都可以炸开，应该就没问题了

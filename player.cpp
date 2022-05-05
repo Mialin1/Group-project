@@ -1,11 +1,11 @@
 #include "structure.h"
 using namespace std;
 
-//initilaize the player
+//initilaize the player for a round
 void Player::initialize(){
 
     if_protect = false;
-    position.set(0,0);
+    position.set(0,0);///////////////////////////////////////////////to be set
     life = 1;
     coins = 0;
         
