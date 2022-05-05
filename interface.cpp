@@ -240,10 +240,24 @@ void print_status(Player player){
     print_page(status_bar,sizeof(status_bar[0]));
 }
 
+void print_prop_instruction(){
+    string instruct[5];
+    instruct[0]="shield: press";
+    instruct[1]="spring: press";
+    instruct[2]="seed: press";
+    instruct[3]="bomb: press <space>";
+}
 void game_page(Player player){
+    refresh();
     print_name(player);
     Map *map=player.map;
+    for(int i=0; i<map->len_y+4;i++){
+        cout<<"\u25BA";
+    }
     map->print_map();
+    for(int i=0; i<=map->len_y+4;i++){
+        cout<<"\u25C4";
+    }
     print_status(player);
     
     //player: Player_Name

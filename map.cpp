@@ -6,14 +6,22 @@ using namespace std;
 //print the map
 void Map::print_map(){
     for(int i = 0; i < len_x; i++){         //i-th row of the map
-    
-    for(int _i = 0; _i < RANGE_X; _i++)
+
+        for(int _i = 0; _i < RANGE_X; _i++)
         for(int j = 0; j < len_y; j++) //j-th column of the map
         for(int _j = 0; _j < RANGE_Y; _j++){
-            cout << map[i][j].image.s[_i][_j]; 
+            if(j==0){
+                cout << "\u25B2 "<<map[i][j].image.s[_i][_j];    
+            }
+            else if(j==(len_y-1)){
+                cout << map[i][j].image.s[_i][_j]<<" \u25BC"; 
+            }
+            else
+                cout << map[i][j].image.s[_i][_j]; 
         }
-        // cout << endl;
+        cout << endl;
     }
+    
 }
 
 //set a bomb
