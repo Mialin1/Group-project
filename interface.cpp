@@ -45,7 +45,7 @@ void welcome_page(Player *player){
             cout<<"||  Please input your name again(begin with letter/number):  ||";
             cout<<"===============================================================";
         }
-        cin >> name;
+        getline(cin, name);
         if (isalnum(name[0])){
             player->name =name;
             valid=true;
@@ -131,7 +131,7 @@ void room_page(Player *player){
             break;
         }
         else if(command=="3"){
-            quit_page();
+            leave_page();
         }
         else{
             lines[0]="Invalid Input! Please Enter the number again: ";
@@ -148,34 +148,74 @@ void room_page(Player *player){
     }
 
     if (command=="1"){
-        choose_level_page();
+        int level;
+        print_level(player->level);
+        cin>>level;
+        while(1){
+            if (level<player->level){
+                break;
+            }
+            else{
+                refresh();
+                print_level(player->level);
+                cin>>level;
+            }
+        }
+        game_page
     }
 
     //list out all the maps for users to choose
     //higher level map may be locked, the locked map should be gray
-    print_page();
+    if (command=="2"){
+
+    }
 
     //player->map = ;
     //press ____ to choose the map and quit room_page
 }
 
-void choose_level_page(){
-    string level[5];
-    for(int i=0;i<20;i++){
-        if()
+void print_level(int l){
+    string level[6];
+    string line;
+    int now=0;
+    level[0]="Please enter the level number you want:";
+    level[1]=" (only can choose the blue highlighted level)";
+    for(int i=1;i<21;i++){
+        if ((i-1)%4==0){
+            line="";
+        }
+        if(i<=l){
+            line+="\033[1m\033[34mLevel "+to_string(i)+"   \033[0m";
+        }
+        else{
+            line+="\033[2mLevel "+to_string(i)+"   \033[0m";
+        }
+        if((i-1)%4==3){
+            level[2+now]=line;
+            now++;
+        }
+        
     }
-    
+    print_page(level,sizeof(level[1]));
 }
-void name_bar(Player player){
+void print_name(Player player){
     string name_bar[3];
     name_bar[0]="Player: "+player.name;
-    name_bar[1]="LEVEL "+;
+    name_bar[1]="LEVEL "+player.level;
     print_page(name_bar,sizeof(name_bar[0]));
 }
 
-void status_bar()
+void print_status(Player player){
+    string status_bar[2];
+    status_bar[0]="\033[1mLife  \033[31m\u2764"+to_string(player.life)+"\033[0m"+"\033[1mCoin(s)   \033[33m\u2726"+to_string(player.coins)+"\033[0m";
+    status_bar[1]="time remaining:   "+to_string(player.time_remain.min)+" : "+to_string(player.time_remain.sec);
+    print_page(status_bar,sizeof(status_bar[0]));
+}
+
 void game_page(Player player){
-    name_bar(player);
+    print_name(player);
+
+    print_status(player);
     
     //player: Player_Name
     //level: 1
@@ -195,39 +235,49 @@ void game_page(Player player){
 
     //maybe also use struct func (map.print_map())
     //or turn the struct func to a generator and also use the print_page() functoin
+   
     print_page;
     
     
 }
 
 void quit_page(){
-
-    //See you next time
-    print_page;
-    quit_game;
+    refresh();
+    string quit[3];
+    quit[0]="░█▀▀▀█ ░█▀▀▀ ░█▀▀▀  ░█──░█ ░█▀▀▀█ ░█─░█  ░█▄ ░█ ░█▀▀▀ ▀▄░▄▀ ▀▀█▀▀";
+    quit[1]="─▀▀▀▄▄ ░█▀▀▀ ░█▀▀▀  ░█▄▄▄█ ░█──░█ ░█─░█  ░█░█░█ ░█▀▀▀ ─░█──  ░█  ";
+    quit[2]="░█▄▄▄█ ░█▄▄▄ ░█▄▄▄    ░█   ░█▄▄▄█  ▀▄▄▀  ░█  ▀█ ░█▄▄▄ ▄▀░▀▄  ░█  ";
+    
+    print_page(quit,sizeof(quit[0]));
+    //quit and 存状态
 }
 
 void leave_page(Player *player){
-    //Do you want to leave the game?
-    //yes(y)            no(n)
-    print_page();
-
-    char x = get_input();
-    if (x =='y') {
-        player -> if_quit = true;
-        //new page
-        //Do you want to save your game?
-        //yes(y)            no(n)
-
-        x = get_input();
-        if (x == 'y'){
-            //save the status to file
-            //to be saved: 
-            //status: Profile and Map
+    string leave[2];
+    leave[0]="Do you want to leave the game?    ";
+    leave[1]="Enter 'y' if yes; Enter 'n' if no ";
+    while(1){
+        refresh();
+        print_page(leave,sizeof(leave[1]));
+        
+        char x = get_input();
+        if (x =='y') {
+            player -> if_quit = true;
+            break;
         }
-        //new page
-        //The status is succesfully saved
+        else if(x=='n'){
+            room_page(player);
+            break;
+        }
+        else{
+            leave[0]="Invalid Input.";
+        }       
     }
+    if (player->if_quit){
+        quit_page();
+    }
+
+}
         
 
     
@@ -235,9 +285,6 @@ void leave_page(Player *player){
     
     
 
-    
-    
-}
 
 // bool quit_game(Player player){
 //     return player.if_quit;
@@ -273,13 +320,12 @@ void check_page(Player player){
     
 }
 
+//function: output message of invalid move/operation
 void warning(){
-    //invalid move/operation
     string warning[2];
     warning[0]="invalid move/operation";
     warning[1]="Please input again!";
     print_page(warning,sizeof(warning[0]));
-
 }
 
 
