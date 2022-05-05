@@ -37,5 +37,5 @@ to be discussed
 
     可以的
 
-5. Level是设定在哪里呢？ 如果没设的话我直接用integer好吗？
+5. Level是设定在哪里呢？ 如果还没设的话我直接用integer行吗？
     到时候自动放炸弹的时间可以根据这个level_num计算，金币也是同理
