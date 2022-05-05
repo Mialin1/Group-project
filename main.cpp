@@ -27,7 +27,7 @@ int main(){
     char x;//the input from the user
     while(1){       //refresh the interface when get a command or time refresh
 
-        if (quit_game(player)){
+        if (player.if_quit){
             quit_page();
             break;
         }

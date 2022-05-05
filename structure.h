@@ -109,8 +109,18 @@ struct Box{
     }
 };
 
+//the struct which stores the image of each unit
 #define RANGE_X 3     //the size of each unit
 #define RANGE_Y 3
+
+struct Image{
+    string s[RANGE_Y];
+    void set_bomb(){
+        s[0] = "///";
+        s[1] = "///";
+        s[2] = "///";
+    }
+};
 
 //information of each unit on the map
 struct unit{
@@ -122,7 +132,7 @@ struct unit{
     Box *box;       //the treasure box on this unit(if any)
     Prop *prop;     //the prop on this unit(if any)
 
-    char image[RANGE_X][RANGE_Y];
+    Image image; 
 
     //for map generation
     void set(string _, int x, int y){
