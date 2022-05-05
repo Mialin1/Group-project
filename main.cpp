@@ -45,14 +45,17 @@ int main(){
                     player.move(1, 0);
                 case 's': //uses props
                     
-                    int _ = get_input();
-                    if (player.package[_].num == 0){
+                    int _x = get_input(), _;
+                    if (_x == 'J') _ = 0;
+                    if (_x == 'K') _ = 1;
+                    if (_x == 'L') _ = 2;
+
+                    if (player.package[_].num == 0)
                         warning();
-                    }
-                    else if(_ == 1){                 //use a shield
+                    else if(_ == 0){                 //use a shield
                         player.use_shield();
                     }
-                    else if(_ == 2){                 //use a spring
+                    else if(_ == 1){                 //use a spring
                         int __ = get_input();   //the direction he face
                         int _x, _y = 0;
                         if (__ == 'W')  _x = 0,  _y = -2;
@@ -62,7 +65,7 @@ int main(){
                         if (!player.jump(_x, _y))
                             warning();
                     }
-                    else if(_ == 3){                 //use a seed
+                    else if(_ == 2){                 //use a seed
                         player.use_seed();
                     }
                 case ' ': //user set bomb

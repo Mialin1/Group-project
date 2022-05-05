@@ -218,7 +218,7 @@ void leave_page(Player *player){
     //new page
     //Do you want to save your game?
     //yes(y)            no(n)
-    print_page();
+    
     
     x = get_input();
     if (x == 'y'){
@@ -226,9 +226,9 @@ void leave_page(Player *player){
         //status: Profile and Map
     }
 
-    //newpage
+    //new page
     //The status is succesfully saved
-    print_page();
+    
 }
 
 bool quit_game(Player player){
@@ -238,6 +238,7 @@ bool quit_game(Player player){
 void dead(Player player){
     //small window: Sorry, you are dead
     //press any key to continue
+    room_page(&player);
 }
 
 void check_page(Player player){
