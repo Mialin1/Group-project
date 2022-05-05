@@ -12,7 +12,7 @@ void Map::read_map(){
     for(int i = 0; i < len_x; i++){
         for(int j = 0; j < len_y; j++){
             //input information of unit [i, j]
-            int _;  //_ denotes what kind of unit it is
+            string _;  //_ denotes what kind of unit it is
             cin >> _;
             map[i][j].set(_, i, j);
 

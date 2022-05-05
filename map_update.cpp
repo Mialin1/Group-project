@@ -105,7 +105,7 @@ void map_update(Player *player){
                                             
                                     }
                                     else{
-                                        u1.set(3, _i, _j); //set to space
+                                        u1.set("space", _i, _j); //set to space
                                     }
                                 }
 
@@ -125,6 +125,7 @@ void map_update(Player *player){
                 //check for seed growing(seed->wooden boxes)
                 if (u.box != NULL && !u.box->if_box){
                     if(u.box -> to_box(remain)){
+                        u.box->if_box = true;
                         //the image turn into tree
                     }
                 }

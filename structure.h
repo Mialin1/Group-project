@@ -125,20 +125,20 @@ struct unit{
     char image[RANGE_X][RANGE_Y];
 
     //for map generation
-    void set(int _, int x, int y){
+    void set(string _, int x, int y){
         bomb = NULL;
         box = NULL;
         prop = NULL;
         
         //if _ == stone
-        if (_ == 1){
+        if (_ == "stone"){
             breakable = false;
             walkable = false;
             empty = false;
         }
 
         //if _ == box
-        if (_ == 2){
+        if (_ == "box"){
             breakable = true;
             walkable = false;
             empty = false;
@@ -147,7 +147,7 @@ struct unit{
         }
 
         //if _ == space
-        if (_ == 3){
+        if (_ == "space"){
             breakable = false;
             walkable = true;
             empty = true;
