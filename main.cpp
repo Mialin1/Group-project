@@ -1,8 +1,6 @@
 #include "structure.h"
 #include "interface.h"
 #include "map_update.h"
-#include "player.h"
-#include "map.h"
 #include "IO.h"
 #include <cstdio>
 #include <iostream>
