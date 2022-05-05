@@ -9,13 +9,8 @@
 #include <thread>
 
 using namespace std;
-<<<<<<< HEAD
+
 extern vector<vector<Map> > maps;
-=======
-
-extern vector<vector<Map>> maps;
-
->>>>>>> c0042af0ba7b83fed448841e5d54180ef8c5f157
 int main(){
 
     Player player;
