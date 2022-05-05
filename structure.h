@@ -100,15 +100,12 @@ struct Bomb{
     }
 };
 
-struct Tree{
+struct Box{
     Time set_time;
-
-    bool to_tree(Time t){
-        return set_time.diff(t).equal(0);
-    }
+    bool if_box;
 
     bool to_box(Time t){
-        return set_time.diff(t).equal(1);
+        return set_time.diff(t).equal(1);///////////////////////////////////////////////to be set
     }
 };
 
@@ -120,19 +117,15 @@ struct unit{
     bool breakable; //wooden_box
     bool walkable;  //props, bombs, and spaces
     bool empty;     //nothing on this unit
-    bool if_box;
-    Point position;
     
     Bomb *bomb;     //the bomb on this unit(if any)
-    Tree *tree;
-    Prop *prop;
+    Box *box;       //the treasure box on this unit(if any)
+    Prop *prop;     //the prop on this unit(if any)
 
     char image[RANGE_X][RANGE_Y];
 
     //for map generation
     void set(int _, int x, int y){
-        position.x = x;
-        position.y = y;
         bomb = NULL;
         tree = NULL;
         prop = NULL;
@@ -170,7 +163,7 @@ struct Map{
     int len_x, len_y;   //the size of the map
     int coins_need;     //the number of coins needed to pass the map
     int level;
-    vector<unit*> empty;
+    vector<Point> empty;
 
     //read maps from file
     void read_map();
