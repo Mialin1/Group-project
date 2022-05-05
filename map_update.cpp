@@ -76,15 +76,17 @@ void map_update(Player *player){
 
                                             if(player->if_quit) //if player has quit the game
                                                 return;
-                                            
+                                            //else 
+                                            //(to be continued)
+                                            //!!!!!!!!!!!!!!!!!!
                                         }
                                             
                                     }
                                         
                                 }
                                 //destroy all the breakables
-                                
-                                
+                                if()
+
                                 //break the boxes and release the random coins/porps
                             }
                         
