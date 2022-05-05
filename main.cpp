@@ -11,10 +11,7 @@
 using namespace std;
 
 extern vector<vector<Map> > maps;
-<<<<<<< HEAD
 
-=======
->>>>>>> aeeffa964a113dd10855d8376ab3a523430124be
 int main(){
 
     Player player;
