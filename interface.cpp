@@ -307,12 +307,11 @@ void dead(Player & player){
 
 //when time is up, check whether the coins meet the requirement
 void check_page(Player player){
-    string check[];
-    check[0]="You need "+
-    //You need (player.map->coins_need) coins to pass this round
-    //you have (player.coins) coins
+    string check[2];
+    check[0]="You need "+to_string(player.coins_needed[player.level])+ " coins to pss this level.";
+    check[1]="You have "+to_string(player.coins)+" coins.";
     
-    print_page();
+    print_page(check,sizeof(check[0]));
 
     if (player.coins >= player.map -> coins_need){
         //Congratulations! .....

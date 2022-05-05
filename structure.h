@@ -228,7 +228,7 @@ struct Player{
     bool if_quit;           //if user is sure to quit the game
     Map *map;               //the chosen map
     int level;
-    int coin_needed[20]={}
+    int coins_needed[20]={};
 
     //about props
     Prop package[10];   //props player owns
