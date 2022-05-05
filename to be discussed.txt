@@ -45,3 +45,6 @@ ________________________________________________________________________________
 9. exit应该用什么function
 
 10.just to make sure 用户捡到道具，道具消失的function写了吗
+
+11. 炸弹explode到player之后是不是应该先检查有没有shield 要是有shield 把他删掉
+    要是没有shield 再扣life

@@ -57,12 +57,16 @@ void map_update(Player *player){
                 if (u.bomb != NULL){
                     //effect1
                     if(u.bomb -> effect1(remain)){
-                        map -> map[i][j].image.s[0] = "   "
-                        map -> map[i][j].image.s[1] = "\033[34m\u2739\033[0m"
-                        map -> map[i][j].image.s[2] = "   "
+                        map -> map[i][j].image.s[0] = "\033[33m - \033[0m";
+                        map -> map[i][j].image.s[1] = "\033[33m\u2739\033[0m";
+                        map -> map[i][j].image.s[2] = "\033[33m - \033[0m";
                     }
                     //effect2
-                    if(u.bomb -> effect2(remain)){}
+                    if(u.bomb -> effect2(remain)){
+                        map -> map[i][j].image.s[0] = "\033[31m - \033[0m";
+                        map -> map[i][j].image.s[1] = "\033[31m\u2739\033[0m";
+                        map -> map[i][j].image.s[2] = "\033[31m - \033[0m";
+                    }
 
                     //the moment after explosion(the outcome)
                     if(u.bomb -> explode(remain)){
@@ -72,6 +76,9 @@ void map_update(Player *player){
                             for(int _j = max(0, j-1); _j <= min(RANGE_Y, j+1); _j ++){
 
                                 unit u1 = map -> map[_i][_j];
+                                u1.image.s[0]="\033[47m"+u1.image.s[0]+"\033[0m";//make the background of 3*3 units become white
+                                u1.image.s[1]="\033[47m"+u1.image.s[1]+"\033[0m";
+                                u1.image.s[2]="\033[47m"+u1.image.s[2]+"\033[0m";
 
                                 //check if user is in this zone
                                 if (player -> position.x == _i && player -> position.y == _j){
