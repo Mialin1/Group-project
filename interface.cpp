@@ -10,7 +10,7 @@ void print_page(string passage[], int length){
         cout<<"-";
     }
     cout<<endl;
-    for(int i=0; i<sizeof(passage);i++){
+    for(int i=0; i<sizeof(passage)-1;i++){
         cout<<"|  "<<format_string(passage[0],length-4)<<"|"<<endl;
     }
     for(int i=0; i<length;i++){
@@ -123,7 +123,7 @@ void room_page(Player *player){
     lines[3]="3: Exit the game";
 
     while(1){
-        refresh(100);
+        refresh();
         logo_interface();
         print_page(lines,sizeof(lines[0])+2);
         cin>>command;
@@ -141,14 +141,14 @@ void room_page(Player *player){
    
     for(int i = 0; i < 10; i ++){
         //generate the loading bar by time
-        refresh(100);
+        refresh();
         string load[1];
         load[0]="Loading.........";
         print_page(load,sizeof(load[0]));
     }
 
     if (command=="1"){
-        map(map.readmap());
+        choose_level_page();
     }
 
     //list out all the maps for users to choose
@@ -159,8 +159,22 @@ void room_page(Player *player){
     //press ____ to choose the map and quit room_page
 }
 
+void choose_level_page(){
+    string level[5];
+    for(int i=0;i<20;i++){
+        if()
+    }
+    
+}
+void name_bar(){
+    string name_bar[3];
+    name_bar[0]="Player: "+player.name;
+    name_bar[0]="LEVEL "+;
+    print_page(name_bar,)
+}
 void game_page(Player player){
-
+    
+    print(page)
     //player: Player_Name
     //level: 1
     // -------------------------    
@@ -300,7 +314,7 @@ string format_string(string str, const int & new_len)
 }
 
 //refresh the screen
-void refresh(int num){
+void refresh(){
     system("clear");
     cout<<endl;
 }
