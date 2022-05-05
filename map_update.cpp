@@ -82,10 +82,9 @@ void map_update(Player *player){
                                     }
                                         
                                 }
-                                
-
-
                                 //destroy all the breakables
+                                
+                                
                                 //break the boxes and release the random coins/porps
                             }
                         
