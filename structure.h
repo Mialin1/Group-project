@@ -197,7 +197,6 @@ struct Map{
 
 };
 
-extern int coin_needed[20]={30,35,40,45,50,55,60,65,70,75,80,85,90,90,91,92,93,94,95,99};
 
 extern vector<vector<Map> > maps;
 
