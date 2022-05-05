@@ -213,21 +213,29 @@ void leave_page(Player *player){
     print_page();
 
     char x = get_input();
-    if (x =='y') player -> if_quit = true;
+    if (x =='y') {
+        player -> if_quit = true;
+        //new page
+        //Do you want to save your game?
+        //yes(y)            no(n)
 
-    //new page
-    //Do you want to save your game?
-    //yes(y)            no(n)
-    
-    
-    x = get_input();
-    if (x == 'y'){
-        //save the status to file
-        //status: Profile and Map
+        x = get_input();
+        if (x == 'y'){
+            //save the status to file
+            //to be saved: 
+            //status: Profile and Map
+        }
+        //new page
+        //The status is succesfully saved
     }
+        
 
-    //new page
-    //The status is succesfully saved
+    
+    
+    
+    
+
+    
     
 }
 
@@ -238,6 +246,7 @@ bool quit_game(Player player){
 void dead(Player player){
     //small window: Sorry, you are dead
     //press any key to continue
+    player.initialize();
     room_page(&player);
 }
 
