@@ -77,6 +77,7 @@ void map_update(Player *player){
 
                                             if(player->if_quit) //if player has quit the game
                                                 return;
+                                            
                                             //else 
                                             //if the player doesnt quit, regenerate the map
                                             //to be continued!!!!!!!!!!!!!!!!!!
