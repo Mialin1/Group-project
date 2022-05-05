@@ -13,6 +13,22 @@ void Map::read_map(){
     for(int i = 0; i < len_x; i++){
         for(int j = 0; j < len_y; j++){
             //input information of unit [i, j]
+
+            //breakable
+            //walkable
+            //empty
+            //position      （i, j）
+            //*bomb
+            //*tree
+            //*prop
+            //image[][]
+
+            //add the empty ones to the queue
+            if (map[i][j].empty){
+                unit *u = &map[i][j];
+                empty.push_back(u);
+            }
+
         }
     }
 }
