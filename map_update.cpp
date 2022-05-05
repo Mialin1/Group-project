@@ -15,6 +15,8 @@ void map_update(Player *player){
 
     game_page(*player);
 
+    srand(26192);
+
     while(1){
         //1 sec
         struct timespec ts, ts1;
@@ -32,6 +34,8 @@ void map_update(Player *player){
         if (last_bomb.diff(remain).bomb_span()){
             Point bomb;
             //randomly pick an empty unit and place a bomb
+            unit *u = map->empty[rand() % map->empty.size()];
+            map->set_bomb(u->position, remain);
             //the bomb will be explode in 1 sec
         }
 
