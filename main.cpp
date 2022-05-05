@@ -8,9 +8,7 @@
 #include <thread>
 
 using namespace std;
-
 extern vector<vector<Map>> maps;
-
 int main(){
 
     Player player;
