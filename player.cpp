@@ -1,4 +1,4 @@
-#include "player.h"
+#include "structure.h"
 using namespace std;
 
 //initilaize the player

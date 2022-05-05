@@ -15,7 +15,8 @@ void map_update(Player *player){
 
     game_page(*player);
 
-    srand(26192);
+    srand(player->time_remain.sec);
+
 
     while(1){
         //1 sec
@@ -81,9 +82,9 @@ void map_update(Player *player){
                                     }
                                         
                                 }
-                                    
-
                                 //destroy all the breakables
+                                
+                                
                                 //break the boxes and release the random coins/porps
                             }
                         

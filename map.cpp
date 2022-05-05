@@ -1,4 +1,3 @@
-#include "map.h"
 #include "structure.h"
 using namespace std;
 
