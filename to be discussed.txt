@@ -44,3 +44,7 @@ to be discussed
     自动放炸弹的时间可以根据这个level_num计算，金币也是同理
 
     我
+
+6. 想在print好的地图右边再print一个方块写instruction的方法我好像搜不到，不知道你有啥高见吗
+    不行的话我只能把他放在
+    

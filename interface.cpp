@@ -224,7 +224,8 @@ void print_status(Player player){
 
 void game_page(Player player){
     print_name(player);
-    player.*map.print_map();
+    Map *map=player.map;
+    map->print_map();
     print_status(player);
     
     //player: Player_Name
@@ -254,9 +255,9 @@ void game_page(Player player){
 void quit_page(){
     refresh();
     string quit[3];
-    quit[0]="░█▀▀▀█ ░█▀▀▀ ░█▀▀▀  ░█──░█ ░█▀▀▀█ ░█─░█  ░█▄ ░█ ░█▀▀▀ ▀▄░▄▀ ▀▀█▀▀ ▀▀█▀▀ ▀█▀ ░█▀▄▀█ ░█▀▀▀ ";
-    quit[1]="─▀▀▀▄▄ ░█▀▀▀ ░█▀▀▀  ░█▄▄▄█ ░█──░█ ░█─░█  ░█░█░█ ░█▀▀▀  ░█    ░█    ░█   ░█  ░█░█░█ ░█▀▀▀ ";
-    quit[2]="░█▄▄▄█ ░█▄▄▄ ░█▄▄▄    ░█   ░█▄▄▄█  ▀▄▄▀  ░█  ▀█ ░█▄▄▄ ▄▀░▀▄  ░█    ░█   ▄█▄ ░█  ░█ ░█▄▄▄ ";
+    quit[0]="░█▀▀▀█ ░█▀▀▀ ░█▀▀▀  ░█──░█ ░█▀▀▀█ ░█─░█  ░█▄ ░█ ░█▀▀▀ ▀▄░▄▀ ▀▀█▀▀  ▀▀█▀▀ ▀█▀ ░█▀▄▀█ ░█▀▀▀ ";
+    quit[1]="─▀▀▀▄▄ ░█▀▀▀ ░█▀▀▀  ░█▄▄▄█ ░█──░█ ░█─░█  ░█░█░█ ░█▀▀▀  ░█    ░█     ░█   ░█  ░█░█░█ ░█▀▀▀ ";
+    quit[2]="░█▄▄▄█ ░█▄▄▄ ░█▄▄▄    ░█   ░█▄▄▄█  ▀▄▄▀  ░█  ▀█ ░█▄▄▄ ▄▀░▀▄  ░█     ░█   ▄█▄ ░█  ░█ ░█▄▄▄ ";
     
     print_page(quit,sizeof(quit[0]));
     //quit and 存状态
