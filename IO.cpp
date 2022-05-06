@@ -40,9 +40,9 @@ void input_maps(){
         return;
     }
 
-    for(int level = 0; level < Max_Level; level ++){ //
+    for(int level = 0; level < Max_Level; level ++){ 
         vector<Map> _map;
-        for(int _; _ < 5; _ ++){
+        for(int _; _ < 3; _ ++){
             Map map;
             
             fin >> map.len_x >> map.len_y;

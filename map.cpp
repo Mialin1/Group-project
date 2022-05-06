@@ -39,11 +39,29 @@ void Map::print_map(Point position){
 }
 
 void Map::delete_map(){
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////
-    for(int i = 0; i < len_x; i ++)
+    for(int i = 0; i < len_x; i ++){
+        for(int j = 0; j < len_y; j ++){
+            if (map[i][j].prop!=NULL){
+                delete map[i][j].prop;
+                map[i][j].prop = NULL;
+            }
+            if (map[i][j].bomb!=NULL){
+                delete map[i][j].bomb;
+                map[i][j].bomb = NULL;
+            }
+            if (map[i][j].box!=NULL){
+                delete map[i][j].box;
+                map[i][j].box = NULL;
+            }  
+
+        }
+    }
+    for(int i = 0; i < len_x; i ++){
         delete map[i];
+        map[i] = NULL;
+    }
     delete *map;
+    *map = NULL;
 }
 
 //set a bomb
