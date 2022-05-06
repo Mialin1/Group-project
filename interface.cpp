@@ -209,8 +209,8 @@ void print_level(int l){
     int now=0;
     level[0]="Please enter the level number you want:";
     level[1]=" (only can choose the blue highlighted level)";
-    for(int i=1;i<21;i++){
-        if ((i-1)%4==0){
+    for(int i=1;i<7;i++){
+        if ((i-1)%3==0){
             line="";
         }
         if(i<=l){
