@@ -147,22 +147,22 @@ void room_page(Player &player){
         input_level(player);
         room_page(player);
     }
-
     //higher level map may be locked, the locked map should be gray
     else{
+        int level = command;
         while(1){
-            if (command<=player.level){
+            if (level <=player.level){
                 break;
             }
             else{
                 cout<<"The level is locked,\n please choose the blue highlighted level"<<endl;
                 print_level(player.level);
-                cin>>command;
+                cin>>level;
             }
         }
         print_loading();
         player.initialize();
-        player.map = &maps[command][rand()%5];//randomly select a map////////////
+        player.map = &maps[level][rand()%5];//randomly select a map////////////
         game_page(player);
     }
 
