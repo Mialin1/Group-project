@@ -6,13 +6,19 @@ to be discussed
 2. 你还要给每个level随便设计一些初始地图欸，我们交作业就不用那么多个level这样你的工作量太大了
     我们就先做个5个level，每个level五张地图
     e.g. level 1假设地图的size是5*10
+
     因为初始地图只有wall, box 和space，所以你就为了简单比如说我们约定好W是wall， B是box，S是space
     然后永远都把0，0留出来(其实就是你搞一个5*10的S, 然后随心把某几个S改成W，然后在还是S的地方随便挑几个改成B就行了)
+
     SWWWWSSSSS              你先随便做一些看上去合理的，就是能走的地方留均匀一点啊什么的，具体的会不会有死路这种
     SSWSSSSSWW              我们运行的时候检查就好
     WSWWWSSSSS
     WSSSSSSWWW
     WWWSSSSSSS
+    
+    我放了一个map.txt里面随便搞了个样例你可以照着写
+    我的读入是不同level一起读的没有分割线
+    你就1-5是level1的地图，6-10是level2以此类推
 
 
 1. 需要确定的变量（可能有漏，想起来就补充）：

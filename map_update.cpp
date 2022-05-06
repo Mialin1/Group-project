@@ -77,7 +77,9 @@ void map_update(Player *player){
                             for(int _j = max(0, j-1); _j <= min(RANGE_Y, j+1); _j ++){
 
                                 unit u1 = map -> map[_i][_j];
-                                u1.image.s[0]="\033[47m"+u1.image.s[0]+"\033[0m";//make the background of 3*3 units become white
+
+                                //make the background of 3*3 units become white
+                                u1.image.s[0]="\033[47m"+u1.image.s[0]+"\033[0m";
                                 u1.image.s[1]="\033[47m"+u1.image.s[1]+"\033[0m";
                                 u1.image.s[2]="\033[47m"+u1.image.s[2]+"\033[0m";
 
@@ -140,7 +142,7 @@ void map_update(Player *player){
                 if (u.box != NULL && !u.box->if_box){
                     if(u.box -> to_box(remain)){
                         u.box->if_box = true;
-                        //the image turn into tree
+                        u.image.set_box();
                     }
                 }
             
@@ -151,9 +153,8 @@ void map_update(Player *player){
         if(restart){
             /////////////////////////////////////////////////////////////////////////////
             map->delete_map();
-            
-            //reset the whole map
-            //if the user want to quit then just quit
+            room_page(player);
+            break;
         }
 
         game_page(*player);//print the page after update
