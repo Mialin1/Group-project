@@ -22,7 +22,7 @@ int main(){
     room_page(player);
 
     //one more thread to update the screen per_sec no matter the player moves or not
-    thread update (map_update, &player);
+    thread update (map_update, ref(player));
     update.detach();
 
     
