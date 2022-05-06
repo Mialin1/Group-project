@@ -266,10 +266,10 @@ void game_page(Player player){
     //|                         |   down (S)
     //|                         |   left (A)
     //|                         |   right (D)
-    //|                         |   shield (shift+1): 5
-    //|                         |   spring (shift+2): 3   
-    //|                         |   seed   (shift+3): -
-    //|                         |   bomb   (space): -
+    //|                         |   shield (): 5
+    //|                         |   spring (): 3   
+    //|                         |   seed   (): -
+    //|                         |   bomb   (): -
     //|                         |
     // -------------------------
     // life: 1    coin(s): 0/100

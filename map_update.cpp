@@ -80,18 +80,19 @@ void map_update(Player *player){
 
                                 //check if user is in this zone
                                 if (player -> position.x == _i && player -> position.y == _j){
-                                    player -> life --;
+                                    //if player is not protected, life --
+                                    if(!player->if_protect){
+                                        player -> life --;
 
-                                    if (player -> life == 0){
-                                        dead(*player);
-                                        restart = true;
-                                        break;
-                                    }
-                                        
+                                        if (player -> life == 0){
+                                            dead(*player);
+                                            restart = true;
+                                            break;
+                                        }
+                                    }   
                                 }
-
                                 //destroy all the breakables
-                                if(u1.breakable){
+                                else if(u1.breakable){ 
                                     //break the boxes and release the random coins/porps
                                     if(u1.box != NULL && u1.box->if_box ){
                                         //0 heart, 1 shield, 2 spring, 3 seed
@@ -111,8 +112,6 @@ void map_update(Player *player){
                                         u1.set("space", _i, _j); //set to space
                                     }
                                 }
-
-                                
                             }
                             if (restart) break;
                         }
