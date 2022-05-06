@@ -76,12 +76,12 @@ struct Time{
 
     //time span between two system bombs
     bool bomb_span(){
-        return equal(5);
+        return equal(10);
     }
 
     //for check the shield
     bool shield_up(){
-        return equal(5);
+        return equal(10);
     }
 };
 
@@ -92,15 +92,15 @@ struct Bomb{
 
     //functions that 
     bool effect1(Time t){
-        return set_time.diff(t).equal(0);
-    }
-
-    bool effect2(Time t){
         return set_time.diff(t).equal(1);
     }
 
-    bool explode(Time t){
+    bool effect2(Time t){
         return set_time.diff(t).equal(2);
+    }
+
+    bool explode(Time t){
+        return set_time.diff(t).equal(3);
     }
 
     bool release(Time t){
@@ -221,6 +221,14 @@ struct unit{
             breakable = true;
             walkable = true;
             empty = false;
+            
+        }
+
+        if (_ == "bomb"){
+            breakable = false;
+            walkable = false;
+            empty = false;
+            image.set_bomb();
         }
 
     }
@@ -282,7 +290,7 @@ struct Player{
 
     //about props
     Prop package[10];   //props player owns
-    bool if_protect;        //the remaining time player being protected
+    bool if_protect;        
     Time time_protect;      //the moment when the shield start to work
 
     //when user get a new prop
