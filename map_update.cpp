@@ -31,7 +31,7 @@ void map_update(Player *player){
             //randomly pick an empty unit and place a bomb
             Point p;
             p.set(rand()% player->map->len_x, rand()% player->map->len_y);
-            while(!map->map[p.x][p.y].empty){
+            while(!map->map[p.x][p.y].empty || p == player->position){
                 p.set(rand()% player->map->len_x, rand()% player->map->len_y);
             }
             map->set_bomb(p, remain);

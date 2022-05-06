@@ -49,8 +49,7 @@ void Map::delete_map(){
 void Map::set_bomb(Point p, Time t){
     map[p.x][p.y].bomb = new Bomb;
     map[p.x][p.y].bomb-> set_time = t;
-    map[p.x][p.y].empty = false;
-    map[p.x][p.y].image.set_bomb();
+    map[p.x][p.y].set("bomb", p.x, p.y);
 }
 
 //set a seed
