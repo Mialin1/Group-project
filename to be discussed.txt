@@ -23,7 +23,6 @@ to be discussed
     我目前的处理是捡到道具之后相当于那个区域变成了space
     然后再map_update那里会输出map
 
-<<<<<<< HEAD
 10. (done)just to make sure 用户捡到道具，道具消失的效果写了吗。 还有爆炸的时候，范围内的道具应该也会消失对吧？
     按照目前的逻辑是的
     看看有没有遗漏，我设置了unit.set(space)的地方有：捡起道具，炸弹爆炸之后除了box和wall和player之外的所有
