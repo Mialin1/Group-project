@@ -228,7 +228,10 @@ void print_status(Player player){
 //display props in the pocket and their instruction
 void print_prop_instruction(Player player){
     string instruct[4];
-    instruct[0]="\033[34m\u25C6\033[0m Shield(press 'j'): "+to_string(player.package[1].num);
+    if (player.if_protect==true)
+        instruct[0]="[Using] \033[34m\u25C6\033[0m Shield(press 'j'): "+to_string(player.package[1].num);
+    else
+        instruct[0]="\033[34m\u25C6\033[0m Shield(press 'j'): "+to_string(player.package[1].num);
     instruct[1]="\u2605 Spring(press 'k'): "+to_string(player.package[2].num);
     instruct[2]="\033[32m。。。\033[0m Seed(press 'l'): "+to_string(player.package[3].num);
     instruct[3]="{\u2739} Bomb(press 'b'): infinite";
@@ -283,7 +286,7 @@ void game_page(Player player){
 void quit_page(){
     refresh();
     string quit[3];
-    quit[0]="░█▀▀▀█ ░█▀▀▀ ░█▀▀▀  ░█──░█ ░█▀▀▀█ ░█─░█  ░█▄ ░█ ░█▀▀▀ ▀▄░▄▀ ▀▀█▀▀  ▀▀█▀▀ ▀█▀ ░█▀▄▀█ ░█▀▀▀ ";
+    quit[0]="░█▀▀▀█ ░█▀▀▀ ░█▀▀▀  ░█  ░█ ░█▀▀▀█ ░█─░█  ░█▄ ░█ ░█▀▀▀ ▀▄░▄▀ ▀▀█▀▀  ▀▀█▀▀ ▀█▀ ░█▀▄▀█ ░█▀▀▀ ";
     quit[1]="─▀▀▀▄▄ ░█▀▀▀ ░█▀▀▀  ░█▄▄▄█ ░█──░█ ░█─░█  ░█░█░█ ░█▀▀▀  ░█    ░█     ░█   ░█  ░█░█░█ ░█▀▀▀ ";
     quit[2]="░█▄▄▄█ ░█▄▄▄ ░█▄▄▄    ░█   ░█▄▄▄█  ▀▄▄▀  ░█  ▀█ ░█▄▄▄ ▄▀░▀▄  ░█     ░█   ▄█▄ ░█  ░█ ░█▄▄▄ ";
     
