@@ -3,19 +3,36 @@ using namespace std;
 
 //print the map
 void Map::print_map(){
+    string player_image[RANGE_X];
+    player_image[0]=" o";
+    player_image[1]="<|>";
+    player_image[2]=" ^ ";
     for(int i = 0; i < len_x; i++){         //i-th row of the map
 
         for(int _i = 0; _i < RANGE_X; _i++)
         for(int j = 0; j < len_y; j++) //j-th column of the map
         for(int _j = 0; _j < RANGE_Y; _j++){
-            if(j==0){
-                cout << "\u25B2 "<<map[i][j].image.s[_i][_j];    
+            if(player.position.x==i && player.position.y==j){
+                if(j==0){
+                    cout << "\u25B2 "<<player_image[_i][_j];    
+                }
+                else if(j==(len_y-1)){
+                    cout << player_image[_i][_j]<<" \u25BC"; 
+                }
+                else
+                    cout << player_image[_i][_j];
+
             }
-            else if(j==(len_y-1)){
-                cout << map[i][j].image.s[_i][_j]<<" \u25BC"; 
+            else{
+                if(j==0){
+                    cout << "\u25B2 "<<map[i][j].image.s[_i][_j];    
+                }
+                else if(j==(len_y-1)){
+                    cout << map[i][j].image.s[_i][_j]<<" \u25BC"; 
+                }
+                else
+                    cout << map[i][j].image.s[_i][_j]; 
             }
-            else
-                cout << map[i][j].image.s[_i][_j]; 
         }
         cout << endl;
     }
