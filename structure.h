@@ -123,7 +123,7 @@ struct Box{
     bool if_box;
 
     bool to_box(Time t){
-        return set_time.diff(t).equal(10);///////////////////////////////////////////////to be set
+        return set_time.diff(t).equal(10);
     }
 };
 
