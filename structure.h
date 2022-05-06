@@ -232,7 +232,6 @@ struct Map{
     int len_x, len_y;   //the size of the map
     int coins_need;     //the number of coins needed to pass the map
     int level;
-    vector<Point> empty;
 
     //print the map
     void print_map();
