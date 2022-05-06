@@ -2,6 +2,7 @@
 #define INTERFACE_H
 
 #include "structure.h"
+#include "IO.h"
 #define STEP 1
 
 
