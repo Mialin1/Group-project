@@ -1,6 +1,6 @@
 #include "structure.h"
 #include "interface.h"
-#include "map_update.h"
+#include "update.h"
 #include "IO.h"
 
 using namespace std;
