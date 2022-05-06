@@ -15,6 +15,7 @@ void print_page(string passage[], int length){
     for(int i=0; i<length;i++){
         cout<<"-";
     }
+    cout<<endl;
 }
 
 //functions below are page generator
@@ -119,42 +120,30 @@ void room_page(Player &player){
     
     string command;
     string lines[4];
-
-    lines[0]="Please Enter the number you want to choose ";
-    lines[1]="1: Start a new game";
-    lines[2]="2: Load from save";
-    lines[3]="3: Exit the game";
+    int level_initial=1;
+    lines[0]="Please Enter the number you want to choose: ";
+    lines[1]="(1-6): Enter the level number you want to start";
+    lines[2]="7: Load from save";
+    lines[3]="8: Exit the game";
 
     while(1){
         refresh();
         logo_interface();
-        print_page(lines,sizeof(lines[0])+2);
+        print_page(lines,sizeof(lines[1])+2);
+        print_level(level_initial);
         cin>>command;
-        if(command=="1"||command=="2"){
-            break;
-        }
-        else if(command=="3"){
+        if(command=="1"||command=="2"||command=="3"||command=="4"||command=="5"||command=="6"||command=="7"||command=="8"){
             break;
         }
         else{
             lines[0]="Invalid Input! Please Enter the number again: ";
         }
     }
-    if(command=="3"){
+    if(command=="8"){
         leave_page(player);
         room_page(player);
     }
-    
-    //generate the loading bar by time
-    refresh();
-    string load[1];
-    load[0]="Loading.........";
-    print_page(load,sizeof(load[0]));
-    struct timespec ts, ts1;
-    ts.tv_nsec = 0;
-    ts.tv_sec = 2;
-    nanosleep(&ts, &ts1);
-    refresh();
+
     
 
     if (command=="2"){
@@ -180,7 +169,17 @@ void room_page(Player &player){
         player.initialize();
         game_page(player);//random抽一个map 
     }
- 
+    
+            //generate the loading bar by time
+    refresh();
+    string load[1];
+    load[0]="Loading.........";
+    print_page(load,sizeof(load[0]));
+    struct timespec ts, ts1;
+    ts.tv_nsec = 0;
+    ts.tv_sec = 2;
+    nanosleep(&ts, &ts1);
+    refresh();
 }
 
 
@@ -188,13 +187,12 @@ void room_page(Player &player){
 
     //list out all the levels for users to choose
 void print_level(int l){
-    string level[6];
+    string level[3];
     string line;
-    int now=0;
-    level[0]="Please enter the level number you want:";
-    level[1]=" (only can choose the blue highlighted level)";
+    int now=1;
+    level[0]=" (only can choose the blue highlighted level)";
     for(int i=1;i<7;i++){
-        if ((i-1)%3==0){
+        if (i==1||i==4){
             line="";
         }
         if(i<=l){
@@ -203,14 +201,15 @@ void print_level(int l){
         else{
             line+="\033[2mLevel "+to_string(i)+"   \033[0m";
         }
-        if((i-1)%4==3){
-            level[2+now]=line;
+        if(i==3||i==6){
+            level[now]=line;
             now++;
-        }
-        
+        }  
     }
     print_page(level,sizeof(level[1]));
 }
+
+
 void print_name(Player player){
     string name_bar[3];
     name_bar[0]="Player: "+player.name;
