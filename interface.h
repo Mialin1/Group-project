@@ -13,6 +13,8 @@ void game_page(Player player);
 
 void quit_page();
 
+void print_loading();
+
 void room_page(Player &player);
 
 void print_level(int l);

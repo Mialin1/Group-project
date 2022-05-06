@@ -120,7 +120,6 @@ void room_page(Player &player){
     
     string command;
     string lines[4];
-    int level_initial=1;
     lines[0]="Please Enter the number you want to choose: ";
     lines[1]="(1-6): Enter the level number you want to start";
     lines[2]="7: Load from save";
@@ -130,7 +129,7 @@ void room_page(Player &player){
         refresh();
         logo_interface();
         print_page(lines,sizeof(lines[1])+2);
-        print_level(level_initial);
+        print_level(player.level);
         cin>>command;
         if(command=="1"||command=="2"||command=="3"||command=="4"||command=="5"||command=="6"||command=="7"||command=="8"){
             break;
@@ -144,33 +143,36 @@ void room_page(Player &player){
         room_page(player);
     }
 
-    
+    else if (command=="2"){
 
-    if (command=="2"){
-        int level;
-        print_level(player.level);
-        cin>>level;
-        while(1){
-            if (level<player.level){
-                break;
-            }
-            else{
-                refresh();
-                print_level(player.level);
-                cin>>level;
-            }
-        }
         ////////load from file//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         game_page(player);
     }
 
     //higher level map may be locked, the locked map should be gray
-    if (command=="1"){/////////////////////////////////////////////edit//////////////////////////////////////
+    else{
+        while(1){
+            if (atoi(command)<player.level){//////
+                break;
+            }
+            else{
+                cout<<"The level is locked,\ please choose the blue highlighted level"
+
+                print_level(player.level);
+                cin>>level;
+            }
+        }
+        print_loading();
         player.initialize();
         game_page(player);//random抽一个map 
     }
+
+        
     
-            //generate the loading bar by time
+}
+
+//generate the loading bar by time
+void print_loading(){
     refresh();
     string load[1];
     load[0]="Loading.........";
@@ -181,7 +183,6 @@ void room_page(Player &player){
     nanosleep(&ts, &ts1);
     refresh();
 }
-
 
 
 
