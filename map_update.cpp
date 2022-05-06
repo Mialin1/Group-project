@@ -11,7 +11,6 @@ void map_update(Player *player){
 
     Time last_bomb = player -> time_remain;
 
-    game_page(*player);
 
     srand(time(0));
 

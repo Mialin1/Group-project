@@ -171,13 +171,14 @@ void room_page(Player *player){
                 cin>>level;
             }
         }
+        ////////load from file//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         game_page(*player);
     }
 
     //higher level map may be locked, the locked map should be gray
-    if (command=="1"){
+    if (command=="1"){/////////////////////////////////////////////edit//////////////////////////////////////
         player->initialize();
-        game_page(*player);
+        game_page(*player);//random抽一个map 
     }
 
     
