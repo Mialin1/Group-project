@@ -35,17 +35,17 @@ void welcome_page(Player &player){
         refresh();
         logo_interface();
         if (valid=true){
-            cout<<"===============================================================";
-            cout<<"||  Welcome to MR.BOMBER !                                   ||";
-            cout<<"||  Please input your name(begin with letter/number):        ||";
-            cout<<"===============================================================";
+            cout<<"===============================================================" << endl;
+            cout<<"||  Welcome to MR.BOMBER !                                   ||" << endl;
+            cout<<"||  Please input your name(begin with letter/number):        ||" << endl;
+            cout<<"===============================================================" << endl;
         }
         else{
-            cout<<"===============================================================";
-            cout<<"||  Welcome to MR.BOMBER !                                   ||";
-            cout<<"||  Invalid input,                                           ||";
-            cout<<"||  Please input your name again(begin with letter/number):  ||";
-            cout<<"===============================================================";
+            cout<<"===============================================================" << endl;
+            cout<<"||  Welcome to MR.BOMBER !                                   ||" << endl;
+            cout<<"||  Invalid input,                                           ||" << endl;
+            cout<<"||  Please input your name again(begin with letter/number):  ||" << endl;
+            cout<<"===============================================================" << endl;
         }
         getline(cin, name);
         if (isalnum(name[0])){
