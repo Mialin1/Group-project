@@ -6,7 +6,7 @@
 #define STEP 1
 
 
-void print_page(string passage[], int length);
+void print_page(string passage[], int length, int size);
 
 void welcome_page(Player &player);
 
