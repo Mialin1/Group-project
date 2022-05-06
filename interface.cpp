@@ -318,36 +318,7 @@ void leave_page(Player &player){
         }       
     }
 }
-        
-//if coin number doesn't meet the requirement
-void no_pass(Player &player){
-    player.initialize();
-    refresh();
-    string c;
-    string nopass[3];
-    nopass[0]="Sorry, your coin number doesn't meet the requirement.";
-    nopass[1]="Cheer up! ";
-    nopass[2]="Enter 'r' to choose level and restart; Enter'e' to exit";
-    while(1){
-        print_page(nopass,sizeof(nopass[0]));
-        cin>>c;
-        if(c=="r"||c=="e"){
-            break;
-        }
-        else{
-            nopass[1]="Invalid Input!";
-        }
-    }
-    if(c=="r"){
-        return;
-    }
-    else{
-        leave_page(player);
-    }
-}    
     
-    
-
 void dead(Player &player){
     player.initialize();
     string dead[3];
@@ -411,8 +382,35 @@ void check_page(Player &player){
     else{
         no_pass(player);
     }
-    
 }
+
+       
+//if coin number doesn't meet the requirement
+void no_pass(Player &player){
+    player.initialize();
+    refresh();
+    string c;
+    string nopass[3];
+    nopass[0]="Sorry, your coin number doesn't meet the requirement.";
+    nopass[1]="Cheer up! ";
+    nopass[2]="Enter 'r' to choose level and restart; Enter'e' to exit";
+    while(1){
+        print_page(nopass,sizeof(nopass[0]));
+        cin>>c;
+        if(c=="r"||c=="e"){
+            break;
+        }
+        else{
+            nopass[1]="Invalid Input!";
+        }
+    }
+    if(c=="r"){
+        return;
+    }
+    else{
+        leave_page(player);
+    }
+}    
 
 //function: output message of invalid move/operation
 void warning(){
