@@ -164,6 +164,9 @@ struct Image{
         s[1]="   ";
         s[2]="   ";
     }
+    void set_coin(){
+        
+    }
 };
 
 //information of each unit on the map
