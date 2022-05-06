@@ -1,5 +1,3 @@
-#include <iostream>
-#include <ctime>
 #include "map_update.h"
 #include "interface.h"
 #include "structure.h"

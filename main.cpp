@@ -2,11 +2,6 @@
 #include "interface.h"
 #include "map_update.h"
 #include "IO.h"
-#include <cstdio>
-#include <iostream>
-#include <fstream>
-#include <ctime>
-#include <thread>
 
 using namespace std;
 
