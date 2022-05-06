@@ -295,7 +295,7 @@ void quit_page(){
 }
 
 void leave_page(Player &player){
-    map.delete_map()
+    player.map->delete_map();
     string leave[2];
     leave[0]="Do you want to leave the game?    ";
     leave[1]="Enter 'y' if yes; Enter 'n' if no ";
