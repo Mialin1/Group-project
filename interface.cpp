@@ -306,9 +306,10 @@ void leave_page(Player &player){
         string x;
         cin>>x;
         if (x =="y") {
+            //////////////////////////////////////////////////////////////////////
+            output_level(player);
             player.map->delete_map();
             quit_page();
-            break;
         }
         else if(x=="n"){
             return;
@@ -369,6 +370,7 @@ void check_page(Player &player){
             print_page(win,sizeof(win[0]));
             cin>>input;
             if(input=="y"||input=="n"){
+                player.initialize();
                 break;
             }
             else
@@ -387,7 +389,6 @@ void check_page(Player &player){
        
 //if coin number doesn't meet the requirement
 void no_pass(Player &player){
-    player.initialize();
     refresh();
     string c;
     string nopass[3];
