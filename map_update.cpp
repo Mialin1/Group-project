@@ -101,6 +101,7 @@ void map_update(Player *player){
                                         if(_ < 4){
                                             u1.prop = new Prop;
                                             u1.prop->set(_, 1);
+                                            u1.set("prop", _i, _j);
                                             if(_ == 0) u1.image.set_heart();
                                             if(_ == 1) u1.image.set_shield();
                                             if(_ == 2) u1.image.set_spring();
@@ -108,10 +109,11 @@ void map_update(Player *player){
                                         }
                                         else if(_ < 10){
                                             u1.prop = new Prop;
+                                            u1.set("prop", _i, _j);
                                             u1.prop->set(_, _ - 3);
                                             u1.image.set_coin();
                                         }
-                                        u1.set("space", _i, _j);
+
                                     }
                                     //other things -> space
                                     else{
@@ -128,7 +130,6 @@ void map_update(Player *player){
                     //release dynamic memory
                     if(u.bomb -> release(remain))
                         delete u.bomb;
-
                 }
 
 
