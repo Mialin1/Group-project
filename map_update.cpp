@@ -4,17 +4,6 @@
 #include "IO.h"
 using namespace std;
 
-void delete_dynamic(Player &player){
-    /////////////////////////////////////////////////////////////////////////////
-    //for(int ) 
-        //delete bomb and props
-    map->delete_map();
-    room_page(player);
-    last_bomb = player.time_remain;
-    restart = false;
-    continue;
-}
-
 //update the screen per_sec
 void map_update(Player &player){
 
@@ -31,6 +20,13 @@ void map_update(Player &player){
         nanosleep(&ts, &ts1);
 
         player.time_remain.tick();  //minus 1 sec
+        if(player.time_remain.if_time_up()){
+            check_page(player);
+            map->delete_map();
+            room_page(player);
+            last_bomb = player.time_remain;
+            restart = false;
+        }
 
         Map *map = player.map;
 
@@ -140,8 +136,6 @@ void map_update(Player &player){
                         delete u.bomb;
                         if (restart) break;
                     }
-
-                    //release dynamic memory
                     
                 }
 
@@ -159,8 +153,11 @@ void map_update(Player &player){
         }
 
         if(restart){
-            delete_dynamic(player);
-            
+            map->delete_map();
+            room_page(player);
+            last_bomb = player.time_remain;
+            restart = false;
+            continue;
         }
 
         game_page(player);//print the page after update

@@ -293,6 +293,7 @@ void quit_page(){
 }
 
 void leave_page(Player &player){
+    ///////////////////////////////////////////////////////////////map.delete_map()
     string leave[2];
     leave[0]="Do you want to leave the game?    ";
     leave[1]="Enter 'y' if yes; Enter 'n' if no ";
@@ -378,18 +379,19 @@ void check_page(Player &player){
     check[0]="You need "+to_string(map->coins_need)+ " coins to pass this level.";
     check[1]="You have "+to_string(player.coins)+" coins.";
     print_page(check,sizeof(check[0]));
+
     struct timespec ts, ts1;
     ts.tv_nsec = 0;
     ts.tv_sec = 3;
     nanosleep(&ts, &ts1);
+
     refresh();
     if (player.coins >= map->coins_need){
-        refresh();
-        player.level+=1;
+        player.level += 1;
         string win[3];
         string input;
         win[0]="Congratulations! "+player.name;
-        win[1]="Enter next level? ";
+        win[1]="Another game? ";
         win[2]="\033[1myes(y)     no(n)\033[0m";  
         while(1){
             refresh();
@@ -402,7 +404,7 @@ void check_page(Player &player){
                 win[0]="Invalid input! Please input again: ";
         }
         if(input=="y")
-            next_level_room_page(player);
+            room_page(player);
         else
             leave_page(player);
     }
