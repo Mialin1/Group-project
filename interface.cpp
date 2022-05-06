@@ -115,7 +115,7 @@ void welcome_page(Player &player){
 
     }
 
-};  
+} 
 
 void room_page(Player &player){
     
@@ -366,7 +366,6 @@ void check_page(Player &player){
     if (player.coins >= map->coins_need){
         player.level += 1;
         string win[3];
-        string input;
         string input;
         win[0]="Congratulations! "+player.name;
         win[1]="Another game or quit the game?";
