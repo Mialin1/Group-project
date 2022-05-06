@@ -50,19 +50,23 @@ If the player can survives from the bombs, and the coins collected has meet the 
 
 ### 3.1 Dynamic User Interface
 
-The user interface is the feature responsible for input and output, displaying the visualized game on the terminal and receiving the user input from the terminal. For user input, there will be only one region - the user input line. The status interface, main interface, text interface, and user input line are arranged in a top-down manner.
+The user interface is the feature responsible for input and output, displaying the visualized game on the terminal and receiving the user input from the terminal. Apart from the welcome information and instructions, the game page is mainly composed of three parts: map view, status bar, and prop instructions
 
-- The status interface is mainly for displaying instantaneous character-related and level-related information. It contains the level number, time, life bar, props inside the pocket.
-- The main interface is mainly for displaying instantaneous game content.
-- The text interface is used to display any notification, and story content.
+- The status interface is mainly for displaying instantaneous character-related and level-related information. It contains the level number, remain time, life bar, coins collected and so on.
+- The map view is mainly for displaying instantaneous game content.
+- The prop instructions are for displaying the instantaneous prop number and the key to use it
 
 ### 3.2 Data storage and Loading
 
-Permanent data storage is manual storage that refreshes only if the specific user command is received(if press "store" in the main interface). During this process, all the character-related data, including status, time, location, level number,  pocket, will be exported to an external file and will have permanent storage.
+Permanent data storage is automaticly done everytime player quit the game to save the highest level the player has reached, and if he/she can choose to load his/her game status next time when he/she enter the game.(if choose "load" in the map choosing page). During this process, the player information will be exported to an external file (named by the player's username)and will have permanent storage.
 
 ### 3.3 Data processing
 
-All the content displayed on the screen is based on continuously updated data. Therefore, we can conclude that all the displayed game content is actually regarding "Data Processing". With collective data processing functions, a different game feature can be created.
+All the content displayed on the screen is based on continuously updated data. Therefore, we can conclude that all the displayed game content is actually regarding "Data Processing". With collective data processing functions, a different game feature can be created. 
+
+### 3.4 Multi-thread process
+
+System activity and user input activity are processed in two different threads, 
 
 ## 4. Code Requirement Implementation
 
