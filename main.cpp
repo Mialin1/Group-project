@@ -70,7 +70,7 @@ int main(){
                 case 'b': //user set bomb
                     if(!player.set_bomb())
                         warning();
-                case 'q': //quit game
+                case 'e': //quit game
                     leave_page(player);
 
 
