@@ -110,7 +110,9 @@ void welcome_page(Player *player){
         else{
             valid=false;
         }
+
     }
+
 };  
 
 void room_page(Player *player){
@@ -142,18 +144,18 @@ void room_page(Player *player){
     if(player->if_quit=true)
         leave_page(player);
    
-    for(int i = 0; i < 10; i ++){
-        //generate the loading bar by time
-        refresh();
-        string load[1];
-        load[0]="Loading.........";
-        print_page(load,sizeof(load[0]));
-        struct timespec ts, ts1;
-        ts.tv_nsec = 0;
-        ts.tv_sec = 2;
-        nanosleep(&ts, &ts1);
-        refresh();
-    }
+    
+    //generate the loading bar by time
+    refresh();
+    string load[1];
+    load[0]="Loading.........";
+    print_page(load,sizeof(load[0]));
+    struct timespec ts, ts1;
+    ts.tv_nsec = 0;
+    ts.tv_sec = 2;
+    nanosleep(&ts, &ts1);
+    refresh();
+    
 
     if (command=="2"){
         int level;
@@ -174,7 +176,7 @@ void room_page(Player *player){
 
     //higher level map may be locked, the locked map should be gray
     if (command=="1"){
-        player->level=1;
+        player->initialize();
         game_page(*player);
     }
 
@@ -259,7 +261,7 @@ void game_page(Player player){
         cout<<"\u25BA";
     }
     cout<<endl;
-    map->print_map();
+    map->print_map(player.position);
     for(int i=0; i<=map->len_y+4;i++){
         cout<<"\u25C4";
     }
@@ -302,6 +304,7 @@ void quit_page(){
     quit[2]="░█▄▄▄█ ░█▄▄▄ ░█▄▄▄    ░█   ░█▄▄▄█  ▀▄▄▀  ░█  ▀█ ░█▄▄▄ ▄▀░▀▄  ░█     ░█   ▄█▄ ░█  ░█ ░█▄▄▄ ";
     
     print_page(quit,sizeof(quit[0]));
+
     //quit and 存状态
 }
 
