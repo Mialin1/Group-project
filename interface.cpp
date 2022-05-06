@@ -134,16 +134,16 @@ void room_page(Player *player){
             break;
         }
         else if(command=="3"){
-            player->if_quit=true;
             break;
         }
         else{
             lines[0]="Invalid Input! Please Enter the number again: ";
         }
     }
-    if(player->if_quit=true)
+    if(command=="3"){
         leave_page(player);
-   
+        room_page(player);
+    }
     
     //generate the loading bar by time
     refresh();
@@ -184,23 +184,7 @@ void room_page(Player *player){
     
 }
 
-//room page for entering next level
-void next_level_room_page(Player *player){
-    refresh();
-    int level;
-    print_level(player->level);
-    cin>>level;
-    while(1){
-        if (level<player->level){
-            break;
-        }
-        else{
-            refresh();
-            print_level(player->level);
-            cin>>level;
-        }
-    }
-}
+
 
 
     //list out all the levels for users to choose
@@ -243,12 +227,12 @@ void print_status(Player player){
 }
 
 //display props in the pocket and their instruction
-void print_prop_instruction(){
+void print_prop_instruction(Player player){
     string instruct[4];
     instruct[0]="\033[34m\u25C6\033[0m Shield(press 'j'): "+to_string(player.package[1].num);
     instruct[1]="\u2605 Spring(press 'k'): "+to_string(player.package[2].num);
     instruct[2]="\033[32m。。。\033[0m Seed(press 'l'): "+to_string(player.package[3].num);
-    instruct[3]="{\u2739} Bomb(press <space>): infinite";
+    instruct[3]="{\u2739} Bomb(press 'b'): infinite";
     print_page(instruct,sizeof(instruct[0])+3);
 }
 
@@ -270,7 +254,7 @@ void game_page(Player player){
     cout<<" "<<endl;
     print_status(player);
     cout<<" "<<endl;
-    print_prop_instruction;
+    print_prop_instruction(player);
 
     
     //player: Player_Name
@@ -317,14 +301,13 @@ void leave_page(Player *player){
         refresh();
         print_page(leave,sizeof(leave[1]));
         
-        char x;
+        string x;
         cin>>x;
-        if (x =='y') {
+        if (x =="y") {
             player -> if_quit = true;
             break;
         }
-        else if(x=='n'){
-            room_page(player);
+        else if(x=="n"){
             break;
         }
         else{
