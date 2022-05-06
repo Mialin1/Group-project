@@ -351,11 +351,11 @@ void no_pass(Player &player){
 
 void dead(Player & player){
     player.initialize();
-    string dead[2];
+    string dead[3];
     string c;
     dead[0]="Sorry, your mr.bomb is dead.";
     dead[1]="Cheer up! ";
-    dead[2]="Enter 'r' to choose level and restart;  Enter'e' to exit";
+    dead[2]="Enter 'r' to restart;  Enter 'e' to exit";
     while(1){
         print_page(dead,sizeof(dead[2]));
         cin>>c;
@@ -367,10 +367,10 @@ void dead(Player & player){
         }
     }
     if(c=="r"){
-        next_level_room_page(&player);
+        room_page(&player);
     }
     else{
-        leave_page;
+        leave_page(player);
     }
     
 }
