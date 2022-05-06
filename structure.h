@@ -221,6 +221,7 @@ struct unit{
             breakable = true;
             walkable = true;
             empty = false;
+            
         }
 
         if (_ == "bomb"){

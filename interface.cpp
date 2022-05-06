@@ -365,10 +365,7 @@ void dead(Player &player){
             dead[1]="Invalid Input!";
         }
     }
-    if(c=="r"){
-        room_page(player);
-    }
-    else{
+    if(c=="e"){{
         leave_page(player);
     }
     

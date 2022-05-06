@@ -4,10 +4,21 @@
 #include "IO.h"
 using namespace std;
 
+void delete_dynamic(Player &player){
+    /////////////////////////////////////////////////////////////////////////////
+    //for(int ) 
+        //delete bomb and props
+    map->delete_map();
+    room_page(player);
+    last_bomb = player.time_remain;
+    restart = false;
+    continue;
+}
+
 //update the screen per_sec
 void map_update(Player &player){
 
-    Time last_bomb = player -> time_remain;
+    Time last_bomb = player.time_remain;
 
 
     srand(time(0));
@@ -19,28 +30,29 @@ void map_update(Player &player){
         ts.tv_sec = 1;
         nanosleep(&ts, &ts1);
 
-        player -> time_remain.tick();  //minus 1 sec
+        player.time_remain.tick();  //minus 1 sec
 
-        Map *map = player->map;
+        Map *map = player.map;
 
-        Time remain = player -> time_remain;
+        Time remain = player.time_remain;
 
         //every few seconds drop a bomb randomly
         if (last_bomb.diff(remain).bomb_span()){
             Point bomb;
             //randomly pick an empty unit and place a bomb
             Point p;
-            p.set(rand()% player->map->len_x, rand()% player->map->len_y);
-            while(!map->map[p.x][p.y].empty || (p.x == player->position.x && p.y == player->position.y)){
-                p.set(rand()% player->map->len_x, rand()% player->map->len_y);
+            p.set(rand()% player.map->len_x, rand()% player.map->len_y);
+            while(!map->map[p.x][p.y].empty || (p.x == player.position.x && p.y == player.position.y)){
+                p.set(rand()% player.map->len_x, rand()% player.map->len_y);
             }
             map->set_bomb(p, remain);
+            last_bomb = remain;
             //the bomb will be explode in 1 sec
         }
 
         //check if there is any shield expire
-        if (player -> time_protect.diff(remain).shield_up()){
-            player -> if_protect = false;
+        if (player.time_protect.diff(remain).shield_up()){
+            player.if_protect = false;
         }
         
         bool restart = false;
@@ -81,12 +93,12 @@ void map_update(Player &player){
                                 // u1.image.s[2]="\033[47m"+u1.image.s[2]+"\033[0m";
 
                                 //check if user is in this zone
-                                if (player -> position.x == _i && player -> position.y == _j){
+                                if (player.position.x == _i && player.position.y == _j){
                                     //if player is not protected, life --
-                                    if(!player->if_protect){
-                                        player -> life --;
+                                    if(!player.if_protect){
+                                        player.life --;
 
-                                        if (player -> life == 0){
+                                        if (player.life == 0){
                                             dead(*player);
                                             restart = true;
                                             break;
@@ -99,19 +111,19 @@ void map_update(Player &player){
                                     if(u1.box != NULL && u1.box->if_box ){
                                         //0 heart, 1 shield, 2 spring, 3 seed
                                         //4 to 9, (_ - 3)coins
-                                        int _ = rand()%20; 
+                                        int _ = rand()%15; 
                                         if(_ < 4){
-                                            u1.prop = new Prop;
-                                            u1.prop->set(_, 1);
                                             u1.set("prop", _i, _j);
+                                            u1.prop = new Prop;
+                                            u1.prop -> set(_, 1);
                                             if(_ == 0) u1.image.set_heart();
                                             if(_ == 1) u1.image.set_shield();
                                             if(_ == 2) u1.image.set_spring();
                                             if(_ == 3) u1.image.set_seed();
                                         }
                                         else if(_ < 10){
-                                            u1.prop = new Prop;
                                             u1.set("prop", _i, _j);
+                                            u1.prop = new Prop;
                                             u1.prop->set(_, _ - 3);
                                             u1.image.set_coin();
                                         }
@@ -125,13 +137,12 @@ void map_update(Player &player){
                             }
                             if (restart) break;
                         }
-                            
+                        delete u.bomb;
                         if (restart) break;
                     }
 
                     //release dynamic memory
-                    if(u.bomb -> release(remain))
-                        delete u.bomb;
+                    
                 }
 
 
@@ -148,13 +159,11 @@ void map_update(Player &player){
         }
 
         if(restart){
-            /////////////////////////////////////////////////////////////////////////////
-            map->delete_map();
-            room_page(player);
-            break;
+            delete_dynamic(player);
+            
         }
 
-        game_page(*player);//print the page after update
+        game_page(player);//print the page after update
     }
     
     
