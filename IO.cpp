@@ -20,6 +20,16 @@ void input_level(Player &player){
     fin.close();
 }
 
+void output_level(Player player){
+    ofstream fout;
+    string s = player.name + ".txt";
+    fout.open(s.c_str());
+
+    fout << player.level;
+
+    fout.close();
+}
+
 void input_maps(){
 
     ifstream fin;

@@ -40,7 +40,7 @@ void Map::print_map(Point position){
 
 void Map::delete_map(){
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    //////////////////////////////////////////////////////////////////////////////////////////
     for(int i = 0; i < len_x; i ++)
         delete map[i];
     delete *map;
@@ -57,7 +57,8 @@ void Map::set_bomb(Point p, Time t){
 //set a seed
 //input: the position of the seed
 void Map::set_seed(Point p, Time t){
-    map[p.x][p.y].box = new Box;
-    map[p.x][p.y].bomb-> set_time = t;
-    map[p.x][p.y].empty = false;
+    map[p.x][p.y].set("box", p.x, p.y);
+    map[p.x][p.y].box-> set_time = t;
+    map[p.x][p.y].box-> if_box = false;
+    map[p.x][p.y].image.seed_used();
 }

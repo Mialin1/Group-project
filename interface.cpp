@@ -120,7 +120,7 @@ void room_page(Player &player){
     
     int command;
     string lines[4];
-    lines[0]="Please Enter the number you want to choose: ";
+    lines[0]="Please ENTER the corresponding number";
     lines[1]="(1-6): Enter the level number you want to start";
     lines[2]="7: Load from save";
     lines[3]="8: Exit the game";
@@ -147,22 +147,22 @@ void room_page(Player &player){
         input_level(player);
         room_page(player);
     }
-
     //higher level map may be locked, the locked map should be gray
     else{
+        int level = command;
         while(1){
-            if (command<=player.level){
+            if (level <=player.level){
                 break;
             }
             else{
                 cout<<"The level is locked,\n please choose the blue highlighted level"<<endl;
                 print_level(player.level);
-                cin>>command;
+                cin>>level;
             }
         }
         print_loading();
         player.initialize();
-        player.map=&maps[command][rand()%5];//randomly select a map////////////
+        player.map = &maps[level][rand()%3];//randomly select a map
         game_page(player);
         
     }
@@ -296,7 +296,7 @@ void quit_page(){
 }
 
 void leave_page(Player &player){
-    map.delete_map()
+    player.map->delete_map();
     string leave[2];
     leave[0]="Do you want to leave the game?    ";
     leave[1]="Enter 'y' if yes; Enter 'n' if no ";
@@ -307,51 +307,20 @@ void leave_page(Player &player){
         string x;
         cin>>x;
         if (x =="y") {
-            player.if_quit = true;
-            break;
+            //////////////////////////////////////////////////////////////////////
+            output_level(player);
+            player.map->delete_map();
+            quit_page();
         }
         else if(x=="n"){
-            break;
+            return;
         }
         else{
             leave[0]="Invalid Input.";
         }       
     }
-    if (player.if_quit){
-        quit_page();
-    }
-
 }
-        
-//if coin number doesn't meet the requirement
-void no_pass(Player &player){
-    player.initialize();
-    refresh();
-    string c;
-    string nopass[3];
-    nopass[0]="Sorry, your coin number doesn't meet the requirement.";
-    nopass[1]="Cheer up! ";
-    nopass[2]="Enter 'r' to choose level and restart; Enter'e' to exit";
-    while(1){
-        print_page(nopass,sizeof(nopass[0]));
-        cin>>c;
-        if(c=="r"||c=="e"){
-            break;
-        }
-        else{
-            nopass[1]="Invalid Input!";
-        }
-    }
-    if(c=="r"){
-        room_page(player);
-    }
-    else{
-        leave_page(player);
-    }
-}    
     
-    
-
 void dead(Player &player){
     player.initialize();
     string dead[3];
@@ -395,28 +364,55 @@ void check_page(Player &player){
         string input;
         string input;
         win[0]="Congratulations! "+player.name;
-        win[1]="Another game? ";
+        win[1]="Another game or quit the game?";
         win[2]="\033[1myes(y)     no(n)\033[0m";  
         while(1){
             refresh();
             print_page(win,sizeof(win[0]));
             cin>>input;
             if(input=="y"||input=="n"){
+                player.initialize();
                 break;
             }
             else
                 win[0]="Invalid input! Please input again: ";
         }
         if(input=="y")
-            room_page(player);
+            return;
         else
             leave_page(player);
     }
     else{
         no_pass(player);
     }
-    
 }
+
+       
+//if coin number doesn't meet the requirement
+void no_pass(Player &player){
+    refresh();
+    string c;
+    string nopass[3];
+    nopass[0]="Sorry, your coin number doesn't meet the requirement.";
+    nopass[1]="Cheer up! ";
+    nopass[2]="Enter 'r' to choose level and restart; Enter'e' to exit";
+    while(1){
+        print_page(nopass,sizeof(nopass[0]));
+        cin>>c;
+        if(c=="r"||c=="e"){
+            break;
+        }
+        else{
+            nopass[1]="Invalid Input!";
+        }
+    }
+    if(c=="r"){
+        return;
+    }
+    else{
+        leave_page(player);
+    }
+}    
 
 //function: output message of invalid move/operation
 void warning(){
