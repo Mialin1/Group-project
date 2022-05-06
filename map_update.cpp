@@ -101,13 +101,19 @@ void map_update(Player *player){
                                         if(_ < 4){
                                             u1.prop = new Prop;
                                             u1.prop->set(_, 1);
+                                            if(_ == 0) u1.image.set_heart();
+                                            if(_ == 1) u1.image.set_shield();
+                                            if(_ == 2) u1.image.set_spring();
+                                            if(_ == 3) u1.image.set_seed();
                                         }
                                         else if(_ < 10){
                                             u1.prop = new Prop;
                                             u1.prop->set(_, _ - 3);
+                                            u1.image.set_coin();
                                         }
                                         u1.set("space", _i, _j);
                                     }
+                                    //other things -> space
                                     else{
                                         u1.set("space", _i, _j); //set to space
                                     }
@@ -140,6 +146,7 @@ void map_update(Player *player){
 
         if(restart){
             /////////////////////////////////////////////////////////////////////////////
+
             //release all the dynamic memory
             //reset the whole map
             //if the user want to quit then just quit

@@ -2,22 +2,19 @@ to be discussed
 
 
 1. 需要确定的变量（可能有漏，想起来就补充）：
-    totle time for a round： 3min
-    time from seed to box：大概十秒？ 
-    bomb effect： 
-    bomb span: 3*3
-    shield time:我的理解是 免除一次扣生命。但如果是按时间的话也可以 大概十二十秒？
-    player initial position: 右下或左下角？
-
-2. 我随意看了一下，没仔细看哈，你那个loading bar里面nanosleep我不确定你是否用对了，你目前的设置是三秒更新一次是不是有点慢了
-    
-    太慢吗 那我调少一点
+    totle time for a round： 3 min 0 sec
+    time from seed to box：  10 sec
+    bomb effect： ?
+    bomb span(time between two system bombs)
+    shield time: 10sec太长了不合理吧，一局才多长
+    player initial position: 右下或左下角？你定啊，或者就0，0，我们保证我们输入的游戏的0，0是空位就好
 
 3. todo: 在加载过去的档案的时候先检查是否存在此文档，加一个提示页面
 
 9. exit游戏 我直接用exit（）可行吗？  还有exit之前我需要存关卡，这个应该用哪里的function呢
     exit之前要release 那些动态内存
     存储和读入还没写，我待会写
+    或者如果你空下来可以写一些
 
 
 
@@ -26,10 +23,24 @@ to be discussed
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> fe82eee1829e793020dc3a3fcbeb3e71f4515ea3
 新问题加在上面
 _________________________________________________________________________________________________________________
 以下是已完成
+
+10. (done)just to make sure 用户捡到道具，道具消失的效果写了吗。 还有爆炸的时候，范围内的道具应该也会消失对吧？
+    按照目前的逻辑是的
+    看看有没有遗漏，我设置了unit.set(space)的地方有：捡起道具，炸弹爆炸之后除了box和wall和player之外的所有
+    我只在这两个地方set了应该也没别的了吧
+
+11. (done)炸弹explode到player之后先检查有没有shield 要是有shield 把他删掉
+    要是没有shield 再扣life
+
+2. 我随意看了一下，没仔细看哈，你那个loading bar里面nanosleep我不确定你是否用对了，你目前的设置是三秒更新一次是不是有点慢了
+    太慢吗 那我调少一点
 
 2. (done)只允许他save他的等级
 
