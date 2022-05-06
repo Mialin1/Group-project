@@ -74,7 +74,7 @@ int main(){
                         warning();
 
                 case 'Q': //quit game
-                    leave_page(&player);
+                    leave_page(player);
 
             }
         }
