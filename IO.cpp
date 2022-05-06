@@ -2,7 +2,6 @@
 #include "structure.h"
 #include <termio.h>
 
-vector<vector<Map> > maps;
 
 void input_level(Player &player){
     ifstream fin;
@@ -32,11 +31,11 @@ void output_level(Player player){
 void input_maps(){
 
     ifstream fin;
-    fin.open("maps.txt");
+    fin.open("map.txt");
 
     if(fin.fail()){
         cout << "Error in file opening!" << endl;
-        return;
+        exit(1);
     }
 
     for(int level = 0; level < Max_Level; level ++){ 

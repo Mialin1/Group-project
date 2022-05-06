@@ -5,8 +5,6 @@
 using namespace std;
 #define STEP 1
 
-extern vector<vector<Map> > maps;
-
 void print_page(string passage[], int length, int size);
 
 void welcome_page(Player &player);

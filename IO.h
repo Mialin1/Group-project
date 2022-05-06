@@ -3,7 +3,6 @@
 
 #include "structure.h"
 
-extern vector<vector<Map> > maps;
 
 void input_level(Player &player);
 void output_level(Player player);

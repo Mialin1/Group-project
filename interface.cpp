@@ -3,7 +3,6 @@
 #include "IO.h"
 using namespace std;
 
-extern vector<vector<Map> > maps;
 
 //all the pages are printed by this function
 void print_page(string passage[], int length, int size){
@@ -124,29 +123,29 @@ void room_page(Player &player){
     int command;
     string lines[4];
     lines[0]="Please ENTER the corresponding number";
-    lines[1]="(1-6): Enter the level number you want to start";
-    lines[2]="7: Load from save";
-    lines[3]="8: Exit the game";
+    lines[1]="(0-5): Enter the level number you want to start";
+    lines[2]="6: Load from save";
+    lines[3]="7: Exit the game";
 
     while(1){
         refresh();
         logo_interface();
         print_page(lines,sizeof(lines[1])+2,4);
         print_level(player.level);
-        cin>>command;
-        if(command>=1 and command<=8){
+        cin>>command; 
+        if(command >=0 and command<=7){
             break;
         }
         else{
             lines[0]="Invalid Input! Please Enter the number again: ";
         }
     }
-    if(command==8){
+    if(command==7){
         leave_page(player);
         room_page(player);
     }
 
-    else if (command==7){
+    else if (command==6){
         input_level(player);
         room_page(player);
     }
@@ -154,7 +153,7 @@ void room_page(Player &player){
     else{
         int level = command;
         while(1){
-            if (level <=player.level){
+            if (level <= player.level){
                 break;
             }
             else{
@@ -165,8 +164,12 @@ void room_page(Player &player){
         }
         print_loading();
         player.initialize();
-        player.map = &maps[level][rand()%3];//randomly select a map
+        cout <<"here" << endl;
+        int x = rand()%3;
+        player.map = &maps[level][x];//randomly select a map
+        cout <<"here" << endl;
         game_page(player);
+        cout <<"here" << endl;
 
     }
 
@@ -195,8 +198,8 @@ void print_level(int l){
     string line;
     int now=1;
     level[0]=" (only can choose the blue highlighted level)";
-    for(int i=1;i<7;i++){
-        if (i==1||i==4){
+    for(int i=0;i<6;i++){
+        if (i==0||i==3){
             line="";
         }
         if(i<=l){
@@ -205,7 +208,7 @@ void print_level(int l){
         else{
             line+="\033[2mLevel "+to_string(i)+"   \033[0m";
         }
-        if(i==3||i==6){
+        if(i==2||i==5){
             level[now]=line;
             now++;
         }  
@@ -246,9 +249,10 @@ void game_page(Player player){
     refresh();
     print_name(player);
     Map *map=player.map;
-    cout<<" "<<endl;
-    for(int i=0; i<map->len_y+4;i++){
-        cout<<"\u25BA";
+    cout << " " << endl;
+    for(int i=0; i< map->len_y + 4; i++){
+        // cout<<"\u25BA";
+        cout << "-";
     }
     cout<<endl;
     map->print_map(player.position);

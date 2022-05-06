@@ -5,16 +5,17 @@
 
 using namespace std;
 
-extern vector<vector<Map> > maps;
+vector<vector<Map> > maps;
 
 int main(){
 
     Player player;
 
     input_maps();
+    cout << maps[0][0].len_x << endl;
 
     player.initialize();
-    player.level = 1;
+    player.level = 0;
     
     welcome_page(player); 
     
