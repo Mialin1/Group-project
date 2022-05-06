@@ -166,7 +166,7 @@ struct Image{
     }
     void set_coin(){
         s[0]="   ";
-        s[1]="   ";
+        s[1]="\033[33m\u2666\u00A9\u2666\033[0m";
         s[2]="   ";
     }
     void seed_used(){
