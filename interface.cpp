@@ -120,7 +120,7 @@ void room_page(Player &player){
     
     int command;
     string lines[4];
-    lines[0]="Please Enter the number you want to choose: ";
+    lines[0]="Please ENTER the corresponding number";
     lines[1]="(1-6): Enter the level number you want to start";
     lines[2]="7: Load from save";
     lines[3]="8: Exit the game";
@@ -162,7 +162,7 @@ void room_page(Player &player){
         }
         print_loading();
         player.initialize();
-        player.map=&maps[command][rand()%5];//randomly select a map////////////
+        player.map = &maps[command][rand()%5];//randomly select a map////////////
         game_page(player);
     }
 
@@ -306,20 +306,17 @@ void leave_page(Player &player){
         string x;
         cin>>x;
         if (x =="y") {
-            player.if_quit = true;
+            player.map->delete_map();
+            quit_page();
             break;
         }
         else if(x=="n"){
-            break;
+            return;
         }
         else{
             leave[0]="Invalid Input.";
         }       
     }
-    if (player.if_quit){
-        quit_page();
-    }
-
 }
         
 //if coin number doesn't meet the requirement
@@ -342,7 +339,7 @@ void no_pass(Player &player){
         }
     }
     if(c=="r"){
-        room_page(player);
+        return;
     }
     else{
         leave_page(player);
@@ -394,7 +391,7 @@ void check_page(Player &player){
         string input;
         string input;
         win[0]="Congratulations! "+player.name;
-        win[1]="Another game? ";
+        win[1]="Another game or quit the game?";
         win[2]="\033[1myes(y)     no(n)\033[0m";  
         while(1){
             refresh();
@@ -407,7 +404,7 @@ void check_page(Player &player){
                 win[0]="Invalid input! Please input again: ";
         }
         if(input=="y")
-            room_page(player);
+            return;
         else
             leave_page(player);
     }

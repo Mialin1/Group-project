@@ -18,7 +18,6 @@ void Player::initialize(){
 
 //initialize the package
 void Player::initialize_props(){
-    
     package[0].set(0, 0);//heart
     package[1].set(1, 0);//shield
     package[2].set(2, 0);//spring
@@ -70,6 +69,7 @@ bool Player::jump(int _x, int _y){
             delete u.prop;
             u.set("space", _x, _y);       //set the unit to space
         }
+        package[2].num --;
         return true;
     }
     return false;
@@ -77,6 +77,7 @@ bool Player::jump(int _x, int _y){
 
 //player use a shield
 void Player::use_shield(){
+    package[1].num --;
     if_protect = true;
     time_protect = time_remain;
 }

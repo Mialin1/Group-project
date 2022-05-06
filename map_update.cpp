@@ -29,8 +29,6 @@ void map_update(Player &player){
             last_bomb = player.time_remain;
         }
 
-        
-
         Time remain = player.time_remain;
 
         //every few seconds drop a bomb randomly
@@ -140,7 +138,6 @@ void map_update(Player &player){
                     }
                     
                 }
-
 
                 //check for seed growing(seed->wooden boxes)
                 if (u.box != NULL && !u.box->if_box){

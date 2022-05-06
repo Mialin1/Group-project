@@ -25,7 +25,7 @@ int main(){
     thread update (map_update, &player);
     update.detach();
 
-    char x;//the input from the user
+    
     while(1){       //refresh the interface when get a command or time refresh
 
         if (player.if_quit){
@@ -33,50 +33,49 @@ int main(){
             break;
         }
         else {
-            x = get_input();
+            char x = get_input();
 
             switch(x){
-                case 'W': //move upward
-                    player.move(0, -1);
-                case 'S': //move downward
-                    player.move(0, 1);
-                case 'A': //move leftward
+                case 'w': //move upward
                     player.move(-1, 0);
-                case 'D': //move rightward
+                case 's': //move downward
                     player.move(1, 0);
-                case 's': //uses props
-                    
-                    int _x = get_input(), _;
-                    if (_x == 'J') _ = 0;
-                    if (_x == 'K') _ = 1;
-                    if (_x == 'L') _ = 2;
-
-                    if (player.package[_].num == 0)
+                case 'a': //move leftward
+                    player.move(0, -1);
+                case 'd': //move rightward
+                    player.move(0, 1);
+                case 'j': //uses shield
+                    if (player.package[1].num == 0)
                         warning();
-                    else if(_ == 0){                 //use a shield
-                        player.use_shield();
+                    else player.use_shield();
+                case 'k': //uses spring
+                    if (player.package[2].num == 0){
+                        warning();
                     }
-                    else if(_ == 1){                 //use a spring
+                    else{
                         int __ = get_input();   //the direction he face
                         int _x, _y = 0;
-                        if (__ == 'W')  _x = 0,  _y = -2;
-                        if (__ == 'S')  _x = 0,  _y = 2;
-                        if (__ == 'A')  _x = -2, _y = 0;
-                        if (__ == 'D')  _x = 2,  _y = 0;
+                        if (__ == 'w')  _x = -2, _y = 0;
+                        if (__ == 's')  _x = 2,  _y = 0;
+                        if (__ == 'a')  _x = 0, _y = -2;
+                        if (__ == 'd')  _x = 0,  _y = 2;
                         if (!player.jump(_x, _y))
                             warning();
                     }
-                    else if(_ == 2){                 //use a seed
-                        player.use_seed();
-                    }
-                case ' ': //user set bomb
+
+                case 'l': //uses seed
+                    if(player.package[3].num == 0)
+                        warning();
+                    else player.use_seed();
+                case 'b': //user set bomb
                     if(!player.set_bomb())
                         warning();
-
-                case 'Q': //quit game
+                case 'q': //quit game
                     leave_page(player);
 
+
             }
+            game_page(player);
         }
         
     }

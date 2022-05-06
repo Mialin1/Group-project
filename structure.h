@@ -83,7 +83,10 @@ struct Time{
             return equal(8);
         else if (level == 4)
             return equal(7);
-        
+        else if (level == 5)
+            return equal(6);
+        else if (level == 6)
+            return equal(5);
     }
 
     //for check the shield
