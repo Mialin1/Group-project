@@ -213,7 +213,9 @@ void print_level(int l){
             now++;
         }  
     }
-    print_page(level,sizeof(level[1]),3);
+    for(int i=0; i<3;i++){
+        cout<<level[i];
+    }
 }
 
 
@@ -251,8 +253,7 @@ void game_page(Player player){
     Map *map=player.map;
     cout << " " << endl;
     for(int i=0; i< map->len_y + 4; i++){
-        // cout<<"\u25BA";
-        cout << "-";
+        cout<<"\u25BA";
     }
     cout<<endl;
     map->print_map(player.position);
@@ -449,17 +450,17 @@ void logo_interface(void){
     string line[13];
 
     line[0]= " ";
-    line[1]= "            OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
-    line[2]= "            OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
-    line[3]= "            OOOO                                                                OOOO";
-    line[4]= "            OOOO                                                                OOOO";
-    line[5]= "            OOOO     ░█▀▄▀█ █▀▀█      ░█▀▀█ ░█▀▀▀█ ░█▀▄▀█ ░█▀▀█ ░█▀▀▀ ░█▀▀█     OOOO";
-    line[6]= "            OOOO     ░█░█░█ █▄▄▀      ░█▀▀▄ ░█──░█ ░█░█░█ ░█▀▀▄ ░█▀▀▀ ░█▄▄▀     OOOO";
-    line[7]= "            OOOO     ░█──░█ █─▀█ █    ░█▄▄█ ░█▄▄▄█ ░█──░█ ░█▄▄█ ░█▄▄▄ ░█─░█     OOOO";  
-    line[8]= "            OOOO                                                                OOOO";
-    line[9]= "            OOOO                                                                OOOO"; 
-    line[10]= "            OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"; 
-    line[11]= "            OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"; 
+    line[1]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
+    line[2]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
+    line[3]= "OOOO                                                                OOOO";
+    line[4]= "OOOO                                                                OOOO";
+    line[5]= "OOOO     ░█▀▄▀█ █▀▀█      ░█▀▀█ ░█▀▀▀█ ░█▀▄▀█ ░█▀▀█ ░█▀▀▀ ░█▀▀█     OOOO";
+    line[6]= "OOOO     ░█░█░█ █▄▄▀      ░█▀▀▄ ░█──░█ ░█░█░█ ░█▀▀▄ ░█▀▀▀ ░█▄▄▀     OOOO";
+    line[7]= "OOOO     ░█──░█ █─▀█ █    ░█▄▄█ ░█▄▄▄█ ░█──░█ ░█▄▄█ ░█▄▄▄ ░█─░█     OOOO";  
+    line[8]= "OOOO                                                                OOOO";
+    line[9]= "OOOO                                                                OOOO"; 
+    line[10]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"; 
+    line[11]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"; 
     line[12]= " ";
 
     for(int i=0; i<13; i++){
