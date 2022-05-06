@@ -76,7 +76,7 @@ struct Time{
 
     //time span between two system bombs
     bool bomb_span(){
-        return equal(5);
+        return equal(10);
     }
 
     //for check the shield
@@ -221,6 +221,13 @@ struct unit{
             breakable = true;
             walkable = true;
             empty = false;
+        }
+
+        if (_ == "bomb"){
+            breakable = false;
+            walkable = false;
+            empty = false;
+            image.set_bomb();
         }
 
     }
