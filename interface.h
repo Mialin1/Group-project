@@ -19,7 +19,7 @@ void print_level(int l);
 
 bool quit_game(Player player);
 
-void leave_page(Player *player);
+void leave_page(Player &player);
 
 void check_page(Player &player);
 
@@ -31,9 +31,11 @@ void print_status(Player player);
 
 void print_prop_instruction(Player player);
 
-void dead(Player player);
+void dead(Player &player);
 
 string format_string(string str, const int & new_len);
+
+void no_pass(Player &player);
 
 void warning();
 
