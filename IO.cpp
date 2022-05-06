@@ -2,8 +2,7 @@
 #include "structure.h"
 #include <termio.h>
 
-
-extern vector<vector<Map> > maps;
+vector<vector<Map> > maps;
 
 void input_level(Player &player){
     ifstream fin;
