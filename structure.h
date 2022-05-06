@@ -13,7 +13,7 @@
 #include <thread>
 using namespace std;
 
-#define Max_Level 6 ////////////////////////////////////////////to be set
+#define Max_Level 6
 
 //a position on the 2D map
 struct Point{
