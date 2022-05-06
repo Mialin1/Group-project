@@ -354,7 +354,7 @@ void dead(Player &player){
     string dead[3];
     string c;
     dead[0]="Sorry, your mr.bomb is dead.";
-    dead[1]="Cheer up! ";
+    dead[1]="Don't despair! You can do it next time!";
     dead[2]="Enter 'r' to restart;  Enter 'e' to exit";
     while(1){
         print_page(dead,sizeof(dead[2]));
