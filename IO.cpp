@@ -2,6 +2,8 @@
 #include "structure.h"
 #include <iostream>
 #include <fstream>
+#include <termio.h>
+#include <unisted.h>
 
 char get_input(){
     return 'w';
