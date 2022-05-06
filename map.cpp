@@ -39,6 +39,12 @@ void Map::print_map(){
     
 }
 
+void Map::delete_map(){
+    for(int i = 0; i < len_x; i ++)
+        delete map[i];
+    delete *map;
+}
+
 //set a bomb
 //input: the position of the bomb
 void Map::set_bomb(Point p, Time t){

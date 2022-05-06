@@ -13,8 +13,7 @@ void map_update(Player *player){
 
     game_page(*player);
 
-    srand(player->time_remain.sec);
-
+    srand(time(0));
 
     while(1){
         //1 sec
@@ -33,7 +32,11 @@ void map_update(Player *player){
         if (last_bomb.diff(remain).bomb_span()){
             Point bomb;
             //randomly pick an empty unit and place a bomb
-            Point p = map->empty[rand() % map->empty.size()];
+            Point p;
+            p.set(rand()% player->map->len_x, rand()% player->map->len_y);
+            while(!map->map[p.x][p.y].empty){
+                p.set(rand()% player->map->len_x, rand()% player->map->len_y);
+            }
             map->set_bomb(p, remain);
             //the bomb will be explode in 1 sec
         }
@@ -74,7 +77,9 @@ void map_update(Player *player){
                             for(int _j = max(0, j-1); _j <= min(RANGE_Y, j+1); _j ++){
 
                                 unit u1 = map -> map[_i][_j];
-                                u1.image.s[0]="\033[47m"+u1.image.s[0]+"\033[0m";//make the background of 3*3 units become white
+
+                                //make the background of 3*3 units become white
+                                u1.image.s[0]="\033[47m"+u1.image.s[0]+"\033[0m";
                                 u1.image.s[1]="\033[47m"+u1.image.s[1]+"\033[0m";
                                 u1.image.s[2]="\033[47m"+u1.image.s[2]+"\033[0m";
 
@@ -101,6 +106,7 @@ void map_update(Player *player){
                                         if(_ < 4){
                                             u1.prop = new Prop;
                                             u1.prop->set(_, 1);
+                                            u1.set("prop", _i, _j);
                                             if(_ == 0) u1.image.set_heart();
                                             if(_ == 1) u1.image.set_shield();
                                             if(_ == 2) u1.image.set_spring();
@@ -108,10 +114,11 @@ void map_update(Player *player){
                                         }
                                         else if(_ < 10){
                                             u1.prop = new Prop;
+                                            u1.set("prop", _i, _j);
                                             u1.prop->set(_, _ - 3);
                                             u1.image.set_coin();
                                         }
-                                        u1.set("space", _i, _j);
+
                                     }
                                     //other things -> space
                                     else{
@@ -128,7 +135,6 @@ void map_update(Player *player){
                     //release dynamic memory
                     if(u.bomb -> release(remain))
                         delete u.bomb;
-
                 }
 
 
@@ -136,7 +142,7 @@ void map_update(Player *player){
                 if (u.box != NULL && !u.box->if_box){
                     if(u.box -> to_box(remain)){
                         u.box->if_box = true;
-                        //the image turn into tree
+                        u.image.set_box();
                     }
                 }
             
@@ -146,10 +152,9 @@ void map_update(Player *player){
 
         if(restart){
             /////////////////////////////////////////////////////////////////////////////
-
-            //release all the dynamic memory
-            //reset the whole map
-            //if the user want to quit then just quit
+            map->delete_map();
+            room_page(player);
+            break;
         }
 
         game_page(*player);//print the page after update

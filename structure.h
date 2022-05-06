@@ -194,7 +194,6 @@ struct unit{
         box = NULL;
         prop = NULL;
         
-        //if _ == stone
         if (_ == "wall"){
             breakable = false;
             walkable = false;
@@ -202,7 +201,6 @@ struct unit{
             image.set_wall();
         }
 
-        //if _ == box
         if (_ == "box"){
             breakable = true;
             walkable = false;
@@ -212,12 +210,17 @@ struct unit{
             image.set_box();
         }
 
-        //if _ == space
         if (_ == "space"){
             breakable = false;
             walkable = true;
             empty = true;
             image.set_space();
+        }
+
+        if (_ == "prop"){
+            breakable = true;
+            walkable = true;
+            empty = false;
         }
 
     }
@@ -229,10 +232,11 @@ struct Map{
     int len_x, len_y;   //the size of the map
     int coins_need;     //the number of coins needed to pass the map
     int level;
-    vector<Point> empty;
 
     //print the map
     void print_map();
+
+    void delete_map();
 
     //set a bomb
     //input: the position of the bomb
