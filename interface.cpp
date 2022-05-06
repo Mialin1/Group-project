@@ -188,7 +188,7 @@ void room_page(Player *player){
 
 
     //list out all the levels for users to choose
-void print_level(int l){
+void  bprint_level(int l){
     string level[6];
     string line;
     int now=0;
