@@ -1,5 +1,6 @@
 #include "IO.h"
 #include "structure.h"
+#include <termios.h>
 
 
 extern vector<vector<Map> > maps;

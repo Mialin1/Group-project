@@ -156,9 +156,10 @@ void room_page(Player &player){
                 break;
             }
             else{
-                cout<<"The level is locked,\ please choose the blue highlighted level"
+                cout<<"The level is locked,please choose the blue highlighted level" << endl;
 
                 print_level(player.level);
+                
                 cin>>level;
             }
         }
