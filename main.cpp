@@ -16,10 +16,10 @@ int main(){
     player.initialize();
     player.level = 1;
     
-    welcome_page(&player); 
+    welcome_page(player); 
     
     //for player to choose room
-    room_page(&player);
+    room_page(player);
 
     //one more thread to update the screen per_sec no matter the player moves or not
     thread update (map_update, &player);
