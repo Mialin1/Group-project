@@ -214,7 +214,7 @@ void print_level(int l){
         }  
     }
     for(int i=0; i<3;i++){
-        cout<<level[i];
+        cout<<level[i]<<endl;
     }
 }
 
@@ -223,14 +223,17 @@ void print_name(Player player){
     string name_bar[2];
     name_bar[0]="Player: "+player.name;
     name_bar[1]="LEVEL "+to_string(player.level)+"            Press 'e' to exit";//////////////////////////////////
-    print_page(name_bar,sizeof(name_bar[1]),2);
+    print_page(name_bar,name_bar[1].length(),2);
 }
 
 void print_status(Player player){
     string status_bar[2];
     status_bar[0]="\033[1mLife  \033[31m\u2764"+to_string(player.life)+"\033[0m"+"\033[1mCoin(s)   \033[33m\u2726"+to_string(player.coins)+"\033[0m";
     status_bar[1]="time remaining:   "+to_string(player.time_remain.min)+" : "+to_string(player.time_remain.sec);
-    print_page(status_bar,sizeof(status_bar[0]),2);
+    for (int i=0;i<2;i++){
+        cout<<status_bar[i]<<endl;
+    }
+
 }
 
 //display props in the pocket and their instruction
@@ -243,7 +246,8 @@ void print_prop_instruction(Player player){
     instruct[1]="\u2605 Spring(press 'k'): "+to_string(player.package[2].num);
     instruct[2]="\033[32m。。。\033[0m Seed(press 'l'): "+to_string(player.package[3].num);
     instruct[3]="{\u2739} Bomb(press 'b'): infinite";
-    print_page(instruct,sizeof(instruct[0])+3,4);
+    for (int i=0;i<4;i++)
+        cout<<instruct[i]<<endl;
 }
 
 //display the main game page
@@ -300,7 +304,6 @@ void quit_page(){
     
     print_page(quit,sizeof(quit[0]),3);
 
-    //quit and 存状态
 }
 
 void leave_page(Player &player){
@@ -362,7 +365,7 @@ void check_page(Player &player){
     Map *map=player.map;
     check[0]="You need "+to_string(map->coins_need)+ " coins to pass this level.";
     check[1]="You have "+to_string(player.coins)+" coins.";
-    print_page(check,sizeof(check[0]),2);
+    print_page(check,check[0].length(),2);
 
     struct timespec ts, ts1;
     ts.tv_nsec = 0;
@@ -376,10 +379,10 @@ void check_page(Player &player){
         string input;
         win[0]="Congratulations! "+player.name;
         win[1]="Another game or quit the game?";
-        win[2]="\033[1myes(y)     no(n)\033[0m";  
+        win[2]="       yes(y)     no(n)";  
         while(1){
             refresh();
-            print_page(win,sizeof(win[0]),3);
+            print_page(win,max(win[0].length(),win[1].length()),3);
             cin>>input;
             if(input=="y"||input=="n"){
                 player.initialize();
