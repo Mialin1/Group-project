@@ -159,6 +159,11 @@ struct Image{
         s[1]=" \u2605 ";
         s[2]="~~~";
     }
+    void set_space(){
+        s[0]="   ";
+        s[1]="   ";
+        s[2]="   ";
+    }
 };
 
 //information of each unit on the map
@@ -180,10 +185,11 @@ struct unit{
         prop = NULL;
         
         //if _ == stone
-        if (_ == "stone"){
+        if (_ == "wall"){
             breakable = false;
             walkable = false;
             empty = false;
+            image.set_wall();
         }
 
         //if _ == box
@@ -193,6 +199,7 @@ struct unit{
             empty = false;
             box = new Box;
             box->if_box = true;
+            image.set_box();
         }
 
         //if _ == space
@@ -200,6 +207,7 @@ struct unit{
             breakable = false;
             walkable = true;
             empty = true;
+            image.set_space();
         }
 
     }

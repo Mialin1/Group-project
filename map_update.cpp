@@ -108,6 +108,7 @@ void map_update(Player *player){
                                         }
                                         u1.set("space", _i, _j);
                                     }
+                                    //other things -> space
                                     else{
                                         u1.set("space", _i, _j); //set to space
                                     }
@@ -140,6 +141,7 @@ void map_update(Player *player){
 
         if(restart){
             /////////////////////////////////////////////////////////////////////////////
+
             //release all the dynamic memory
             //reset the whole map
             //if the user want to quit then just quit
