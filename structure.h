@@ -181,8 +181,23 @@ struct Image{
     }
     void seed_used(){
         s[0]="\033[32m ^ \033[0m";
-        s[1]="\033[32m/_＼\033[0m";
+        s[1]="\033[32m/_\\\033[0m";
         s[2]="\033[32m ≡ \033[0m"; 
+    }
+};
+
+//Props for player to use in the game
+//Porp list:
+//0: heart, add one life, not in the package
+//1: sheild, defend the bomb for 5 sec
+//2: spring, jump over the wall once
+//3: seed, growing up and become a box
+struct Prop{
+    int no;
+    int num;
+    void set(int _no, int _num){
+        no = _no;
+        num = _num;
     }
 };
 
@@ -268,21 +283,6 @@ struct Map{
 
 
 extern vector<vector<Map> > maps;
-
-//Props for player to use in the game
-//Porp list:
-//0: heart, add one life, not in the package
-//1: sheild, defend the bomb for 5 sec
-//2: spring, jump over the wall once
-//3: seed, growing up and become a box
-struct Prop{
-    int no;
-    int num;
-    void set(int _no, int _num){
-        no = _no;
-        num = _num;
-    }
-};
 
 
 //Profile of the player
