@@ -80,6 +80,8 @@ void map_update(Player &player){
                                 u.image.s[1]="\033[45m"+u1.image.s[1]+"\033[0m";
                                 u.image.s[2]="\033[45m"+u1.image.s[2]+"\033[0m";
                     }
+                    
+                
 
                     //the moment after explosion(the outcome)
                     if(u.bomb -> explode(remain)){
