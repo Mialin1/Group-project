@@ -164,6 +164,7 @@ void room_page(Player &player){
         player.initialize();
         player.map = &maps[level][rand()%3];//randomly select a map
         game_page(player);
+        
     }
 
         
