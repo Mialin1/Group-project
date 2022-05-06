@@ -1,9 +1,9 @@
 to be discussed
 
 
-0. 你得改一下那个print的函数，player不是map的member所以不能直接调用
+0. (done)你得改一下那个print的函数，player不是map的member所以不能直接调用
     
-2. 你还要给每个level随便设计一些初始地图欸，我们交作业就不用那么多个level这样你的工作量太大了
+2. (done)你还要给每个level随便设计一些初始地图欸，我们交作业就不用那么多个level这样你的工作量太大了
     我们就先做个5个level，每个level五张地图
     e.g. level 1假设地图的size是5*10
 

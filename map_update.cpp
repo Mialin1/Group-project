@@ -32,7 +32,7 @@ void map_update(Player &player){
         Time remain = player.time_remain;
 
         //every few seconds drop a bomb randomly
-        if (last_bomb.diff(remain).bomb_span(player.level)){
+        if (last_bomb.diff(remain).bomb_span(player.map->level)){
             Point bomb;
             //randomly pick an empty unit and place a bomb
             Point p;
