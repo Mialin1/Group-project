@@ -3,6 +3,8 @@
 #include "IO.h"
 using namespace std;
 
+extern vector<vector<Map> > maps;
+
 //all the pages are printed by this function
 void print_page(string passage[], int length, int size){
     for(int i=0; i<length;i++){
