@@ -5,6 +5,21 @@
 
 extern vector<vector<Map> > maps;
 
+void input_level(Player &player){
+    ifstream fin;
+    string s = player.name + ".txt";
+    fin.open(s.c_str());
+
+    if(fin.fail()){
+        cout << "Error in file opening!" << endl;
+        return;
+    }
+
+    fin >> player.level;
+
+    fin.close();
+}
+
 void input_maps(){
 
     ifstream fin;
@@ -12,7 +27,7 @@ void input_maps(){
 
     if(fin.fail()){
         cout << "Error in file opening!" << endl;
-        exit(1);
+        return;
     }
 
     for(int level = 0; level < Max_Level; level ++){ //
