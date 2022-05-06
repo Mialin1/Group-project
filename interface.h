@@ -1,8 +1,8 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
-
 #include "structure.h"
 #include "IO.h"
+using namespace std;
 #define STEP 1
 
 extern vector<vector<Map> > maps;
