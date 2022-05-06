@@ -85,7 +85,7 @@ struct Time{
             return equal(7);
         else if (level == 5)
             return equal(6);
-        else if (level == 6)
+        else
             return equal(5);
     }
 
