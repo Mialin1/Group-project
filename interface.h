@@ -19,9 +19,13 @@ void leave_page(Player *player);
 
 void check_page(Player player);
 
+void logo_interface();
 void dead(Player player);
+
+string format_string(string str, const int & new_len);
 
 void warning();
 
+void refresh();
 
 #endif
