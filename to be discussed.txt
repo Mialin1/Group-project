@@ -2,12 +2,12 @@ to be discussed
 
 
 1. 需要确定的变量（可能有漏，想起来就补充）：
-    totle time for a round：
-    time from seed to box：
-    bomb effect：
-    bomb span:
+    totle time for a round： 3min
+    time from seed to box：大概十秒？ 
+    bomb effect： 
+    bomb span: 3*3
     shield time:我的理解是 免除一次扣生命。但如果是按时间的话也可以 大概十二十秒？
-    player initial position:
+    player initial position: 右下或左下角？
 
 2. 我随意看了一下，没仔细看哈，你那个loading bar里面nanosleep我不确定你是否用对了，你目前的设置是三秒更新一次是不是有点慢了
     
