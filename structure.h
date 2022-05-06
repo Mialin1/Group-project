@@ -13,7 +13,7 @@
 #include <thread>
 using namespace std;
 
-#define Max_Level 3 ////////////////////////////////////////////to be set
+#define Max_Level 6 ////////////////////////////////////////////to be set
 
 //a position on the 2D map
 struct Point{
@@ -74,8 +74,16 @@ struct Time{
     }
 
     //time span between two system bombs
-    bool bomb_span(){
-        return equal(10);
+    bool bomb_span(int level){
+        if (level == 1)
+            return equal(10);
+        else if (level == 2)
+            return equal(9);
+        else if (level == 3)
+            return equal(8);
+        else if (level == 4)
+            return equal(7);
+        
     }
 
     //for check the shield
@@ -112,7 +120,7 @@ struct Box{
     bool if_box;
 
     bool to_box(Time t){
-        return set_time.diff(t).equal(1);///////////////////////////////////////////////to be set
+        return set_time.diff(t).equal(10);///////////////////////////////////////////////to be set
     }
 };
 

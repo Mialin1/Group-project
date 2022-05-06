@@ -20,15 +20,16 @@ void map_update(Player &player){
         nanosleep(&ts, &ts1);
 
         player.time_remain.tick();  //minus 1 sec
+        Map *map = player.map;
+
         if(player.time_remain.if_time_up()){
             check_page(player);
             map->delete_map();
             room_page(player);
             last_bomb = player.time_remain;
-            restart = false;
         }
 
-        Map *map = player.map;
+        
 
         Time remain = player.time_remain;
 
@@ -94,7 +95,7 @@ void map_update(Player &player){
                                         player.life --;
 
                                         if (player.life == 0){
-                                            dead(*player);
+                                            dead(player);
                                             restart = true;
                                             break;
                                         }
