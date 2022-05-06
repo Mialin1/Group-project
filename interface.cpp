@@ -150,7 +150,7 @@ void room_page(Player *player){
         print_page(load,sizeof(load[0]));
         struct timespec ts, ts1;
         ts.tv_nsec = 0;
-        ts.tv_sec = 3;
+        ts.tv_sec = 2;
         nanosleep(&ts, &ts1);
         refresh();
     }
