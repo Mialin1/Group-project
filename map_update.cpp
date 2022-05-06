@@ -147,8 +147,8 @@ void map_update(Player *player){
 
         if(restart){
             /////////////////////////////////////////////////////////////////////////////
-
-            //release all the dynamic memory
+            map->delete_map();
+            
             //reset the whole map
             //if the user want to quit then just quit
         }

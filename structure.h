@@ -165,9 +165,6 @@ struct Image{
         s[2]="   ";
     }
     void set_coin(){
-<<<<<<< HEAD
-
-=======
         s[0]="   ";
         s[1]="\033[33m\u2666\u00A9\u2666\033[0m";
         s[2]="   ";
@@ -176,7 +173,6 @@ struct Image{
         s[0]="\033[32m ^ \033[0m";
         s[1]="\033[32m/_＼\033[0m";
         s[2]="\033[32m ≡ \033[0m"; 
->>>>>>> 1665791d167a530403c0adf99cb90ed0b0033390
     }
 };
 
@@ -240,6 +236,8 @@ struct Map{
 
     //print the map
     void print_map();
+
+    void delete_map();
 
     //set a bomb
     //input: the position of the bomb

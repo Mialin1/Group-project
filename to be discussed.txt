@@ -1,6 +1,9 @@
 to be discussed
 
 
+0. 你得改一下那个print的函数，player不是map的member所以不能直接调用
+    你那个map.cpp有问题的
+
 1. 需要确定的变量（可能有漏，想起来就补充）：
     totle time for a round： 3 min 0 sec
     time from seed to box：  10 sec
@@ -23,10 +26,7 @@ to be discussed
 
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> fe82eee1829e793020dc3a3fcbeb3e71f4515ea3
 新问题加在上面
 _________________________________________________________________________________________________________________
 以下是已完成
