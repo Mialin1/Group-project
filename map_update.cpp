@@ -34,7 +34,7 @@ void map_update(Player &player){
         Time remain = player.time_remain;
 
         //every few seconds drop a bomb randomly
-        if (last_bomb.diff(remain).bomb_span()){
+        if (last_bomb.diff(remain).bomb_span(player.level)){
             Point bomb;
             //randomly pick an empty unit and place a bomb
             Point p;
@@ -53,7 +53,6 @@ void map_update(Player &player){
         }
         
         bool restart = false;
-        unit u1;
 
         //check for map units changes
         for(int i = 0; i < map->len_x; i ++){
@@ -74,11 +73,12 @@ void map_update(Player &player){
                         for(int _i = max(0, i-1); _i <= min(RANGE_X, i+1); _i ++){
                             for(int _j = max(0, j-1); _j <= min(RANGE_Y, j+1); _j ++){
 
-                                u1 = map -> map[_i][_j];
+                                unit u1 = map -> map[_i][_j];
 
                                 u.image.s[0]="\033[45m"+u1.image.s[0]+"\033[0m";
                                 u.image.s[1]="\033[45m"+u1.image.s[1]+"\033[0m";
                                 u.image.s[2]="\033[45m"+u1.image.s[2]+"\033[0m";
+                        }
                     }
                     
                 
@@ -89,10 +89,8 @@ void map_update(Player &player){
                         //boxes became coins / props
                         for(int _i = max(0, i-1); _i <= min(RANGE_X, i+1); _i ++){
                             for(int _j = max(0, j-1); _j <= min(RANGE_Y, j+1); _j ++){
-
-                                u.image.s[0]=u1.image.s[0];
-                                u.image.s[1]=u1.image.s[1];
-                                u.image.s[2]=u1.image.s[2];
+                                
+                                unit u1 = map -> map[_i][_j];
 
                                 //check if user is in this zone
                                 if (player.position.x == _i && player.position.y == _j){
