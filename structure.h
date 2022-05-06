@@ -8,7 +8,7 @@
 #include <ctime>
 #include <fstream>
 #include <termio.h>
-#include <unisted.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <fcntl.h>
 #include <thread>
