@@ -110,7 +110,9 @@ void welcome_page(Player *player){
         else{
             valid=false;
         }
+
     }
+
 };  
 
 void room_page(Player *player){
@@ -142,18 +144,18 @@ void room_page(Player *player){
     if(player->if_quit=true)
         leave_page(player);
    
-    for(int i = 0; i < 10; i ++){
-        //generate the loading bar by time
-        refresh();
-        string load[1];
-        load[0]="Loading.........";
-        print_page(load,sizeof(load[0]));
-        struct timespec ts, ts1;
-        ts.tv_nsec = 0;
-        ts.tv_sec = 2;
-        nanosleep(&ts, &ts1);
-        refresh();
-    }
+    
+    //generate the loading bar by time
+    refresh();
+    string load[1];
+    load[0]="Loading.........";
+    print_page(load,sizeof(load[0]));
+    struct timespec ts, ts1;
+    ts.tv_nsec = 0;
+    ts.tv_sec = 2;
+    nanosleep(&ts, &ts1);
+    refresh();
+    
 
     if (command=="2"){
         int level;
@@ -169,13 +171,14 @@ void room_page(Player *player){
                 cin>>level;
             }
         }
+        ////////load from file//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         game_page(*player);
     }
 
     //higher level map may be locked, the locked map should be gray
-    if (command=="1"){
-        player->level=1;
-        game_page(*player);
+    if (command=="1"){/////////////////////////////////////////////edit//////////////////////////////////////
+        player->initialize();
+        game_page(*player);//random抽一个map 
     }
 
     
@@ -207,8 +210,8 @@ void  bprint_level(int l){
     int now=0;
     level[0]="Please enter the level number you want:";
     level[1]=" (only can choose the blue highlighted level)";
-    for(int i=1;i<21;i++){
-        if ((i-1)%4==0){
+    for(int i=1;i<7;i++){
+        if ((i-1)%3==0){
             line="";
         }
         if(i<=l){
@@ -259,7 +262,7 @@ void game_page(Player player){
         cout<<"\u25BA";
     }
     cout<<endl;
-    map->print_map();
+    map->print_map(player.position);
     for(int i=0; i<=map->len_y+4;i++){
         cout<<"\u25C4";
     }
@@ -302,6 +305,7 @@ void quit_page(){
     quit[2]="░█▄▄▄█ ░█▄▄▄ ░█▄▄▄    ░█   ░█▄▄▄█  ▀▄▄▀  ░█  ▀█ ░█▄▄▄ ▄▀░▀▄  ░█     ░█   ▄█▄ ░█  ░█ ░█▄▄▄ ";
     
     print_page(quit,sizeof(quit[0]));
+
     //quit and 存状态
 }
 
