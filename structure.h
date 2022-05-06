@@ -165,7 +165,7 @@ struct Image{
         s[2]="   ";
     }
     void set_coin(){
-        
+
     }
 };
 
@@ -187,7 +187,6 @@ struct unit{
         box = NULL;
         prop = NULL;
         
-        //if _ == stone
         if (_ == "wall"){
             breakable = false;
             walkable = false;
@@ -195,7 +194,6 @@ struct unit{
             image.set_wall();
         }
 
-        //if _ == box
         if (_ == "box"){
             breakable = true;
             walkable = false;
@@ -205,12 +203,17 @@ struct unit{
             image.set_box();
         }
 
-        //if _ == space
         if (_ == "space"){
             breakable = false;
             walkable = true;
             empty = true;
             image.set_space();
+        }
+
+        if (_ == "prop"){
+            breakable = true;
+            walkable = true;
+            empty = false;
         }
 
     }
