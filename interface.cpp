@@ -241,12 +241,15 @@ void print_status(Player player){
 
 //display props in the pocket and their instruction
 void print_prop_instruction(){
-    string instruct[5];
-    instruct[0]="shield(press 'j'): "+;
-    instruct[1]="spring(press 'k'): ";
-    instruct[2]="seed(press 'l'): ";
-    instruct[3]="bomb(press <space>): infinite";
+    string instruct[4];
+    instruct[0]="\033[34m\u25C6\033[0m Shield(press 'j'): "+to_string(player.package[1].num);
+    instruct[1]="\u2605 Spring(press 'k'): "+to_string(player.package[2].num);
+    instruct[2]="\033[32m。。。\033[0m Seed(press 'l'): "+to_string(player.package[3].num);
+    instruct[3]="{\u2739} Bomb(press <space>): infinite";
+    print_page(instruct,sizeof(instruct[0]+3));
 }
+
+//display the main game page
 void game_page(Player player){
     refresh();
     print_name(player);
@@ -263,6 +266,9 @@ void game_page(Player player){
     cout<<endl;
     cout<<" "<<endl;
     print_status(player);
+    cout<<" "<<endl;
+    print_prop_instruction;
+
     
     //player: Player_Name
     //level: 1
