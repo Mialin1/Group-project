@@ -24,7 +24,7 @@ If the player can survives from the bombs, and the coins collected has meet the 
 2) shield: the player will be under protection for 10 seconds
 3) spring: the player is able to directly walk though the wall once
 4) seed: player can set a seed on a unit, and it will turn into a box in 10 seconds
-5) bomb: it will explode 3 seconds after it is set, and its impact range is 3*3,  and it will affect everything excpet the stone wall. Boxes will be opened (and there will be chances to appear props and coins), and others will be turned into dust.
+5) bomb: it will explode 3 seconds after it is set, and its impact range is 3*3,  and it will affect everything except the stone wall. Boxes will be opened (and there will be chances to appear props and coins), and others will be turned into dust.
 
 ### 2.4 commands from the player input
 
