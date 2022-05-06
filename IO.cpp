@@ -21,18 +21,13 @@ void input_level(Player &player){
 }
 
 void output_level(Player player){
-    ifstream fin;
+    ofstream fout;
     string s = player.name + ".txt";
-    fin.open(s.c_str());
+    fout.open(s.c_str());
 
-    if(fin.fail()){
-        cout << "Error in file opening!" << endl;
-        return;
-    }
+    fout << player.level;
 
-    fin >> player.level;
-
-    fin.close();
+    fout.close();
 }
 
 void input_maps(){
