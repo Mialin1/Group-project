@@ -6,12 +6,28 @@ to be discussed
     time from seed to box：
     bomb effect：
     bomb span:
-    shield time:
+    shield time:我的理解是 免除一次扣生命。但如果是按时间的话也可以 大概十二十秒？
     player initial position:
 
 2. 我随意看了一下，没仔细看哈，你那个loading bar里面nanosleep我不确定你是否用对了，你目前的设置是三秒更新一次是不是有点慢了
+    
+    太慢吗 那我调少一点
 
 3. todo: 在加载过去的档案的时候先检查是否存在此文档，加一个提示页面
+
+9. exit游戏 我直接用exit（）可行吗？  还有exit之前我需要存关卡，这个应该用哪里的function呢
+
+10.just to make sure 用户捡到道具，道具消失的效果写了吗。 还有爆炸的时候，范围内的道具应该也会消失对吧？
+
+11. 炸弹explode到player之后是不是应该先检查有没有shield 要是有shield 把他删掉
+    要是没有shield 再扣life
+
+12。这个小人儿的image，也和别的image写在一起吗。
+
+13. 我在game_page这边需要写一直refresh嘛 
+
+14. 每个prop分别的快捷键是什么. btw shield和spring是不是不需要使用，他们应该会自己使用
+    shield是在受到伤害的时候可以不用扣life spring是在一定时间内可以跳过wall
 
 新问题加在上面
 _________________________________________________________________________________________________________________
@@ -43,16 +59,4 @@ ________________________________________________________________________________
 8. (done)每关的时间 三分钟一局这样子
         那coin比如第一关30，第二关40，到时候测试下
 
-9. exit游戏 我直接用exit（）可行吗？  还有exit之前我需要存关卡，这个应该用哪里的function呢
 
-10.just to make sure 用户捡到道具，道具消失的效果写了吗。 还有爆炸的时候，范围内的道具应该也会消失对吧？
-
-11. 炸弹explode到player之后是不是应该先检查有没有shield 要是有shield 把他删掉
-    要是没有shield 再扣life
-
-12。这个小人儿的image，也和别的image写在一起吗。
-
-13. 我在game_page这边需要写一直refresh嘛 
-
-14. 每个prop分别的快捷键是什么. btw shield和spring是不是不需要使用，他们应该会自己使用
-    shield是在受到伤害的时候可以不用扣life spring是在一定时间内可以跳过wall
