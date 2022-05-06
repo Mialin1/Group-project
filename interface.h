@@ -5,21 +5,32 @@
 #define STEP 1
 
 
-void welcome_page(Player *player);
+void print_page(string passage[], int length);
+
+void welcome_page(Player &player);
 
 void game_page(Player player);
 
 void quit_page();
 
-void room_page(Player *player);
+void room_page(Player &player);
+
+void print_level(int l);
 
 bool quit_game(Player player);
 
 void leave_page(Player *player);
 
-void check_page(Player player);
+void check_page(Player &player);
 
 void logo_interface();
+
+void print_name(Player player);
+
+void print_status(Player player);
+
+void print_prop_instruction(Player player);
+
 void dead(Player player);
 
 string format_string(string str, const int & new_len);
