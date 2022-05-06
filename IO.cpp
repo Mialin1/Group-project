@@ -1,12 +1,23 @@
 #include "IO.h"
 #include "structure.h"
-#include <iostream>
-#include <fstream>
-#include <termio.h>
-#include <unisted.h>
 
-char get_input(){
-    return 'w';
+char get_input()
+{
+    int in;
+    struct termios new_settings;
+    struct termios stored_settings;
+    tcgetattr(0,&stored_settings);
+    new_settings = stored_settings;
+    new_settings.c_lflag &= (~ICANON);
+    new_settings.c_cc[VTIME] = 0;
+    tcgetattr(0,&stored_settings);
+    new_settings.c_cc[VMIN] = 1;
+    tcsetattr(0,TCSANOW,&new_settings);
+     
+    in = getchar();
+     
+    tcsetattr(0,TCSANOW,&stored_settings);
+    return (char)in;
 }
 
 extern vector<vector<Map> > maps;
