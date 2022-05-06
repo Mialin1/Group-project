@@ -88,7 +88,8 @@ void welcome_page(Player &player){
         cout<<"||    2.shield: the player will be in invincible mode for 5s ||"<<endl;
         cout<<"||    3.coin: count for the final grade                      ||"<<endl;
         cout<<"||    4.spring: the player can directly walk through the     ||"<<endl;
-        cout<<"||      wall once                                            ||"<<endl;
+        cout<<"||      wall once,you need to first press keyboard then      ||"<<endl;
+        cout<<"||      press the direction you want to go.                  ||"<<endl;
         cout<<"==============================================================="<<endl;
         cout<<""<<endl;
         if (valid==true){
@@ -307,7 +308,11 @@ void leave_page(Player &player){
         string x;
         cin>>x;
         if (x =="y") {
-            //////////////////////////////////////////////////////////////////////
+            string message[3];
+            message[0]="Your level record has been loaded!";
+            message[1]="Please use the same player name next time ";
+            message[2]=" if your want to load the previous record";
+            print_page(message,sizeof(message[1]));
             output_level(player);
             player.map->delete_map();
             quit_page();
