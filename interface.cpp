@@ -248,7 +248,7 @@ void print_prop_instruction(){
     instruct[1]="\u2605 Spring(press 'k'): "+to_string(player.package[2].num);
     instruct[2]="\033[32m。。。\033[0m Seed(press 'l'): "+to_string(player.package[3].num);
     instruct[3]="{\u2739} Bomb(press <space>): infinite";
-    print_page(instruct,sizeof(instruct[0]+3));
+    print_page(instruct,sizeof(instruct[0])+3);
 }
 
 //display the main game page

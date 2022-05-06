@@ -7,7 +7,7 @@ using namespace std;
 //update the screen per_sec
 void map_update(Player *player){
     
-    player -> time_remain.set(5, 0);        //e.g. 5 mins per round
+    
 
     Time last_bomb = player -> time_remain;
 
@@ -15,7 +15,7 @@ void map_update(Player *player){
 
     srand(time(0));
 
-    while(1){
+    while(true){
         //1 sec
         struct timespec ts, ts1;
         ts.tv_nsec = 0;

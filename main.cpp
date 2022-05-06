@@ -14,6 +14,7 @@ int main(){
     input_maps();
 
     player.initialize();
+    player.level = 1;
     
     welcome_page(&player); 
     

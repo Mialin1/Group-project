@@ -234,7 +234,7 @@ struct Map{
     int level;
 
     //print the map
-    void print_map();
+    void print_map(Point position);
 
     void delete_map();
 

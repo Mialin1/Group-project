@@ -2,7 +2,7 @@
 using namespace std;
 
 //print the map
-void Map::print_map(){
+void Map::print_map(Point position){
     string player_image[RANGE_X];
     player_image[0]=" o";
     player_image[1]="<|>";
@@ -12,7 +12,7 @@ void Map::print_map(){
         for(int _i = 0; _i < RANGE_X; _i++)
         for(int j = 0; j < len_y; j++) //j-th column of the map
         for(int _j = 0; _j < RANGE_Y; _j++){
-            if(player.position.x==i && player.position.y==j){
+            if(position.x==i && position.y==j){
                 if(j==0){
                     cout << "\u25B2 "<<player_image[_i][_j];    
                 }
