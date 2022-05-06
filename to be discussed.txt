@@ -2,7 +2,18 @@ to be discussed
 
 
 0. 你得改一下那个print的函数，player不是map的member所以不能直接调用
-    你那个map.cpp有问题的
+    
+2. 你还要给每个level随便设计一些初始地图欸，我们交作业就不用那么多个level这样你的工作量太大了
+    我们就先做个5个level，每个level五张地图
+    e.g. level 1假设地图的size是5*10
+    因为初始地图只有wall, box 和space，所以你就为了简单比如说我们约定好W是wall， B是box，S是space
+    然后永远都把0，0留出来(其实就是你搞一个5*10的S, 然后随心把某几个S改成W，然后在还是S的地方随便挑几个改成B就行了)
+    SWWWWSSSSS              你先随便做一些看上去合理的，就是能走的地方留均匀一点啊什么的，具体的会不会有死路这种
+    SSWSSSSSWW              我们运行的时候检查就好
+    WSWWWSSSSS
+    WSSSSSSWWW
+    WWWSSSSSSS
+
 
 1. 需要确定的变量（可能有漏，想起来就补充）：
     totle time for a round： 3 min 0 sec

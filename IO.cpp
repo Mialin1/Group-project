@@ -29,16 +29,9 @@ void input_maps(){
                 for(int j = 0; j < map.len_y; j++){
                     //input information of unit [i, j]
                     string _;  //_ denotes what kind of unit it is
+                    char c;
                     cin >> _;
                     map.map[i][j].set(_, i, j);
-
-                    //add the empty ones to the queue
-                    if (map.map[i][j].empty){
-                        unit *u = &map.map[i][j];
-                        Point p;
-                        p.set(i,j);
-                        map.empty.push_back(p);
-                    }
 
                 }
             }

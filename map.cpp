@@ -40,7 +40,9 @@ void Map::print_map(){
 }
 
 void Map::delete_map(){
-
+    for(int i = 0; i < len_x; i ++)
+        delete map[i];
+    delete *map;
 }
 
 //set a bomb

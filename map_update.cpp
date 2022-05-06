@@ -13,8 +13,7 @@ void map_update(Player *player){
 
     game_page(*player);
 
-    srand(player->time_remain.sec);
-
+    srand(time(0));
 
     while(1){
         //1 sec
@@ -33,7 +32,11 @@ void map_update(Player *player){
         if (last_bomb.diff(remain).bomb_span()){
             Point bomb;
             //randomly pick an empty unit and place a bomb
-            Point p = map->empty[rand() % map->empty.size()];
+            Point p;
+            p.set(rand()% player->map->len_x, rand()% player->map->len_y);
+            while(!map->map[p.x][p.y].empty){
+                p.set(rand()% player->map->len_x, rand()% player->map->len_y);
+            }
             map->set_bomb(p, remain);
             //the bomb will be explode in 1 sec
         }
