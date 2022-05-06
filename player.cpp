@@ -4,14 +4,16 @@ using namespace std;
 //initilaize the player for a round
 void Player::initialize(){
 
-    if_protect = false;
-    position.set(0,0);///////////////////////////////////////////////to be set
+    time_remain.set(3, 0); //3 mins per round
+    position.set(0,0);
     life = 1;
     coins = 0;
-        
+    if_quit = false;
+
     initialize_props();
 
-    if_quit = false;
+    if_protect = false;
+    
 }
 
 //initialize the package
