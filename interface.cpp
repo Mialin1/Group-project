@@ -239,24 +239,29 @@ void print_status(Player player){
     print_page(status_bar,sizeof(status_bar[0]));
 }
 
+//display props in the pocket and their instruction
 void print_prop_instruction(){
     string instruct[5];
-    instruct[0]="shield: press";
-    instruct[1]="spring: press";
-    instruct[2]="seed: press";
-    instruct[3]="bomb: press <space>";
+    instruct[0]="shield(press 'j'): "+;
+    instruct[1]="spring(press 'k'): ";
+    instruct[2]="seed(press 'l'): ";
+    instruct[3]="bomb(press <space>): infinite";
 }
 void game_page(Player player){
     refresh();
     print_name(player);
     Map *map=player.map;
+    cout<<" "<<endl;
     for(int i=0; i<map->len_y+4;i++){
         cout<<"\u25BA";
     }
+    cout<<endl;
     map->print_map();
     for(int i=0; i<=map->len_y+4;i++){
         cout<<"\u25C4";
     }
+    cout<<endl;
+    cout<<" "<<endl;
     print_status(player);
     
     //player: Player_Name
