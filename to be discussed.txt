@@ -24,21 +24,14 @@ to be discussed
 1. 需要确定的变量（可能有漏，想起来就补充）：
     totle time for a round： 3 min 0 sec
     time from seed to box：  10 sec
-    bomb effect： ?
+    bomb effect： 0,1,2(explode)
     bomb span(time between two system bombs)
-    shield time: 10sec太长了不合理吧，一局才多长
-    player initial position: 右下或左下角？你定啊，或者就0，0，我们保证我们输入的游戏的0，0是空位就好
+    shield time: 10sec
+    player initial position: 就0，0
 
-3. todo: 在加载过去的档案的时候先检查是否存在此文档，加一个提示页面
+3. （done） 在加载过去的档案的时候先检查是否存在此文档，加一个提示页面
 
-9. exit游戏 我直接用exit（）可行吗？  还有exit之前我需要存关卡，这个应该用哪里的function呢
-    exit之前要release 那些动态内存
-    存储和读入还没写，我待会写
-    或者如果你空下来可以写一些
-
-
-
-
+9. （done）exit之前要release那些动态内存
 
 
 
