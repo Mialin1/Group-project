@@ -5,6 +5,6 @@
 
 using namespace std;
 
-void map_update(Player *player);
+void map_update(Player &player);
 
 #endif
