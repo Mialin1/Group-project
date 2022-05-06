@@ -1,4 +1,3 @@
-#include <iostream>
 #include "interface.h"
 #include "structure.h"
 #include "IO.h"

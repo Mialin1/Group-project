@@ -6,6 +6,12 @@
 #include <string>
 #include <vector>
 #include <ctime>
+#include <fstream>
+#include <termio.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <thread>
 using namespace std;
 
 #define Max_Level 3 ////////////////////////////////////////////to be set

@@ -1,6 +1,4 @@
 #include "structure.h"
-#include <iostream>
-#include <fstream>
 using namespace std;
 
 //print the map
