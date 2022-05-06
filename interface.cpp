@@ -3,18 +3,16 @@
 #include "IO.h"
 using namespace std;
 
-vector<vector<Map> > maps;
-
 //all the pages are printed by this function
 void print_page(string passage[], int length, int size){
-    for(int i=0; i<length;i++){
+    for(int i=0; i<length + 4 ;i++){
         cout<<"-";
     }
     cout<<endl;
-    for(int i=0; i<(size-1);i++){
-        cout<<"|  "<<format_string(passage[0],length-4)<<"|"<<endl;
+    for(int i=0; i< size; i++){
+        cout<<"| "<< format_string(passage[i],length) << " |" << endl;
     }
-    for(int i=0; i<length;i++){
+    for(int i=0; i<length + 4;i++){
         cout<<"-";
     }
     cout<<endl;
@@ -167,7 +165,7 @@ void room_page(Player &player){
         player.initialize();
         player.map = &maps[level][rand()%3];//randomly select a map
         game_page(player);
-        
+
     }
 
         
