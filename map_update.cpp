@@ -53,6 +53,7 @@ void map_update(Player &player){
         }
         
         bool restart = false;
+        unit u1;
 
         //check for map units changes
         for(int i = 0; i < map->len_x; i ++){
@@ -70,9 +71,14 @@ void map_update(Player &player){
                     }
                     //effect2
                     if(u.bomb -> effect2(remain)){
-                        u1.image.s[0]="\033[45m"+u1.image.s[0]+"\033[0m";
-                        u1.image.s[1]="\033[45m"+u1.image.s[1]+"\033[0m";
-                        u1.image.s[2]="\033[45m"+u1.image.s[2]+"\033[0m";
+                        for(int _i = max(0, i-1); _i <= min(RANGE_X, i+1); _i ++){
+                            for(int _j = max(0, j-1); _j <= min(RANGE_Y, j+1); _j ++){
+
+                                u1 = map -> map[_i][_j];
+
+                                u.image.s[0]="\033[45m"+u1.image.s[0]+"\033[0m";
+                                u.image.s[1]="\033[45m"+u1.image.s[1]+"\033[0m";
+                                u.image.s[2]="\033[45m"+u1.image.s[2]+"\033[0m";
                     }
 
                     //the moment after explosion(the outcome)
@@ -82,11 +88,9 @@ void map_update(Player &player){
                         for(int _i = max(0, i-1); _i <= min(RANGE_X, i+1); _i ++){
                             for(int _j = max(0, j-1); _j <= min(RANGE_Y, j+1); _j ++){
 
-                                unit u1 = map -> map[_i][_j];
-
-                                u1.image.s[0]="\033[47m"+u1.image.s[0]+"\033[0m";
-                                u1.image.s[1]="\033[47m"+u1.image.s[1]+"\033[0m";
-                                u1.image.s[2]="\033[47m"+u1.image.s[2]+"\033[0m";
+                                u.image.s[0]=u1.image.s[0];
+                                u.image.s[1]=u1.image.s[1];
+                                u.image.s[2]=u1.image.s[2];
 
                                 //check if user is in this zone
                                 if (player.position.x == _i && player.position.y == _j){
