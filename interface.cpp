@@ -213,8 +213,8 @@ void print_level(int l){
 void print_name(Player player){
     string name_bar[3];
     name_bar[0]="Player: "+player.name;
-    name_bar[1]="LEVEL "+player.level;
-    print_page(name_bar,sizeof(name_bar[0]));
+    name_bar[1]="LEVEL "+to_string(player.level)+"            Press 'e' to exit";
+    print_page(name_bar,sizeof(name_bar[1]));
 }
 
 void print_status(Player player){
