@@ -8,7 +8,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "enter program name, for example ${workspaceFolder}/game",
+            "program": "${workspaceFolder}/game",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

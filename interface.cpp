@@ -255,15 +255,13 @@ void game_page(Player player){
     refresh();
     print_name(player);
     Map *map=player.map;
-    cout << " " << endl;
-    for(int i=0; i< map->len_y + 4; i++){
+    cout << endl;
+    for(int i = 0; i < (map -> len_y + 4)*RANGE_Y; i++)
         cout<<"\u25BA";
-    }
     cout<<endl;
     map->print_map(player.position);
-    for(int i=0; i<=map->len_y+4;i++){
+    for(int i = 0; i < (map -> len_y + 4)*RANGE_Y; i++)
         cout<<"\u25C4";
-    }
     cout<<endl;
     cout<<" "<<endl;
     print_status(player);

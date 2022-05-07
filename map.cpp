@@ -7,33 +7,17 @@ void Map::print_map(Point position){
     player_image[0]=" o ";
     player_image[1]="<|>";
     player_image[2]=" ^ ";
-    for(int i = 0; i < len_x; i++){         //i-th row of the map
-        for(int _i = 0; _i < RANGE_X; _i++)
-        for(int j = 0; j < len_y; j++) //j-th column of the map
-        for(int _j = 0; _j < RANGE_Y; _j++){
-            if(position.x==i && position.y==j){
-                if(j==0){
-                    cout << "\u25B2 "<<player_image[_i][_j];    
-                }
-                else if(j==(len_y-1)){
-                    cout << player_image[_i][_j]<<" \u25BC"; 
-                }
-                else
-                    cout << player_image[_i][_j];
-
-            }
-            else{
-                if(j==0){
-                    cout << "\u25B2 "<<map[i][j].image.s[_i][_j];    
-                }
-                else if(j==(len_y-1)){
-                    cout << map[i][j].image.s[_i][_j]<<" \u25BC"; 
-                }
-                else
-                    cout << map[i][j].image.s[_i][_j]; 
-            }
+    for(int i = 0; i < len_x; i++)
+    for(int _i = 0; _i < RANGE_X; _i++){         //i-th row of the map
+        cout << "\u25BC ";
+        for(int j = 0; j < len_y; j++) 
+        for(int _j = 0; _j < RANGE_Y; _j++){    //j-th column of the map
+            if(position.x==i && position.y==j)
+                cout << player_image[_i][_j];
+            else 
+                cout << map[i][j].image.s[_i][_j]; 
         }
-        cout << endl;
+        cout << " \u25BC" << endl;
     }
     
 }
