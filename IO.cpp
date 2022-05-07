@@ -10,7 +10,7 @@ void input_level(Player &player){
 
     if(fin.fail()){
         cout << "Error in file opening!" << endl;
-        return;
+        exit(1);
     }
 
     fin >> player.level;
