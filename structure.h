@@ -262,11 +262,12 @@ struct Map{
     //print the map
     void print_map(Point position);
 
-    void build_map(int level, int _){
-        len_x = 0;
+    void build_map(int _level, int _){
+        level = _level;
         len_x = maps_size[level][_][0];
         len_y = maps_size[level][_][1];
         coins_need = maps_coin[level][_];
+
 
         map = new unit *[len_x];
         
