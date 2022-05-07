@@ -11,13 +11,11 @@ void Map::print_map(Point position){
     for(int i = 0; i < len_x; i++)
     for(int _i = 0; _i < RANGE_X; _i++){         //i-th row of the map
         cout << "\u25BC ";
-        for(int j = 0; j < len_y; j++) 
-        for(int _j = 0; _j < RANGE_Y; _j++){    //j-th column of the map
+        for(int j = 0; j < len_y; j++) //j-th column of the map
             if(position.x==i && position.y==j)
-                cout << player_image[_i][_j];
+                cout << player_image[_i];
             else 
-                cout << map[i][j].image.s[_i][_j]; 
-        }
+                cout << map[i][j].image.s[_i]; 
         cout << " \u25BC" << endl;
     }
     

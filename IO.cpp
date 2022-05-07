@@ -38,7 +38,7 @@ void input_maps(){
     }
 
     for(int level = 0; level < Max_Level; level ++){ 
-        for(int _; _ < 3; _ ++){
+        for(int _ = 0; _ < 3; _ ++){
             int x, y, c;
             fin >> x >> y >> c;
             maps_size[level][_][0] = x;
