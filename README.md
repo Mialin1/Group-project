@@ -38,11 +38,11 @@ If the player can survives from the bombs, and the coins collected has meet the 
 ### 2.5 rules for the setting
 
 1. map： 5*10 initially, and the map will enlarge while the level goes up.
-2. stone wall：solid square, unbreakable, will not be affected by the bomb
-3. treasure boxes: hollow square，which can be exploded and get game props,coin, or even bomb
+2. stone wall：white hollow square, unbreakable, will not be affected by the bomb
+3. treasure boxes: yellow square，which can be exploded and get game props,coin, or even bomb
 4. player pocket: store the props
-5. life bar: shows how many lives does player has
-6. time: the remain time for this level
+5. life value: shows how many lives does player has
+6. The countdown watch: the remain time for this level
 7. coins collected: show how many coins have been collected
 8. coin requirement: the required coin for this level
 
@@ -62,11 +62,11 @@ Permanent data storage is automaticly done everytime player quit the game to sav
 
 ### 3.3 Data processing
 
-All the content displayed on the screen is based on continuously updated data. Therefore, we can conclude that all the displayed game content is actually regarding "Data Processing". With collective data processing functions, a different game feature can be created. 
+All the content displayed on the screen is based on continuously updated data. Therefore, we can conclude that all the displayed game content is actually regarding "Data Processing". With collective data processing functions, a different game feature can be created.
 
 ### 3.4 Multi-thread process
 
-System activity and user input activity are processed in two different threads, 
+System activity and user input activity are processed in two different threads,
 
 ## 4. Code Requirement Implementation
 
