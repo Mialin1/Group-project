@@ -431,6 +431,7 @@ void no_pass(Player &player){
 
 //function: output message of invalid move/operation
 void warning(){
+    refresh();
     string warning[2];
     warning[0]="invalid move/operation";
     warning[1]="Please input again!";

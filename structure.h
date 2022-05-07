@@ -79,6 +79,8 @@ struct Time{
 
     //time span between two system bombs
     bool bomb_span(int level){
+        if (level == 0)
+            return equal(20);
         if (level == 1)
             return equal(10);
         else if (level == 2)

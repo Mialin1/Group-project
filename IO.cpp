@@ -68,5 +68,6 @@ char get_input()
     in = getchar();
      
     tcsetattr(0,TCSANOW,&stored_settings);
-    return (char)in;
+    char x = (char) in;
+    return x;
 }
