@@ -17,7 +17,8 @@ void Map::print_map(Point position){
             else 
                 s += map[i][j].image.s[_i]; 
         s += " \u25BC";
-        cout << s << endl;
+        cout << s ;
+        cout << endl;
     }
     
 }
