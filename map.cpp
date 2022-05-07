@@ -10,7 +10,7 @@ void Map::print_map(Point position){
     player_image[2]="  ^ ";
     for(int i = 0; i < len_x; i++)
     for(int _i = 0; _i < RANGE_X; _i++){         //i-th row of the map
-        string s = "\u25BC ";
+        string s = "\u25BC";
         for(int j = 0; j < len_y; j++) //j-th column of the map
             if(position.x==i && position.y==j)
                 s += player_image[_i];
