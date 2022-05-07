@@ -5,12 +5,12 @@ using namespace std;
 //print the map
 void Map::print_map(Point position){
     string player_image[RANGE_X];
-    player_image[0]=" o ";
-    player_image[1]="<|>";
-    player_image[2]=" ^ ";
+    player_image[0]="  o ";
+    player_image[1]=" <|>";
+    player_image[2]="  ^ ";
     for(int i = 0; i < len_x; i++)
     for(int _i = 0; _i < RANGE_X; _i++){         //i-th row of the map
-        string s = "\u25BC ";
+        string s = "\u25BC";
         for(int j = 0; j < len_y; j++) //j-th column of the map
             if(position.x==i && position.y==j)
                 s += player_image[_i];

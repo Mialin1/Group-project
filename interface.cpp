@@ -245,8 +245,8 @@ void print_prop_instruction(Player player){
     else
         instruct[0]="\033[34m\u25C6\033[0m Shield(press 'j'): "+to_string(player.package[1].num);
     instruct[1]="\u2605 Spring(press 'k'): "+to_string(player.package[2].num);
-    instruct[2]="\033[32m。。。\033[0m Seed(press 'l'): "+to_string(player.package[3].num);
-    instruct[3]="{\u2739} Bomb(press 'b'): infinite";
+    instruct[2]="\033[32m。\033[0m Seed(press 'l'): "+to_string(player.package[3].num);
+    instruct[3]="{\u2739} Bomb(press 'b'): no limit";
     for (int i=0;i<4;i++)
         cout<<instruct[i]<<endl;
 }
