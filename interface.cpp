@@ -175,7 +175,6 @@ void room_page(Player &player){
         player.map->build_map(level, x);//randomly select a map
         game_page(player);
         _sleep(0, 10);
-        cout <<"here" << endl;///////////////////////////////////////////////////////////////////////////////////////////to be delete
 
     }
 
@@ -230,7 +229,7 @@ void print_name(Player player){
 
 void print_status(Player player){
     string status_bar[2];
-    status_bar[0]="\033[1mLife  \033[31m\u2764"+to_string(player.life)+"\033[0m"+"\033[1mCoin(s)   \033[33m\u2726"+to_string(player.coins)+"\033[0m";
+    status_bar[0]="\033[1mLife  \033[31m\u2764 "+to_string(player.life)+"      \033[0m"+"\033[1mCoin(s)   \033[33m\u2726"+to_string(player.coins)+"\033[0m";
     status_bar[1]="time remaining:   "+to_string(player.time_remain.min)+" : "+to_string(player.time_remain.sec);
     for (int i=0;i<2;i++){
         cout<<status_bar[i]<<endl;
