@@ -79,7 +79,7 @@ struct Time{
 
     //time span between two system bombs
     bool bomb_span(int level){
-        return 10 - level; 
+        return (min == 0 && sec == 10 - level); 
     }
 
     //for check the shield
