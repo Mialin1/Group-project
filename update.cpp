@@ -144,6 +144,7 @@ void map_update(Player &player){
                         }
                         u.set("space", i, j);
                         delete u.bomb;
+                        u.bomb = NULL;
                         if (restart) break;
                     }
                     

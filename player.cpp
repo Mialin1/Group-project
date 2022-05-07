@@ -47,6 +47,7 @@ void Player::move(int _x, int _y){
         if (u.prop != NULL){ //if the target unit has a prop on it
             add_item(u.prop);     //add the prop to the package
             delete u.prop;
+            u.prop = NULL;
             u.set("space", _x, _y);     //set the unit to space
         }
     }
@@ -67,6 +68,7 @@ bool Player::jump(int _x, int _y){
         if (u.prop != NULL){         //if the target unit has a prop on it
             add_item(u.prop);     //add the prop to the package
             delete u.prop;
+            u.prop = NULL;
             u.set("space", _x, _y);       //set the unit to space
         }
         package[2].num --;
