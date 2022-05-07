@@ -166,6 +166,7 @@ void room_page(Player &player){
         player.initialize();
         cout <<"here" << endl;///////////////////////////////////////////////////////////////////////////////////////////to be delete
         int x = rand()%3;
+        player.map = new Map;
         player.map->build_map(level, x);//randomly select a map
         cout <<"here" << endl;///////////////////////////////////////////////////////////////////////////////////////////to be delete
         game_page(player);
@@ -306,6 +307,8 @@ void quit_page(){
 
 void leave_page(Player &player){
     player.map->delete_map();
+    delete player.map;
+    player.map = NULL;
     string leave[2];
     leave[0]="Do you want to leave the game?    ";
     leave[1]="Enter 'y' if yes; Enter 'n' if no ";

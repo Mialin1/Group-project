@@ -25,6 +25,8 @@ void map_update(Player &player){
         if(player.time_remain.if_time_up()){
             check_page(player);
             map->delete_map();
+            delete map;
+            map = NULL;
             room_page(player);
             last_bomb = player.time_remain;
         }
@@ -156,6 +158,8 @@ void map_update(Player &player){
 
         if(restart){
             map->delete_map();
+            delete map;
+            map = NULL;
             room_page(player);
             last_bomb = player.time_remain;
             restart = false;
