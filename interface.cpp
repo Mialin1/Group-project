@@ -12,6 +12,7 @@ void _sleep(int s, int ns){
 
 //all the pages are printed by this function
 void print_page(string passage[], int length, int size){
+    length += 10;
     for(int i=0; i<length + 4 ;i++){
         cout<<"-";
     }
@@ -136,7 +137,7 @@ void room_page(Player &player){
     while(1){
         refresh();
         logo_interface();
-        print_page(lines,sizeof(lines[1])+2,4);
+        print_page(lines,sizeof(lines[1]),4);
         print_level(player.level);
         cin>>command; 
         if(command >=0 and command<=7){
@@ -224,7 +225,7 @@ void print_name(Player player){
     string name_bar[2];
     name_bar[0]="Player: "+player.name;
     name_bar[1]="LEVEL "+to_string(player.level)+"            Press 'e' to exit";//////////////////////////////////
-    print_page(name_bar,name_bar[1].length(),2);
+    print_page(name_bar,45,2);
 }
 
 void print_status(Player player){
@@ -301,20 +302,19 @@ void quit_page(){
     quit[1]="─▀▀▀▄▄ ░█▀▀▀ ░█▀▀▀  ░█▄▄▄█ ░█──░█ ░█─░█  ░█░█░█ ░█▀▀▀  ░█    ░█     ░█   ░█  ░█░█░█ ░█▀▀▀ ";
     quit[2]="░█▄▄▄█ ░█▄▄▄ ░█▄▄▄    ░█   ░█▄▄▄█  ▀▄▄▀  ░█  ▀█ ░█▄▄▄ ▄▀░▀▄  ░█     ░█   ▄█▄ ░█  ░█ ░█▄▄▄ ";
     
-    print_page(quit,sizeof(quit[0]),3);
+    print_page(quit,quit[0].length(),3);
 
+    exit(0);
 }
 
 void leave_page(Player &player){
-    player.map->delete_map();
-    delete player.map;
-    player.map = NULL;
+    player.if_quit = true;
     string leave[2];
     leave[0]="Do you want to leave the game?    ";
     leave[1]="Enter 'y' if yes; Enter 'n' if no ";
     while(1){
         refresh();
-        print_page(leave,sizeof(leave[1]),2);
+        print_page(leave, leave[1].length(),2);
         
         string x;
         cin>>x;
@@ -323,12 +323,15 @@ void leave_page(Player &player){
             message[0]="Your level record has been loaded!";
             message[1]="Please use the same player name next time ";
             message[2]=" if your want to load the previous record";
-            print_page(message,sizeof(message[1]),3);
+            print_page(message,message[1].length(),3);
             output_level(player);
             player.map->delete_map();
+            delete player.map;
+            player.map = NULL;
             quit_page();
         }
         else if(x=="n"){
+            player.if_quit = false;
             return;
         }
         else{
@@ -345,7 +348,7 @@ void dead(Player &player){
     dead[1]="Cheer up! ";
     dead[2]="Enter 'r' to restart;  Enter 'e' to exit";
     while(1){
-        print_page(dead,sizeof(dead[2]),3);
+        print_page(dead,dead[2].length(),3);
         cin>>c;
         if(c=="r"||c=="e"){
             break;
@@ -412,7 +415,7 @@ void no_pass(Player &player){
     nopass[1]="Cheer up! ";
     nopass[2]="Enter 'r' to choose level and restart; Enter'e' to exit";
     while(1){
-        print_page(nopass,sizeof(nopass[0]),3);
+        print_page(nopass,nopass[2].length(),3);
         cin>>c;
         if(c=="r"||c=="e"){
             break;
@@ -431,11 +434,10 @@ void no_pass(Player &player){
 
 //function: output message of invalid move/operation
 void warning(){
-    refresh();
     string warning[2];
     warning[0]="invalid move/operation";
     warning[1]="Please input again!";
-    print_page(warning,sizeof(warning[0]),2);
+    print_page(warning,warning[0].length(),2);
 }
 
 

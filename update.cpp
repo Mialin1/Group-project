@@ -13,12 +13,14 @@ void map_update(Player &player){
     srand(time(0));
 
     while(true){
-        //1 sec
-        struct timespec ts, ts1;
-        ts.tv_nsec = 0;
-        ts.tv_sec = 1;
-        nanosleep(&ts, &ts1);
+        if(player.if_quit){
+            sleep(1000);
+            continue;
+        } 
 
+        //1 sec
+        sleep(1000);
+        
         player.time_remain.tick();  //minus 1 sec
         Map *map = player.map;
 
@@ -171,8 +173,9 @@ void map_update(Player &player){
             restart = false;
             continue;
         }
-
-        game_page(player);//print the page after update
+        
+        if (!player.if_quit)
+            game_page(player);//print the page after update
     }
     
     

@@ -23,6 +23,32 @@ void Map::print_map(Point position){
     
 }
 
+void Map::build_map(int _level, int _){
+    level = _level;
+    len_x = maps_size[level][_][0];
+    len_y = maps_size[level][_][1];
+    coins_need = maps_coin[level][_];
+
+
+    map = new unit *[len_x];
+    
+    for(int i = 0; i < len_x; i++)
+        map[i] = new unit [len_y];
+
+    for(int i = 0; i < len_x; i++){
+        for(int j = 0; j < len_y; j++){     //build map[i][j]
+
+            char c = maps[level][_][i][j]; 
+            if(c == 'S')
+                map[i][j].set("space", i, j);
+            else if (c == 'W')
+                map[i][j].set("wall", i, j);
+            else if (c == 'B')
+                map[i][j].set("box", i, j);
+        }
+    }
+}
+
 void Map::delete_map(){
     for(int i = 0; i < len_x; i ++){
         for(int j = 0; j < len_y; j ++){
@@ -42,11 +68,11 @@ void Map::delete_map(){
         }
     }
     for(int i = 0; i < len_x; i ++){
-        delete map[i];
+        delete[] map[i];
         map[i] = NULL;
     }
-    delete *map;
-    *map = NULL;
+    delete[] map;
+    map = NULL;
 }
 
 //set a bomb

@@ -85,12 +85,11 @@ void Player::use_shield(){
 }
 
 //player set a bomb on the map
-bool Player::set_bomb(){
+void Player::set_bomb(){
     unit u = map->map[position.x][position.y];
     if (!u.empty)
-        return false;
+        return;
     map -> set_bomb(position, time_remain);
-    return true;
 }
 
 //player use a seed(seed--10s-->(wooden)treasure box, and when the boxes are exploded, there will be coins or props)

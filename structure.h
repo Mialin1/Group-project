@@ -262,31 +262,7 @@ struct Map{
     //print the map
     void print_map(Point position);
 
-    void build_map(int _level, int _){
-        level = _level;
-        len_x = maps_size[level][_][0];
-        len_y = maps_size[level][_][1];
-        coins_need = maps_coin[level][_];
-
-
-        map = new unit *[len_x];
-        
-        for(int i = 0; i < len_x; i++)
-            map[i] = new unit [len_y];
-
-        for(int i = 0; i < len_x; i++){
-            for(int j = 0; j < len_y; j++){     //build map[i][j]
-
-                char c = maps[level][_][i][j]; 
-                if(c == 'S')
-                    map[i][j].set("space", i, j);
-                else if (c == 'W')
-                    map[i][j].set("wall", i, j);
-                else if (c == 'B')
-                    map[i][j].set("box", i, j);
-            }
-        }
-    }
+    void build_map(int _level, int _);
 
     void delete_map();
 
@@ -339,7 +315,7 @@ struct Player{
     void use_shield();
 
     //player set a bomb on the map
-    bool set_bomb();
+    void set_bomb();
 
     //player use a seed(seed--10s-->(wooden)treasure box, and when the boxes are exploded, there will be coins or props)
     bool use_seed();

@@ -71,11 +71,12 @@ int main(){
                     else player.use_seed();
                 case 'b': //user set bomb
                     player.set_bomb();
-                case 'e': //quit game
+                    cout << "here" << endl;
+                case 'e': //quit gamef
+                    cout << "here" << endl;
                     leave_page(player);
             }
             game_page(player);
-            cout << "here";
         }
         
     }
