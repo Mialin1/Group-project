@@ -375,7 +375,7 @@ void check_page(Player &player){
 
     refresh();
     if (player.coins >= map->coins_need){
-        player.level += 1;
+        player.level = max(player.level, map->level + 1);
         string win[3];
         string input;
         win[0]="Congratulations! "+player.name;

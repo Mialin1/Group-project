@@ -86,7 +86,8 @@ void Player::use_shield(){
 
 //player set a bomb on the map
 bool Player::set_bomb(){
-    if (!map -> map[position.x][position.y].empty)
+    unit u = map->map[position.x][position.y];
+    if (!u.empty)
         return false;
     map -> set_bomb(position, time_remain);
     return true;
