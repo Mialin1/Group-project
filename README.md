@@ -8,6 +8,8 @@
 
 The proposed game, "Mr. Bomb", is an adventure RPG game, inspired by the game Crazy-Arcade, which is one of the best and enjoyable game in our childhood. The player can enjoy the excitement of surviving from bombs, making use of varieties of props, and collecting coins.  By putting bombs to blow up the wooden boxes, player may get helpful props or coins. Random bombs may fall from time to time, and if the player can survive the game and get enough gold coins within the limited time, he or she can unlock more challenging game in higher level.
 
+Game Video: https://drive.google.com/file/d/13dZF9SelheH5aUkwMshrJn5POlLPFftN/view?usp=sharing
+
 ## 2. Rules of the Game
 
 ### 2.0 command to run the code (dark mode recommended)
