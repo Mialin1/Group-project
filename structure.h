@@ -79,20 +79,7 @@ struct Time{
 
     //time span between two system bombs
     bool bomb_span(int level){
-        if (level == 0)
-            return equal(20);
-        if (level == 1)
-            return equal(10);
-        else if (level == 2)
-            return equal(9);
-        else if (level == 3)
-            return equal(8);
-        else if (level == 4)
-            return equal(7);
-        else if (level == 5)
-            return equal(6);
-        else
-            return equal(5);
+        return 10 - level; 
     }
 
     //for check the shield
