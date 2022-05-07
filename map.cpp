@@ -3,8 +3,7 @@ using namespace std;
 
 
 //print the map
-void Map::print_map(Player player){
-    Point p = player.position;
+void Map::print_map(Point p, int n1, int n2, int n3, bool if_protect){
     string player_image[RANGE_X];
     player_image[0]="  o ";
     player_image[1]=" <|>";
@@ -19,17 +18,17 @@ void Map::print_map(Player player){
                 s += map[i][j].image.s[_i]; 
         s += " \u25BC";
         if(i == 0 && _i == 1){
-            if (player.if_protect==true)
-                s += "[Using] \033[34m\u25C6\033[0m Shield(press 'j'): "+to_string(player.package[1].num);
+            if (if_protect==true)
+                s += "[Using] \033[34m\u25C6\033[0m Shield(press 'j'): "+to_string(n1);
             else
-                s += "     \033[34m\u25C6\033[0m Shield(press 'j'): "+to_string(player.package[1].num);
+                s += "     \033[34m\u25C6\033[0m Shield(press 'j'): "+to_string(n1);
 
         }
             
         if(i == 1 && _i == 0)
-            s += "     \u2605 Spring(press 'k'): "+to_string(player.package[2].num);
+            s += "     \u2605 Spring(press 'k'): "+to_string(n2);
         if(i == 1 && _i == 2) 
-            s += "     \033[32m。\033[0mSeed(press 'l'): "+to_string(player.package[3].num);
+            s += "     \033[32m。\033[0mSeed(press 'l'): "+to_string(n3);
         if(i == 2 && _i == 1)
             s += "     {\u2739} Bomb(press 'b'): no limit";
         cout << s << endl;

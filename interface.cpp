@@ -262,7 +262,7 @@ void game_page(Player player){
     for(int i = 0; i < map -> len_y *RANGE_Y + 3; i++)
         cout<<"\u25BA";
     cout<<endl;
-    map->print_map(player);
+    map->print_map(player.position, player.package[1].num, player.package[2].num, player.package[3].num, player.if_protect);
     for(int i = 0; i < map -> len_y *RANGE_Y + 3; i++)
         cout<<"\u25C4";
     cout<<endl;
