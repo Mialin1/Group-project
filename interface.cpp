@@ -234,7 +234,7 @@ void print_level(int l){
 void print_name(Player player){
     string name_bar[2];
     name_bar[0]="Player: " + player.name + "            Press 'e' to exit";
-    name_bar[1]="Your LEVEL: "+to_string(player.level) + "           Map LEVEL: " + to_string(player.map->level);
+    name_bar[1]="Your LEVEL: "+to_string(player.level) + "               Map LEVEL: " + to_string(player.map->level);
     print_page(name_bar,45,2);
 }
 
