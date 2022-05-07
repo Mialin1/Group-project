@@ -5,6 +5,8 @@
 using namespace std;
 #define STEP 1
 
+void congratulation_interface();
+
 void print_page(string passage[], int length, int size);
 
 void welcome_page(Player &player);

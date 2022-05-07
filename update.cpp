@@ -9,7 +9,6 @@ void map_update(Player &player){
 
     Time last_bomb = player.time_remain;
 
-
     srand(time(0));
 
     while(true){
