@@ -7,14 +7,17 @@
 #include <vector>
 #include <ctime>
 #include <fstream>
-#include <termio.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <fcntl.h>
 #include <thread>
 using namespace std;
 
-#define Max_Level 3 ////////////////////////////////////////////to be set
+#define Max_Level 6
+
+extern string maps[10][5][13];
+extern int maps_size[10][5][2];
+extern int maps_coin[10][5];
 
 //a position on the 2D map
 struct Point{
@@ -75,8 +78,8 @@ struct Time{
     }
 
     //time span between two system bombs
-    bool bomb_span(){
-        return equal(10);
+    bool bomb_span(int level){
+        return (min == 0 && sec == 10 - level); 
     }
 
     //for check the shield
@@ -92,15 +95,15 @@ struct Bomb{
 
     //functions that 
     bool effect1(Time t){
-        return set_time.diff(t).equal(1);
-    }
-
-    bool effect2(Time t){
         return set_time.diff(t).equal(2);
     }
 
+    bool effect2(Time t){
+        return set_time.diff(t).equal(4);
+    }
+
     bool explode(Time t){
-        return set_time.diff(t).equal(3);
+        return set_time.diff(t).equal(6);
     }
 
     bool release(Time t){
@@ -113,66 +116,92 @@ struct Box{
     bool if_box;
 
     bool to_box(Time t){
-        return set_time.diff(t).equal(1);///////////////////////////////////////////////to be set
+        return set_time.diff(t).equal(10);
     }
 };
 
 #define RANGE_X 3     //the size of each unit
-#define RANGE_Y 3
+#define RANGE_Y 4
 //extern const int range_x = 3;
 
 //the struct which stores the image of each unit
 struct Image{
-    string s[RANGE_Y];
+    string s[RANGE_X];
+    bool if_colored;
     void set_bomb(){
-        s[0] = " - ";
-        s[1] = "{\u2739}";
-        s[2] = " - ";
+        s[0] = "  - ";
+        s[1] = " {\u2739}";
+        s[2] = "  - ";
+        if_colored = false;
     }
     void set_seed(){
-        s[0] = "\033[32m。。。\033[0m";
-        s[1] = "\033[32m。。。\033[0m";
-        s[2] = "\033[32m。。。\033[0m";
+        s[0] = "\033[32m。。\033[0m";
+        s[1] = "\033[32m。。\033[0m";
+        s[2] = "\033[32m。。\033[0m";
+        if_colored = false;
     }
     void set_box(){
-        s[0]="\033[33m===\033[0m";
-        s[1]="\033[33m===\033[0m";
-        s[2]="\033[33m===\033[0m";
+        s[0]=" \033[33m===\033[0m";
+        s[1]=" \033[33m===\033[0m";
+        s[2]=" \033[33m===\033[0m";
+        if_colored = false;
     }
     void set_heart(){
-        s[0]=" \033[31m- \033[0m";
-        s[1]=" \033[31m\u2764\033[0m ";
-        s[2]=" \033[31m- \033[0m";
+        s[0]="  \033[31m- \033[0m";
+        s[1]="  \033[31m\u2764\033[0m ";
+        s[2]="  \033[31m- \033[0m";
+        if_colored = false;
     }
     void set_shield(){
-        s[0]="\033[34m---\033[0m";
-        s[1]="\033[34m|\u25C6|\033[0m";
-        s[2]="\033[34m---\033[0m";
+        s[0]=" \033[34m---\033[0m";
+        s[1]=" \033[34m|\u25C6|\033[0m";
+        s[2]=" \033[34m---\033[0m";
+        if_colored = false;
     }
     void set_wall(){
-        s[0]="===";
-        s[1]="= =";
-        s[2]="===";
+        s[0]=" ===";
+        s[1]=" = =";
+        s[2]=" ===";
+        if_colored = false;
     }
     void set_spring(){
-        s[0]="~~~";
-        s[1]=" \u2605 ";
-        s[2]="~~~";
+        s[0]=" ~~~";
+        s[1]="  \u2605 ";
+        s[2]=" ~~~";
+        if_colored = false;
     }
     void set_space(){
-        s[0]="   ";
-        s[1]="   ";
-        s[2]="   ";
+        s[0]="    ";
+        s[1]="    ";
+        s[2]="    ";
+        if_colored = false;
     }
     void set_coin(){
-        s[0]="   ";
-        s[1]="\033[33m\u2666\u00A9\u2666\033[0m";
-        s[2]="   ";
+        s[0]="    ";
+        s[1]=" \033[33m\u2666\u00A9\u2666\033[0m";
+        s[2]="    ";
+        if_colored = false;
     }
     void seed_used(){
-        s[0]="\033[32m ^ \033[0m";
-        s[1]="\033[32m/_＼\033[0m";
-        s[2]="\033[32m ≡ \033[0m"; 
+        s[0]=" \033[32m ^ \033[0m";
+        s[1]=" \033[32m/_\\\033[0m";
+        s[2]=" \033[32m ≡ \033[0m"; 
+        if_colored = false;
+    }
+};
+
+//Props for player to use in the game
+//Porp list:
+//0: heart, add one life, not in the package
+//1: sheild, defend the bomb for 5 sec
+//2: spring, jump over the wall once
+//3: seed, growing up and become a box
+struct Prop{
+    int no;
+    int num;
+    void set(int _no, int _num){
+        no = _no;
+        num = _num;
     }
 };
 
@@ -242,7 +271,9 @@ struct Map{
     int level;
 
     //print the map
-    void print_map(Point position);
+    void print_map(Point p, int n1, int n2, int n3, bool if_protect, int life, int coins, Time t);
+
+    void build_map(int _level, int _);
 
     void delete_map();
 
@@ -254,24 +285,6 @@ struct Map{
     //input: the position of the seed
     void set_seed(Point p, Time t);
 
-};
-
-
-extern vector<vector<Map> > maps;
-
-//Props for player to use in the game
-//Porp list:
-//0: heart, add one life, not in the package
-//1: sheild, defend the bomb for 5 sec
-//2: spring, jump over the wall once
-//3: seed, growing up and become a box
-struct Prop{
-    int no;
-    int num;
-    void set(int _no, int _num){
-        no = _no;
-        num = _num;
-    }
 };
 
 
@@ -313,7 +326,7 @@ struct Player{
     void use_shield();
 
     //player set a bomb on the map
-    bool set_bomb();
+    void set_bomb();
 
     //player use a seed(seed--10s-->(wooden)treasure box, and when the boxes are exploded, there will be coins or props)
     bool use_seed();

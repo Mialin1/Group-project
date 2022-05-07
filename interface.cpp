@@ -3,18 +3,27 @@
 #include "IO.h"
 using namespace std;
 
+void _sleep(int s, int ns){
+    struct timespec ts, ts1;
+    ts.tv_nsec = ns;
+    ts.tv_sec = s;
+    nanosleep(&ts, &ts1);
+}
+
 //all the pages are printed by this function
-void print_page(string passage[], int length){
-    for(int i=0; i<length;i++){
+void print_page(string passage[], int length, int size){
+    length += 10;
+    for(int i=0; i<length + 4 ;i++){
         cout<<"-";
     }
     cout<<endl;
-    for(int i=0; i<sizeof(passage)-1;i++){
-        cout<<"|  "<<format_string(passage[0],length-4)<<"|"<<endl;
+    for(int i=0; i< size; i++){
+        cout<<"| "<< format_string(passage[i],length) << " |" << endl;
     }
-    for(int i=0; i<length;i++){
+    for(int i=0; i<length + 4;i++){
         cout<<"-";
     }
+    cout<<endl;
 }
 
 //functions below are page generator
@@ -22,6 +31,7 @@ void print_page(string passage[], int length){
 
 //a page with welcome information
 void welcome_page(Player &player){
+    player.if_quit = true;
     //first ask the user to input his/her name.
 
     string name;
@@ -32,17 +42,17 @@ void welcome_page(Player &player){
         refresh();
         logo_interface();
         if (valid=true){
-            cout<<"===============================================================";
-            cout<<"||  Welcome to MR.BOMBER !                                   ||";
-            cout<<"||  Please input your name(begin with letter/number):        ||";
-            cout<<"===============================================================";
+            cout<<"===============================================================" << endl;
+            cout<<"||  Welcome to MR.BOMBER !                                   ||" << endl;
+            cout<<"||  Please input your name(begin with letter/number):        ||" << endl;
+            cout<<"===============================================================" << endl;
         }
         else{
-            cout<<"===============================================================";
-            cout<<"||  Welcome to MR.BOMBER !                                   ||";
-            cout<<"||  Invalid input,                                           ||";
-            cout<<"||  Please input your name again(begin with letter/number):  ||";
-            cout<<"===============================================================";
+            cout<<"===============================================================" << endl;
+            cout<<"||  Welcome to MR.BOMBER !                                   ||" << endl;
+            cout<<"||  Invalid input,                                           ||" << endl;
+            cout<<"||  Please input your name again(begin with letter/number):  ||" << endl;
+            cout<<"===============================================================" << endl;
         }
         getline(cin, name);
         if (isalnum(name[0])){
@@ -87,7 +97,8 @@ void welcome_page(Player &player){
         cout<<"||    2.shield: the player will be in invincible mode for 5s ||"<<endl;
         cout<<"||    3.coin: count for the final grade                      ||"<<endl;
         cout<<"||    4.spring: the player can directly walk through the     ||"<<endl;
-        cout<<"||      wall once                                            ||"<<endl;
+        cout<<"||      wall once,you need to first press keyboard then      ||"<<endl;
+        cout<<"||      press the direction you want to go.                  ||"<<endl;
         cout<<"==============================================================="<<endl;
         cout<<""<<endl;
         if (valid==true){
@@ -113,88 +124,94 @@ void welcome_page(Player &player){
 
     }
 
-};  
+} 
 
 void room_page(Player &player){
-    
-    string command;
+    player.if_quit = true;
     string lines[4];
+    lines[0]="Please ENTER the corresponding number";
+    lines[1]="(0-5): Enter the level number you want to start";
+    lines[2]="6: Load from save";
+    lines[3]="7: Exit the game";
 
-    lines[0]="Please Enter the number you want to choose ";
-    lines[1]="1: Start a new game";
-    lines[2]="2: Load from save";
-    lines[3]="3: Exit the game";
-
+    string command;
     while(1){
         refresh();
         logo_interface();
-        print_page(lines,sizeof(lines[0])+2);
-        cin>>command;
-        if(command=="1"||command=="2"){
-            break;
-        }
-        else if(command=="3"){
+        print_page(lines,sizeof(lines[1]),4);
+        print_level(player.level);
+        cin >> command;
+        if(command.length() == 1 && command[0] >= '0' && command[0]<='7' ){
             break;
         }
         else{
             lines[0]="Invalid Input! Please Enter the number again: ";
+            continue;
         }
     }
-    if(command=="3"){
+    if(command == "7"){
         leave_page(player);
         room_page(player);
     }
-    
-    //generate the loading bar by time
-    refresh();
-    string load[1];
-    load[0]="Loading.........";
-    print_page(load,sizeof(load[0]));
-    struct timespec ts, ts1;
-    ts.tv_nsec = 0;
-    ts.tv_sec = 2;
-    nanosleep(&ts, &ts1);
-    refresh();
-    
-
-    if (command=="2"){
-        int level;
-        print_level(player.level);
-        cin>>level;
+    else if (command == "6"){
+        input_level(player);
+        room_page(player);
+    }
+    //higher level map may be locked, the locked map should be gray
+    else{
+        int level = command[0] - '0';
         while(1){
-            if (level<player.level){
+            if (level <= player.level){
                 break;
             }
             else{
-                refresh();
+                cout<<"The level is locked,\n please choose the blue highlighted level"<<endl;
                 print_level(player.level);
                 cin>>level;
             }
         }
-        ////////load from file//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        print_loading();
+        player.initialize();
+
+        if(level ==1) player.time_remain.set(1, 30);
+        if(level ==2) player.time_remain.set(1, 45);
+        if(level ==3) player.time_remain.set(2, 00);
+        if(level ==4) player.time_remain.set(2, 15);
+        if(level ==5) player.time_remain.set(2, 30);
+        if(level ==6) player.time_remain.set(2, 45);
+
+
+        int x = rand()%3;
+        player.map = new Map;
+        player.map->build_map(level, x);//randomly select a map
         game_page(player);
+        _sleep(0, 10);
+
     }
 
-    //higher level map may be locked, the locked map should be gray
-    if (command=="1"){/////////////////////////////////////////////edit//////////////////////////////////////
-        player.initialize();
-        game_page(player);//random抽一个map 
-    }
- 
+        
+    
 }
 
+//generate the loading bar by time
+void print_loading(){
+    refresh();
+    string load[1];
+    load[0]="Loading.........";
+    print_page(load,sizeof(load[0]),1);
+    _sleep(2, 0);
+}
 
 
 
     //list out all the levels for users to choose
 void print_level(int l){
-    string level[6];
+    string level[3];
     string line;
-    int now=0;
-    level[0]="Please enter the level number you want:";
-    level[1]=" (only can choose the blue highlighted level)";
-    for(int i=1;i<7;i++){
-        if ((i-1)%3==0){
+    int now=1;
+    level[0]=" (only can choose the blue highlighted level)";
+    for(int i=0;i<6;i++){
+        if (i==0||i==3){
             line="";
         }
         if(i<=l){
@@ -203,36 +220,36 @@ void print_level(int l){
         else{
             line+="\033[2mLevel "+to_string(i)+"   \033[0m";
         }
-        if((i-1)%4==3){
-            level[2+now]=line;
+        if(i==2||i==5){
+            level[now]=line;
             now++;
-        }
-        
+        }  
     }
-    print_page(level,sizeof(level[1]));
-}
-void print_name(Player player){
-    string name_bar[3];
-    name_bar[0]="Player: "+player.name;
-    name_bar[1]="LEVEL "+player.level;
-    print_page(name_bar,sizeof(name_bar[0]));
+    for(int i=0; i<3;i++){
+        cout<<level[i]<<endl;
+    }
 }
 
-void print_status(Player player){
-    string status_bar[2];
-    status_bar[0]="\033[1mLife  \033[31m\u2764"+to_string(player.life)+"\033[0m"+"\033[1mCoin(s)   \033[33m\u2726"+to_string(player.coins)+"\033[0m";
-    status_bar[1]="time remaining:   "+to_string(player.time_remain.min)+" : "+to_string(player.time_remain.sec);
-    print_page(status_bar,sizeof(status_bar[0]));
+
+void print_name(Player player){
+    string name_bar[2];
+    name_bar[0]="Player: " + player.name + "            Press 'e' to exit";
+    name_bar[1]="Your LEVEL: "+to_string(player.level) + "               Map LEVEL: " + to_string(player.map->level);
+    print_page(name_bar,45,2);
 }
 
 //display props in the pocket and their instruction
 void print_prop_instruction(Player player){
     string instruct[4];
+    if (player.if_protect==true)
+        instruct[0]="[Using] \033[34m\u25C6\033[0m Shield(press 'j'): "+to_string(player.package[1].num);
+    else
     instruct[0]="\033[34m\u25C6\033[0m Shield(press 'j'): "+to_string(player.package[1].num);
     instruct[1]="\u2605 Spring(press 'k'): "+to_string(player.package[2].num);
-    instruct[2]="\033[32m。。。\033[0m Seed(press 'l'): "+to_string(player.package[3].num);
-    instruct[3]="{\u2739} Bomb(press 'b'): infinite";
-    print_page(instruct,sizeof(instruct[0])+3);
+    instruct[2]="\033[32m。\033[0mSeed(press 'l'): "+to_string(player.package[3].num);
+    instruct[3]="{\u2739} Bomb(press 'b'): no limit";
+    for (int i=0;i<4;i++)
+        cout<<instruct[i]<<endl;
 }
 
 //display the main game page
@@ -240,20 +257,17 @@ void game_page(Player player){
     refresh();
     print_name(player);
     Map *map=player.map;
-    cout<<" "<<endl;
-    for(int i=0; i<map->len_y+4;i++){
+    cout << endl;
+    for(int i = 0; i < map -> len_y *RANGE_Y + 3; i++)
         cout<<"\u25BA";
-    }
     cout<<endl;
-    map->print_map(player.position);
-    for(int i=0; i<=map->len_y+4;i++){
+    map->print_map(player.position, player.package[1].num, player.package[2].num, player.package[3].num, player.if_protect, player.life, player.coins, player.time_remain);
+    for(int i = 0; i < map -> len_y *RANGE_Y + 3; i++)
         cout<<"\u25C4";
-    }
-    cout<<endl;
-    cout<<" "<<endl;
-    print_status(player);
-    cout<<" "<<endl;
-    print_prop_instruction(player);
+    cout << endl;
+    // print_status(player);
+    // cout<<" "<<endl;
+    // print_prop_instruction(player);
 
     
     //player: Player_Name
@@ -272,92 +286,71 @@ void game_page(Player player){
     // life: 1    coin(s): 0/100
     // time remaining:    03: 00
 
-    //maybe also use struct func (map.print_map())
-    //or turn the struct func to a generator and also use the print_page() functoin
-   
 
-    
     
 }
 
 void quit_page(){
     refresh();
-    string quit[3];
-    quit[0]="░█▀▀▀█ ░█▀▀▀ ░█▀▀▀  ░█──░█ ░█▀▀▀█ ░█─░█  ░█▄ ░█ ░█▀▀▀ ▀▄░▄▀ ▀▀█▀▀  ▀▀█▀▀ ▀█▀ ░█▀▄▀█ ░█▀▀▀ ";
-    quit[1]="─▀▀▀▄▄ ░█▀▀▀ ░█▀▀▀  ░█▄▄▄█ ░█──░█ ░█─░█  ░█░█░█ ░█▀▀▀  ░█    ░█     ░█   ░█  ░█░█░█ ░█▀▀▀ ";
-    quit[2]="░█▄▄▄█ ░█▄▄▄ ░█▄▄▄    ░█   ░█▄▄▄█  ▀▄▄▀  ░█  ▀█ ░█▄▄▄ ▄▀░▀▄  ░█     ░█   ▄█▄ ░█  ░█ ░█▄▄▄ ";
     
-    print_page(quit,sizeof(quit[0]));
+    cout << endl;
+    cout << endl;
+    cout << "░█▀▀▀█ ░█▀▀▀ ░█▀▀▀  ░█  ░█ ░█▀▀▀█ ░█─░█  ░█▄ ░█ ░█▀▀▀ ▀▄░▄▀ ▀▀█▀▀  ▀▀█▀▀ ▀█▀ ░█▀▄▀█ ░█▀▀▀ " << endl;
+    cout << "─▀▀▀▄▄ ░█▀▀▀ ░█▀▀▀  ░█▄▄▄█ ░█──░█ ░█─░█  ░█░█░█ ░█▀▀▀  ░█    ░█     ░█   ░█  ░█░█░█ ░█▀▀▀ " << endl;
+    cout << "░█▄▄▄█ ░█▄▄▄ ░█▄▄▄    ░█   ░█▄▄▄█  ▀▄▄▀  ░█  ▀█ ░█▄▄▄ ▄▀░▀▄  ░█     ░█   ▄█▄ ░█  ░█ ░█▄▄▄ " << endl;
+    cout << endl;
+    cout << endl;
 
-    //quit and 存状态
+    
+    exit(0);
 }
 
 void leave_page(Player &player){
-    ///////////////////////////////////////////////////////////////map.delete_map()
+    player.if_quit = true;
     string leave[2];
     leave[0]="Do you want to leave the game?    ";
     leave[1]="Enter 'y' if yes; Enter 'n' if no ";
     while(1){
         refresh();
-        print_page(leave,sizeof(leave[1]));
+        print_page(leave, leave[1].length(),2);
         
         string x;
         cin>>x;
         if (x =="y") {
-            player.if_quit = true;
-            break;
+            string message[4];
+            message[0]="Your level record has been loaded!";
+            message[1]="Please use the same player name next time ";
+            message[2]=" if your want to load the previous record";
+            message[3]=" use the same username next time.";
+            print_page(message,message[1].length(),4);
+            output_level(player);
+            if(player.map!=NULL){
+                player.map->delete_map();
+                delete player.map;
+                player.map = NULL;
+            }
+            quit_page();
         }
         else if(x=="n"){
-            break;
+            player.if_quit = false;
+            return;
         }
         else{
             leave[0]="Invalid Input.";
         }       
     }
-    if (player.if_quit){
-        quit_page();
-    }
-
 }
-        
-//if coin number doesn't meet the requirement
-void no_pass(Player &player){
-    player.initialize();
-    refresh();
-    string c;
-    string nopass[3];
-    nopass[0]="Sorry, your coin number doesn't meet the requirement.";
-    nopass[1]="Cheer up! ";
-    nopass[2]="Enter 'r' to choose level and restart; Enter'e' to exit";
-    while(1){
-        print_page(nopass,sizeof(nopass[0]));
-        cin>>c;
-        if(c=="r"||c=="e"){
-            break;
-        }
-        else{
-            nopass[1]="Invalid Input!";
-        }
-    }
-    if(c=="r"){
-        room_page(player);
-    }
-    else{
-        leave_page();
-    }
-}    
     
-    
-
 void dead(Player &player){
+    player.if_quit = true;
     player.initialize();
     string dead[3];
     string c;
-    dead[0]="Sorry, your mr.bomb is dead.";
+    dead[0]="Sorry, your mr.bomber is dead.";
     dead[1]="Cheer up! ";
     dead[2]="Enter 'r' to restart;  Enter 'e' to exit";
     while(1){
-        print_page(dead,sizeof(dead[2]));
+        print_page(dead,dead[2].length(),3);
         cin>>c;
         if(c=="r"||c=="e"){
             break;
@@ -366,7 +359,7 @@ void dead(Player &player){
             dead[1]="Invalid Input!";
         }
     }
-    if(c=="e"){{
+    if(c=="e"){
         leave_page(player);
     }
     
@@ -374,52 +367,88 @@ void dead(Player &player){
 
 //when time is up, check whether the coins meet the requirement
 void check_page(Player &player){
-    string check[2];
-    Map *map=player.map;
-    check[0]="You need "+to_string(map->coins_need)+ " coins to pass this level.";
-    check[1]="You have "+to_string(player.coins)+" coins.";
-    print_page(check,sizeof(check[0]));
-
-    struct timespec ts, ts1;
-    ts.tv_nsec = 0;
-    ts.tv_sec = 3;
-    nanosleep(&ts, &ts1);
-
+    player.if_quit = true;
     refresh();
-    if (player.coins >= map->coins_need){
-        player.level += 1;
+    string check[4];
+    Map map=*player.map;
+
+    char x = ' ';
+    while(x != 'm'){
+        refresh();
+        check[0]="You need "+to_string(map.coins_need)+ " coins to pass this level.";
+        check[1]="You have "+to_string(player.coins)+" coins.";
+        check[2]="";
+        check[3]="press M to continue";
+        print_page(check,check[0].length(),4);
+        x = get_input();
+    }
+        
+
+    
+    if (player.coins >= map.coins_need){
+        player.level = max(player.level, max(5, map.level + 1));
         string win[3];
         string input;
-        win[0]="Congratulations! "+player.name;
-        win[1]="Another game? ";
-        win[2]="\033[1myes(y)     no(n)\033[0m";  
+        refresh();
+        congratulation_interface();
+        std::cout << "              Another game or quit the game?        " << endl;
+        std::cout << "              another game(y)     quit(n)           " << endl;  
         while(1){
-            refresh();
-            print_page(win,sizeof(win[0]));
-            cin>>input;
-            if(input=="y"||input=="n"){
+            
+            cin >> input;
+            if(input == "y")
+                return;
+            else if(input == "n"){
+                leave_page(player);
                 break;
             }
-            else
-                win[0]="Invalid input! Please input again: ";
+            else{
+                refresh();
+                congratulation_interface();
+                cout << "           Invalid input! Please input again: " << endl;
+                cout << "              another game(y)     quit(n)           " << endl;  
+            }
+                
         }
-        if(input=="y")
-            room_page(player);
-        else
-            leave_page(player);
     }
     else{
         no_pass(player);
     }
-    
 }
+
+       
+//if coin number doesn't meet the requirement
+void no_pass(Player &player){
+    player.if_quit = true;
+    string nopass[3];
+    cout << "Sorry, your coin number doesn't meet the requirement." << endl;
+    cout << "Cheer up and try again! " << endl;
+    cout << endl;
+    cout << "Enter 'r' to start a new game; Enter 'e' to exit" << endl;
+    
+    while(1){
+        string input;
+        cin >> input;
+        if(input == "r"){
+            return;
+        }
+        if(input == "e"){
+            leave_page(player);
+        }
+        else{
+            refresh();
+            cout << "Invalid Input!" << endl;
+            cout << "Enter 'r' to start a new game; Enter 'e' to exit" << endl;
+        }
+    }
+}    
 
 //function: output message of invalid move/operation
 void warning(){
     string warning[2];
     warning[0]="invalid move/operation";
     warning[1]="Please input again!";
-    print_page(warning,sizeof(warning[0]));
+    print_page(warning,warning[0].length(),2);
 }
 
 
@@ -439,17 +468,41 @@ void logo_interface(void){
     string line[13];
 
     line[0]= " ";
-    line[1]= "            OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
-    line[2]= "            OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
-    line[3]= "            OOOO                                                                OOOO";
-    line[4]= "            OOOO                                                                OOOO";
-    line[5]= "            OOOO     ░█▀▄▀█ █▀▀█      ░█▀▀█ ░█▀▀▀█ ░█▀▄▀█ ░█▀▀█ ░█▀▀▀ ░█▀▀█     OOOO";
-    line[6]= "            OOOO     ░█░█░█ █▄▄▀      ░█▀▀▄ ░█──░█ ░█░█░█ ░█▀▀▄ ░█▀▀▀ ░█▄▄▀     OOOO";
-    line[7]= "            OOOO     ░█──░█ █─▀█ █    ░█▄▄█ ░█▄▄▄█ ░█──░█ ░█▄▄█ ░█▄▄▄ ░█─░█     OOOO";  
-    line[8]= "            OOOO                                                                OOOO";
-    line[9]= "            OOOO                                                                OOOO"; 
-    line[10]= "            OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"; 
-    line[11]= "            OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"; 
+    line[1]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
+    line[2]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
+    line[3]= "OOOO                                                                OOOO";
+    line[4]= "OOOO                                                                OOOO";
+    line[5]= "OOOO     ░█▀▄▀█ █▀▀█      ░█▀▀█ ░█▀▀▀█ ░█▀▄▀█ ░█▀▀█ ░█▀▀▀ ░█▀▀█     OOOO";
+    line[6]= "OOOO     ░█░█░█ █▄▄▀      ░█▀▀▄ ░█──░█ ░█░█░█ ░█▀▀▄ ░█▀▀▀ ░█▄▄▀     OOOO";
+    line[7]= "OOOO     ░█──░█ █─▀█ █    ░█▄▄█ ░█▄▄▄█ ░█──░█ ░█▄▄█ ░█▄▄▄ ░█─░█     OOOO";  
+    line[8]= "OOOO                                                                OOOO";
+    line[9]= "OOOO                                                                OOOO"; 
+    line[10]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"; 
+    line[11]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"; 
+    line[12]= " ";
+
+    for(int i=0; i<13; i++){
+        cout<<line[i]<<endl;
+    }
+
+}
+
+//print our logo "MR. BOMBER" is the main interface
+void congratulation_interface(void){
+    string line[13];
+
+    line[0]= " ";
+    line[1]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO000000000000000000000000000000000000000";
+    line[2]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO000000000000000000000000000000000000000";
+    line[3]= "OOOO                                                                                                       OOOO";
+    line[4]= "OOOO                                                                                                       OOOO";
+    line[5]= "OOOO     ░█▀▀█ ░█▀▀▀█ ░█▄ ░█ ░█▀▀█ ░█▀▀█ ░█▀▀█ ▀▀█▀▀ ░█ ░█ ░█    ░█▀▀█ ▀▀█▀▀ ▀█▀ ░█▀▀▀█ ░█▄ ░█ ░█▀▀▀█      OOOO";
+    line[6]= "OOOO     ░█    ░█  ░█ ░█░█░█ ░█ ▄▄ ░█▄▄▀ ░█▄▄█  ░█   ░█ ░█ ░█    ░█▄▄█  ░█   ░█  ░█  ░█ ░█░█░█  ▀▀▀▄▄      OOOO";
+    line[7]= "OOOO     ░█▄▄█ ░█▄▄▄█ ░█  ▀█ ░█▄▄█ ░█ ░█ ░█ ░█  ░█   ░▀▄▄▀ ░█▄▄█ ░█ ░█  ░█   ▄█▄ ░█▄▄▄█ ░█  ▀█ ░█▄▄▄█      OOOO";  
+    line[8]= "OOOO                                                                                                       OOOO";
+    line[9]= "OOOO                                                                                                       OOOO"; 
+    line[10]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO000000000000000000000000000000000000000";
+    line[11]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO000000000000000000000000000000000000000";
     line[12]= " ";
 
     for(int i=0; i<13; i++){

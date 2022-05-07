@@ -6,68 +6,67 @@
 
 ## 1. Introduction of Game
 
-The proposed game, "Mr. Bomb", is an adventure RPG game. The player can enjoy the excitement of surviving from bombs, making use of varieties of props, and collecting coins. By putting bombs to open the wooden boxes, the outcome can be helpful props, coins, or even bombs. If the player can get enough gold coins within the limited time or before death, it will get more challenging with every level, and the random bomb will occur at a higher frequency.
+The proposed game, "Mr. Bomb", is an adventure RPG game. The player can enjoy the excitement of surviving from bombs, making use of varieties of props, and collecting coins.  By putting bombs to blow up the wooden boxes, player may get helpful props or coins. Random bombs may fall from time to time, and if the player can survive the game and get enough gold coins within the limited time, he or she can unlock more challenging game in higher level.
 
 ## 2. Rules of the Game
 
 ### 2.1 rules for survival
 
-The player initially has one life. If the player can collect a "heart" prop, the player can add one more life. If the bomb hits the user, he will lose one life, and if the life status becomes zero, the user dies. After death, the game will calculate the total coin collected in this level, and if it meets the requirement for passing this level, the player can go to the next level.
+The player initially has one life. If the player luckily collect a "heart" prop, he or she can add one extra life. When the bomb unfortunately explode near the user, he or she will get life deduction. If the life status becomes zero, the player dies, which also means the player has lost the game.
 
 ### 2.2 rules for passing to next level
 
-When the user survives from the bombs after a limited time, the game will compare the coin collected by the player with the requirement. If the number is above the condition, it will pass to the next level.
+If the player can survives from the bombs, and the coins collected has meet the requirement, he or she will pass to the next level, and will be able to have more challenging game (larger map, more frequent bombs, and higher coin collect requirement).
 
 ### 2.3 rules for game props
 
 1) heart: add one more life
-2) shield: the player will be in invincible mode for 5 seconds
-3) coin: count for the final grade
-4) //rocket: increase the speed of the player within the next 20 seconds
-5) spring: the player is able to directly walk though the wall once
-6) wood (-> shield): the player can build a disposable wall which can protect itself from the bomb
-7) bomb:
+2) shield: the player will be under protection for 10 seconds
+3) spring: the player is able to directly walk though the wall once
+4) seed: player can set a seed on a unit, and it will turn into a box in 10 seconds
+5) bomb: it will explode 3 seconds after it is set, and its impact range is 3*3,  and it will affect everything except the stone wall. Boxes will be opened (and there will be chances to appear props and coins), and others will be turned into dust.
 
-1. Placed by the user: the bomb's lethality is the nine boxes around it, but it can only explode the wooden boxes not the wall. There will be random coin, props or even bombs come out after explode the wooden boxes.
-2. the automated bomb: the bomb's lethality is the nine boxes around it. It will only hurt the uer but will not explode any other boxes.
+### 2.4 commands from the player input
 
-8) seed: can be used to plant a tree
-
-### 2.4 rules for the player
-
-1) move: using the keyboard (W:up, S:down, A: left, D: right)
-2) put the bomb: press the space key
-3) press shift + (number) to use the prop in the according pocket number
+1) WSAD: move (W:up, S:down, A: left, D: right)
+2) B: set a bomb
+3) J: use a shield
+4) K: (+WSAD) use a spring
+5) L: set a seed
+6) E：exit the game
 
 ### 2.5 rules for the setting
 
-1. map： 32x32 initially, and the map will enlarge with the level-up.
-2. stone wall：solid square, which cannot be exploded
-3. wooden boxes: hollow square， which can be exploded and get game props,coin, or even bomb
-4. trees: they will automatically create coins, and can be exploded by bombs
-5. pocket: used to store the game props
-6. life bar: shows how many lives does player has
-7. time: the limited time for this level
+1. map： 5*10 initially, and the map will enlarge while the level goes up.
+2. stone wall：solid square, unbreakable, will not be affected by the bomb
+3. treasure boxes: hollow square，which can be exploded and get game props,coin, or even bomb
+4. player pocket: store the props
+5. life bar: shows how many lives does player has
+6. time: the remain time for this level
+7. coins collected: show how many coins have been collected
 8. coin requirement: the required coin for this level
-9. level number
 
 ## 3.Game Features and Requirement
 
 ### 3.1 Dynamic User Interface
 
-The user interface is the feature responsible for input and output, displaying the visualized game on the terminal and receiving the user input from the terminal. There will be three regions for display: status interface, main interface, and text interface, respectively. For user input, there will be only one region - the user input line. The status interface, main interface, text interface, and user input line are arranged in a top-down manner.
+The user interface is the feature responsible for input and output, displaying the visualized game on the terminal and receiving the user input from the terminal. Apart from the welcome information and instructions, the game page is mainly composed of three parts: map view, status bar, and prop instructions
 
-- The status interface is mainly for displaying instantaneous character-related and level-related information. It contains the level number, time, life bar, props inside the pocket.
-- The main interface is mainly for displaying instantaneous game content.
-- The text interface is used to display any notification, and story content.
+- The status interface is mainly for displaying instantaneous character-related and level-related information. It contains the level number, remain time, life bar, coins collected and so on.
+- The map view is mainly for displaying instantaneous game content.
+- The prop instructions are for displaying the instantaneous prop number and the key to use it
 
 ### 3.2 Data storage and Loading
 
-Permanent data storage is manual storage that refreshes only if the specific user command is received(if press "store" in the main interface). During this process, all the character-related data, including status, time, location, level number,  pocket, will be exported to an external file and will have permanent storage.
+Permanent data storage is automaticly done everytime player quit the game to save the highest level the player has reached, and if he/she can choose to load his/her game status next time when he/she enter the game.(if choose "load" in the map choosing page). During this process, the player information will be exported to an external file (named by the player's username)and will have permanent storage.
 
 ### 3.3 Data processing
 
-All the content displayed on the screen is based on continuously updated data. Therefore, we can conclude that all the displayed game content is actually regarding "Data Processing". With collective data processing functions, a different game feature can be created.
+All the content displayed on the screen is based on continuously updated data. Therefore, we can conclude that all the displayed game content is actually regarding "Data Processing". With collective data processing functions, a different game feature can be created. 
+
+### 3.4 Multi-thread process
+
+System activity and user input activity are processed in two different threads, 
 
 ## 4. Code Requirement Implementation
 
