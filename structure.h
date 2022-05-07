@@ -274,6 +274,7 @@ struct Map{
     void print_map(Point position);
 
     void build_map(int level, int _){
+        len_x = 0;
         len_x = maps_size[level][_][0];
         len_y = maps_size[level][_][1];
         coins_need = maps_coin[level][_];
