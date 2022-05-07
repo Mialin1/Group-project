@@ -65,9 +65,9 @@ void map_update(Player &player){
                 if (u.bomb != NULL){
                     //effect1
                     if(u.bomb -> effect1(remain)){  //1sec
-                        map -> map[i][j].image.s[0] = "\033[31m - \033[0m";
-                        map -> map[i][j].image.s[1] = "\033[31m\u2739\033[0m";
-                        map -> map[i][j].image.s[2] = "\033[31m - \033[0m";
+                        map -> map[i][j].image.s[0] = " \033[31m - \033[0m";
+                        map -> map[i][j].image.s[1] = "  \033[31m\u2739\033[0m ";
+                        map -> map[i][j].image.s[2] = " \033[31m - \033[0m";
                     }
                     //effect2
                     if(u.bomb -> effect2(remain)){
@@ -76,9 +76,9 @@ void map_update(Player &player){
 
                                 unit u1 = map -> map[_i][_j];
 
-                                u.image.s[0]="\033[45m"+u1.image.s[0]+"\033[0m";
-                                u.image.s[1]="\033[45m"+u1.image.s[1]+"\033[0m";
-                                u.image.s[2]="\033[45m"+u1.image.s[2]+"\033[0m";
+                                u.image.s[0]=" \033[45m"+u1.image.s[0]+"\033[0m";
+                                u.image.s[1]=" \033[45m"+u1.image.s[1]+"\033[0m";
+                                u.image.s[2]=" \033[45m"+u1.image.s[2]+"\033[0m";
                             }
                         }
                     }
