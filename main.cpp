@@ -75,6 +75,7 @@ int main(){
                     leave_page(player);
             }
             game_page(player);
+            cout << "here";
         }
         
     }
