@@ -127,55 +127,66 @@ struct Box{
 //the struct which stores the image of each unit
 struct Image{
     string s[RANGE_X];
+    bool if_colored;
     void set_bomb(){
         s[0] = "  - ";
         s[1] = " {\u2739}";
         s[2] = "  - ";
+        if_colored = false;
     }
     void set_seed(){
         s[0] = "\033[32m。。\033[0m";
         s[1] = "\033[32m。。\033[0m";
         s[2] = "\033[32m。。\033[0m";
+        if_colored = false;
     }
     void set_box(){
         s[0]=" \033[33m===\033[0m";
         s[1]=" \033[33m===\033[0m";
         s[2]=" \033[33m===\033[0m";
+        if_colored = false;
     }
     void set_heart(){
         s[0]="  \033[31m- \033[0m";
         s[1]="  \033[31m\u2764\033[0m ";
         s[2]="  \033[31m- \033[0m";
+        if_colored = false;
     }
     void set_shield(){
         s[0]=" \033[34m---\033[0m";
         s[1]=" \033[34m|\u25C6|\033[0m";
         s[2]=" \033[34m---\033[0m";
+        if_colored = false;
     }
     void set_wall(){
         s[0]=" ===";
         s[1]=" = =";
         s[2]=" ===";
+        if_colored = false;
     }
     void set_spring(){
         s[0]=" ~~~";
         s[1]="  \u2605 ";
         s[2]=" ~~~";
+        if_colored = false;
     }
     void set_space(){
         s[0]="    ";
         s[1]="    ";
         s[2]="    ";
+        if_colored = false;
     }
     void set_coin(){
         s[0]="    ";
         s[1]=" \033[33m\u2666\u00A9\u2666\033[0m";
         s[2]="    ";
+        if_colored = false;
     }
     void seed_used(){
         s[0]=" \033[32m ^ \033[0m";
         s[1]=" \033[32m/_\\\033[0m";
         s[2]=" \033[32m ≡ \033[0m"; 
+        if_colored = false;
     }
 };
 

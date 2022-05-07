@@ -370,20 +370,23 @@ void check_page(Player &player){
     player.if_quit = true;
     refresh();
     string check[4];
-    Map *map=player.map;
-    check[0]="You need "+to_string(map->coins_need)+ " coins to pass this level.";
-    check[1]="You have "+to_string(player.coins)+" coins.";
-    check[2]="";
-    check[3]="press M to continue";
-    print_page(check,check[0].length(),4);
+    Map map=*player.map;
 
-    char x = get_input();
-    while(x != 'm')
+    char x = ' ';
+    while(x != 'm'){
+        refresh();
+        check[0]="You need "+to_string(map.coins_need)+ " coins to pass this level.";
+        check[1]="You have "+to_string(player.coins)+" coins.";
+        check[2]="";
+        check[3]="press M to continue";
+        print_page(check,check[0].length(),4);
         x = get_input();
+    }
+        
 
-    refresh();
-    if (player.coins >= map->coins_need){
-        player.level = max(player.level, max(5, map->level + 1));
+    
+    if (player.coins >= map.coins_need){
+        player.level = max(player.level, max(5, map.level + 1));
         string win[3];
         string input;
         refresh();

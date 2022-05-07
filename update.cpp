@@ -77,10 +77,11 @@ void map_update(Player &player){
                             for(int _j = max(0, j-1); _j < min(map -> len_y, j+2); _j ++){
 
                                 unit &u1 = map -> map[_i][_j];
-                                if(u1.image.s[0][2] != 4){
+                                if(u1.image.s[0][2] != 4 && u1.image.if_colored == false){
                                     u1.image.s[0]="\033[45m"+u1.image.s[0]+"\033[0m";
                                     u1.image.s[1]="\033[45m"+u1.image.s[1]+"\033[0m";
                                     u1.image.s[2]="\033[45m"+u1.image.s[2]+"\033[0m";
+                                    u1.image.if_colored = true;
                                 }
                             }
                         }
@@ -110,10 +111,11 @@ void map_update(Player &player){
                                             break;
                                         }
                                     }
-                                    else if(u1.image.s[0][2]=='4' && u1.image.s[0].length() > 12){
+                                    else if(u1.image.if_colored && u1.image.s[0].length() > 12){
                                         u1.image.s[0]=u1.image.s[0].substr(5, 4);
                                         u1.image.s[1]=u1.image.s[1].substr(5, 4);
                                         u1.image.s[2]=u1.image.s[2].substr(5, 4);
+                                        u1.image.if_colored = false;
                                     }
                                 }
                                 //destroy all the breakables
@@ -131,24 +133,28 @@ void map_update(Player &player){
                                             if(_ == 1) u1.image.set_shield();
                                             if(_ == 2) u1.image.set_spring();
                                             if(_ == 3) u1.image.set_seed();
+                                            u1.image.if_colored = false;
                                         }
                                         else if(_ < 10){
                                             u1.set("prop", _i, _j);
                                             u1.prop = new Prop;
                                             u1.prop->set(_, _ - 3);
                                             u1.image.set_coin();
+                                            u1.image.if_colored = false;
                                         }
 
                                     }
                                     //other things -> space
                                     else{
                                         u1.set("space", _i, _j); //set to space
+                                        u1.image.if_colored = false;
                                     }
                                 }
-                                else if(u1.image.s[0][2]=='4' && u1.image.s[0].length() > 12){
+                                else if(u1.image.if_colored && u1.image.s[0].length() > 12){
                                     u1.image.s[0]=u1.image.s[0].substr(5, 4);
                                     u1.image.s[1]=u1.image.s[1].substr(5, 4);
                                     u1.image.s[2]=u1.image.s[2].substr(5, 4);
+                                    u1.image.if_colored = false;
                                 }
                             }
                             if (restart) break;

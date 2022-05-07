@@ -12,10 +12,13 @@ void Map::print_map(Point p, int n1, int n2, int n3, bool if_protect, int life, 
     for(int _i = 0; _i < RANGE_X; _i++){         //i-th row of the map
         string s = "\u25BC";
         for(int j = 0; j < len_y; j++) //j-th column of the map
-            if(p.x==i && p.y==j)
+            if(p.x==i && p.y==j){
                 s += player_image[_i];
-            else 
+                
+            }
+            else {
                 s += map[i][j].image.s[_i]; 
+            }
         s += " \u25BC";
         if(i == 0 && _i == 1){
             if (if_protect==true)
@@ -31,12 +34,12 @@ void Map::print_map(Point p, int n1, int n2, int n3, bool if_protect, int life, 
             s += "     \033[32m。\033[0mSeed(press 'l'): "+to_string(n3);
         if(i == 2 && _i == 1)
             s += "     {\u2739} Bomb(press 'b'): no limit";
-        if(i == 3 && i == 0)
-            s += "\033[1mLife  \033[31m\u2764 "+to_string(life);
-        if(i == 3 && i == 2)
-            s += "      \033[0m \033[1mCoin(s)   \033[33m\u2726"+to_string(coins)+"\033[0m /"+to_string(coins_need);
-        if(i == 4 && i == 1)
-            s +="time remaining:   "+to_string(t.min)+" : "+to_string(t.sec);
+        if(i == 3 && _i == 0)
+            s += "      \033[1mLife  \033[31m\u2764\033[0m  "+to_string(life);
+        if(i == 3 && _i == 2)
+            s += "      \033[1mCoin(s)   \033[33m\u2726\033[0m  "+to_string(coins)+"\033[0m / "+to_string(coins_need);
+        if(i == 4 && _i == 1)
+            s +="     time remaining:   "+to_string(t.min)+" : "+to_string(t.sec);
         cout << s << endl;
     }
     
