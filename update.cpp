@@ -63,7 +63,12 @@ void map_update(Player &player){
         for(int i = 0; i < map->len_x; i ++){
             for(int j = 0; j < map->len_y; j ++){
                 unit &u = map -> map[i][j]; 
-            
+
+                for(int _i = max(0, i-1); _i < min(map->len_x, i+2); _i ++){
+                    for(int _j = max(0, j-1); _j < min(map -> len_y, j+2); _j ++){
+                        
+                    }
+                }
                 //check if there is any bomb to bang
                 //can add explosion effect here
                 if (u.bomb != NULL){
@@ -79,10 +84,11 @@ void map_update(Player &player){
                             for(int _j = max(0, j-1); _j < min(map -> len_y, j+2); _j ++){
 
                                 unit &u1 = map -> map[_i][_j];
-
-                                u1.image.s[0]="\033[45m"+u1.image.s[0]+"\033[0m";
-                                u1.image.s[1]="\033[45m"+u1.image.s[1]+"\033[0m";
-                                u1.image.s[2]="\033[45m"+u1.image.s[2]+"\033[0m";
+                                if(u1.image.s[0][2] != 4){
+                                    u1.image.s[0]="\033[45m"+u1.image.s[0]+"\033[0m";
+                                    u1.image.s[1]="\033[45m"+u1.image.s[1]+"\033[0m";
+                                    u1.image.s[2]="\033[45m"+u1.image.s[2]+"\033[0m";
+                                }
                             }
                         }
                     }
@@ -146,7 +152,7 @@ void map_update(Player &player){
                                         u1.set("space", _i, _j); //set to space
                                     }
                                 }
-                                else if(u1.image.s[0].length()>4){
+                                else if(u1.image.s[0][2]=='4'){
                                     u1.image.s[0]=u1.image.s[0].substr(5, 4);
                                     u1.image.s[1]=u1.image.s[1].substr(5, 4);
                                     u1.image.s[2]=u1.image.s[2].substr(5, 4);
