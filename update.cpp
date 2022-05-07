@@ -14,21 +14,23 @@ void map_update(Player &player){
 
     while(true){
         if(player.if_quit){
-            sleep(1000);
+            usleep(1000000);
             continue;
         } 
 
         //1 sec
-        sleep(1000);
+        usleep(1000000);
         
         player.time_remain.tick();  //minus 1 sec
         Map *map = player.map;
 
         if(player.time_remain.if_time_up()){
             check_page(player);
-            map->delete_map();
-            delete map;
-            map = NULL;
+            if(player.map!=NULL){
+                player.map->delete_map();
+                delete player.map;
+                player.map = NULL;
+            }
             room_page(player);
             last_bomb = player.time_remain;
         }
@@ -165,15 +167,17 @@ void map_update(Player &player){
         }
 
         if(restart){
-            map->delete_map();
-            delete map;
-            map = NULL;
+            if(player.map!=NULL){
+                player.map->delete_map();
+                delete player.map;
+                player.map = NULL;
+            }
             room_page(player);
             last_bomb = player.time_remain;
             restart = false;
             continue;
         }
-        
+
         if (!player.if_quit)
             game_page(player);//print the page after update
     }

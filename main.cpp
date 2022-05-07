@@ -39,18 +39,29 @@ int main(){
 
             switch(x){
                 case 'w': //move upward
+                {
                     player.move(-1, 0);
+                }
                 case 's': //move downward
+                {
                     player.move(1, 0);
+                }
                 case 'a': //move leftward
+                {
                     player.move(0, -1);
+                }
                 case 'd': //move rightward
+                {
                     player.move(0, 1);
+                }
                 case 'j': //uses shield
+                {
                     if (player.package[1].num == 0)
                         continue;
                     else player.use_shield();
+                }
                 case 'k': //uses spring
+                {
                     if (player.package[2].num == 0){
                         continue;
                     }
@@ -64,17 +75,25 @@ int main(){
                         if (!player.jump(_x, _y))
                             continue;
                     }
-
+                }
                 case 'l': //uses seed
+                {
                     if(player.package[3].num == 0)
                         continue;
                     else player.use_seed();
+                }
+                    
                 case 'b': //user set bomb
+                {
                     player.set_bomb();
                     cout << "here" << endl;
+                }
                 case 'e': //quit gamef
+                {
                     cout << "here" << endl;
                     leave_page(player);
+                }
+                    
             }
             game_page(player);
         }

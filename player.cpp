@@ -9,6 +9,7 @@ void Player::initialize(){
     life = 1;
     coins = 0;
     if_quit = false;
+    map = NULL;
 
     initialize_props();
 
@@ -89,6 +90,8 @@ void Player::set_bomb(){
     unit u = map->map[position.x][position.y];
     if (!u.empty)
         return;
+    Time t;
+    t.set(time_remain.min, time_remain.sec - 2);
     map -> set_bomb(position, time_remain);
 }
 

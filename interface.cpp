@@ -323,11 +323,14 @@ void leave_page(Player &player){
             message[0]="Your level record has been loaded!";
             message[1]="Please use the same player name next time ";
             message[2]=" if your want to load the previous record";
-            print_page(message,message[1].length(),3);
+            message[2]=" use the same username next time.";
+            print_page(message,message[1].length(),4);
             output_level(player);
-            player.map->delete_map();
-            delete player.map;
-            player.map = NULL;
+            if(player.map!=NULL){
+                player.map->delete_map();
+                delete player.map;
+                player.map = NULL;
+            }
             quit_page();
         }
         else if(x=="n"){
@@ -341,6 +344,7 @@ void leave_page(Player &player){
 }
     
 void dead(Player &player){
+    player.if_quit = true;
     player.initialize();
     string dead[3];
     string c;
