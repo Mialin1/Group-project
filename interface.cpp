@@ -319,11 +319,11 @@ void leave_page(Player &player){
         string x;
         cin>>x;
         if (x =="y") {
-            string message[3];
+            string message[4];
             message[0]="Your level record has been loaded!";
             message[1]="Please use the same player name next time ";
             message[2]=" if your want to load the previous record";
-            message[2]=" use the same username next time.";
+            message[3]=" use the same username next time.";
             print_page(message,message[1].length(),4);
             output_level(player);
             if(player.map!=NULL){

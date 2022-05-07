@@ -31,8 +31,8 @@ int main(){
     while(1){       //refresh the interface when get a command or time refresh
 
         if (player.if_quit){
-            quit_page();
-            break;
+            usleep(100000);
+            continue;
         }
         else {
             char x = get_input();

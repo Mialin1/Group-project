@@ -14,7 +14,7 @@ void map_update(Player &player){
 
     while(true){
         if(player.if_quit){
-            usleep(1000000);
+            usleep(100000);
             continue;
         } 
 
@@ -102,12 +102,20 @@ void map_update(Player &player){
                                     if(!player.if_protect){
                                         player.life --;
 
+                                        while(player.if_quit){
+                                            usleep(100000);
+                                        } 
                                         if (player.life == 0){
                                             dead(player);
                                             restart = true;
                                             break;
                                         }
-                                    }   
+                                    }
+                                    else if(u1.image.s[0].length()>4){
+                                        u1.image.s[0]=u1.image.s[0].substr(5, 4);
+                                        u1.image.s[1]=u1.image.s[1].substr(5, 4);
+                                        u1.image.s[2]=u1.image.s[2].substr(5, 4);
+                                    }
                                 }
                                 //destroy all the breakables
                                 else if(u1.breakable){ 
@@ -115,7 +123,7 @@ void map_update(Player &player){
                                     if(u1.box != NULL && u1.box->if_box ){
                                         //0 heart, 1 shield, 2 spring, 3 seed
                                         //4 to 9, (_ - 3)coins
-                                        int _ = rand()%15; 
+                                        int _ = rand()%10; 
                                         if(_ < 4){
                                             u1.set("prop", _i, _j);
                                             u1.prop = new Prop;
@@ -138,7 +146,7 @@ void map_update(Player &player){
                                         u1.set("space", _i, _j); //set to space
                                     }
                                 }
-                                else{
+                                else if(u1.image.s[0].length()>4){
                                     u1.image.s[0]=u1.image.s[0].substr(5, 4);
                                     u1.image.s[1]=u1.image.s[1].substr(5, 4);
                                     u1.image.s[2]=u1.image.s[2].substr(5, 4);

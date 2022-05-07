@@ -95,15 +95,15 @@ struct Bomb{
 
     //functions that 
     bool effect1(Time t){
-        return set_time.diff(t).equal(1);
-    }
-
-    bool effect2(Time t){
         return set_time.diff(t).equal(2);
     }
 
+    bool effect2(Time t){
+        return set_time.diff(t).equal(4);
+    }
+
     bool explode(Time t){
-        return set_time.diff(t).equal(3);
+        return set_time.diff(t).equal(6);
     }
 
     bool release(Time t){
