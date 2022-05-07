@@ -128,38 +128,38 @@ void welcome_page(Player &player){
 
 void room_page(Player &player){
     player.if_quit = true;
-    int command;
     string lines[4];
     lines[0]="Please ENTER the corresponding number";
     lines[1]="(0-5): Enter the level number you want to start";
     lines[2]="6: Load from save";
     lines[3]="7: Exit the game";
 
+    string command;
     while(1){
         refresh();
         logo_interface();
         print_page(lines,sizeof(lines[1]),4);
         print_level(player.level);
-        cin>>command; 
-        if(command >=0 and command<=7){
+        cin >> command;
+        if(command.length() == 1 && command[0] >= '0' && command[0]<='7' ){
             break;
         }
         else{
             lines[0]="Invalid Input! Please Enter the number again: ";
+            continue;
         }
     }
-    if(command==7){
+    if(command == "7"){
         leave_page(player);
         room_page(player);
     }
-
-    else if (command==6){
+    else if (command == "6"){
         input_level(player);
         room_page(player);
     }
     //higher level map may be locked, the locked map should be gray
     else{
-        int level = command;
+        int level = command[0] - '0';
         while(1){
             if (level <= player.level){
                 break;
@@ -233,19 +233,9 @@ void print_level(int l){
 
 void print_name(Player player){
     string name_bar[2];
-    name_bar[0]="Player: "+player.name;
-    name_bar[1]="LEVEL "+to_string(player.level)+"            Press 'e' to exit";//////////////////////////////////
+    name_bar[0]="Player: " + player.name + "            Press 'e' to exit";
+    name_bar[1]="Your LEVEL: "+to_string(player.level) + "           Map LEVEL: " + to_string(player.map->level);
     print_page(name_bar,45,2);
-}
-
-void print_status(Player player){
-    string status_bar[2];
-    status_bar[0]="\033[1mLife  \033[31m\u2764 "+to_string(player.life)+"      \033[0m"+"\033[1mCoin(s)   \033[33m\u2726"+to_string(player.coins)+"\033[0m //"+to_string(player.map->coins_need);
-    status_bar[1]="time remaining:   "+to_string(player.time_remain.min)+" : "+to_string(player.time_remain.sec);
-    for (int i=0;i<2;i++){
-        cout<<status_bar[i]<<endl;
-    }
-
 }
 
 //display props in the pocket and their instruction
@@ -271,12 +261,11 @@ void game_page(Player player){
     for(int i = 0; i < map -> len_y *RANGE_Y + 3; i++)
         cout<<"\u25BA";
     cout<<endl;
-    map->print_map(player.position, player.package[1].num, player.package[2].num, player.package[3].num, player.if_protect);
+    map->print_map(player.position, player.package[1].num, player.package[2].num, player.package[3].num, player.if_protect, player.life, player.coins, player.time_remain);
     for(int i = 0; i < map -> len_y *RANGE_Y + 3; i++)
         cout<<"\u25C4";
-    cout<<endl;
-    cout<<" "<<endl;
-    print_status(player);
+    cout << endl;
+    // print_status(player);
     // cout<<" "<<endl;
     // print_prop_instruction(player);
 
@@ -297,11 +286,7 @@ void game_page(Player player){
     // life: 1    coin(s): 0/100
     // time remaining:    03: 00
 
-    //maybe also use struct func (map.print_map())
-    //or turn the struct func to a generator and also use the print_page() functoin
-   
 
-    
     
 }
 
@@ -396,7 +381,7 @@ void check_page(Player &player){
     while(x != 'm')
         x = get_input();
 
-
+    refresh();
     if (player.coins >= map->coins_need){
         player.level = max(player.level, max(5, map->level + 1));
         string win[3];

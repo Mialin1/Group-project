@@ -36,7 +36,8 @@ int main(){
         }
         else {
             char x = get_input();
-
+            if(player.if_quit)
+                continue;
             switch(x){
                 case 'w': //move upward
                 {

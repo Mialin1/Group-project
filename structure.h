@@ -260,7 +260,7 @@ struct Map{
     int level;
 
     //print the map
-    void print_map(Point p, int n1, int n2, int n3, bool if_protect);
+    void print_map(Point p, int n1, int n2, int n3, bool if_protect, int life, int coins, Time t);
 
     void build_map(int _level, int _);
 

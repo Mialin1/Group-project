@@ -3,7 +3,7 @@ using namespace std;
 
 
 //print the map
-void Map::print_map(Point p, int n1, int n2, int n3, bool if_protect){
+void Map::print_map(Point p, int n1, int n2, int n3, bool if_protect, int life, int coins, Time t){
     string player_image[RANGE_X];
     player_image[0]="  o ";
     player_image[1]=" <|>";
@@ -31,6 +31,12 @@ void Map::print_map(Point p, int n1, int n2, int n3, bool if_protect){
             s += "     \033[32m。\033[0mSeed(press 'l'): "+to_string(n3);
         if(i == 2 && _i == 1)
             s += "     {\u2739} Bomb(press 'b'): no limit";
+        if(i == 3 && i == 0)
+            s += "\033[1mLife  \033[31m\u2764 "+to_string(life);
+        if(i == 3 && i == 2)
+            s += "      \033[0m \033[1mCoin(s)   \033[33m\u2726"+to_string(coins)+"\033[0m /"+to_string(coins_need);
+        if(i == 4 && i == 1)
+            s +="time remaining:   "+to_string(t.min)+" : "+to_string(t.sec);
         cout << s << endl;
     }
     
