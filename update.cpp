@@ -5,7 +5,7 @@
 using namespace std;
 
 //update the screen per_sec
-void map_update(){
+void map_update(Player &player){
 
     Time last_bomb = player.time_remain;
 
@@ -42,6 +42,7 @@ void map_update(){
             while(!map->map[p.x][p.y].empty || (p.x == player.position.x && p.y == player.position.y)){
                 p.set(rand()% player.map->len_x, rand()% player.map->len_y);
             }
+
             map->set_bomb(p, remain);
             last_bomb = remain;
             //the bomb will be explode in 1 sec

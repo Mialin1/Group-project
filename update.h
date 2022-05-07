@@ -8,8 +8,6 @@
 
 using namespace std;
 
-extern Player player;
-
-void map_update();
+void map_update(Player &player);
 
 #endif
