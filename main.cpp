@@ -41,24 +41,29 @@ int main(){
                 case 'w': //move upward
                 {
                     player.move(-1, 0);
+                    break;
                 }
                 case 's': //move downward
                 {
                     player.move(1, 0);
+                    break;
                 }
                 case 'a': //move leftward
                 {
                     player.move(0, -1);
+                    break;
                 }
                 case 'd': //move rightward
                 {
                     player.move(0, 1);
+                    break;
                 }
                 case 'j': //uses shield
                 {
                     if (player.package[1].num == 0)
                         continue;
                     else player.use_shield();
+                    break;
                 }
                 case 'k': //uses spring
                 {
@@ -75,23 +80,32 @@ int main(){
                         if (!player.jump(_x, _y))
                             continue;
                     }
+                    break;
                 }
                 case 'l': //uses seed
                 {
                     if(player.package[3].num == 0)
                         continue;
                     else player.use_seed();
+                    break;
                 }
                     
                 case 'b': //user set bomb
                 {
                     player.set_bomb();
                     cout << "here" << endl;
+                    break;
                 }
                 case 'e': //quit gamef
                 {
-                    cout << "here" << endl;
                     leave_page(player);
+                    break;
+                }
+                default:
+                {
+                    warning();
+                    continue;
+                    break;
                 }
                     
             }
