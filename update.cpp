@@ -5,7 +5,7 @@
 using namespace std;
 
 //update the screen per_sec
-void map_update(Player &player){
+void map_update(){
 
     Time last_bomb = player.time_remain;
 

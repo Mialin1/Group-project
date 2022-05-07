@@ -9,10 +9,9 @@ string maps[10][5][13];
 int maps_size[10][5][2];
 int maps_coin[10][5];
 
+Player player;
 
 int main(){
-
-    Player player;
 
     input_maps();
 
