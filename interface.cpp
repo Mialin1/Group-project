@@ -92,7 +92,7 @@ void welcome_page(Player &player){
         cout<<""<<endl;
         if (valid==true){
             cout<<"---------------------------------------------------------------"<<endl;
-            cout<<"Are ready to start!?                                      "<<endl;
+            cout<<"Are you ready to starts?                                      "<<endl;
             cout<<"Enter 'y' to start the game!!!                          "<<endl;
         }
         else{
