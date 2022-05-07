@@ -70,8 +70,7 @@ int main(){
                         continue;
                     else player.use_seed();
                 case 'b': //user set bomb
-                    if(!player.set_bomb())
-                        continue;
+                    player.set_bomb();
                 case 'e': //quit game
                     leave_page(player);
             }
