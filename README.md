@@ -12,6 +12,8 @@ The proposed game, "Mr. Bomb", is an adventure RPG game, inspired by the game Cr
 
 ### 2.0 command to run the code (dark mode recommended)
 
+make clean
+
 make game
 
 ### 2.1 rules for survival
