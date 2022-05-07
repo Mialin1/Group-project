@@ -5,9 +5,9 @@ using namespace std;
 //print the map
 void Map::print_map(Point position){
     string player_image[RANGE_X];
-    player_image[0]=" o ";
-    player_image[1]="<|>";
-    player_image[2]=" ^ ";
+    player_image[0]="  o ";
+    player_image[1]=" <|>";
+    player_image[2]="  ^ ";
     for(int i = 0; i < len_x; i++)
     for(int _i = 0; _i < RANGE_X; _i++){         //i-th row of the map
         string s = "\u25BC ";
