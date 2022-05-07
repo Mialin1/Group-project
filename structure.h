@@ -260,7 +260,7 @@ struct Map{
     int level;
 
     //print the map
-    void print_map(Point position);
+    void print_map(Player player);
 
     void build_map(int _level, int _);
 

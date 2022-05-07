@@ -262,14 +262,14 @@ void game_page(Player player){
     for(int i = 0; i < map -> len_y *RANGE_Y + 3; i++)
         cout<<"\u25BA";
     cout<<endl;
-    map->print_map(player.position);
+    map->print_map(player);
     for(int i = 0; i < map -> len_y *RANGE_Y + 3; i++)
         cout<<"\u25C4";
     cout<<endl;
     cout<<" "<<endl;
     print_status(player);
-    cout<<" "<<endl;
-    print_prop_instruction(player);
+    // cout<<" "<<endl;
+    // print_prop_instruction(player);
 
     
     //player: Player_Name
@@ -299,9 +299,14 @@ void game_page(Player player){
 void quit_page(){
     refresh();
     
+    cout << endl;
+    cout << endl;
     cout << "░█▀▀▀█ ░█▀▀▀ ░█▀▀▀  ░█  ░█ ░█▀▀▀█ ░█─░█  ░█▄ ░█ ░█▀▀▀ ▀▄░▄▀ ▀▀█▀▀  ▀▀█▀▀ ▀█▀ ░█▀▄▀█ ░█▀▀▀ " << endl;
     cout << "─▀▀▀▄▄ ░█▀▀▀ ░█▀▀▀  ░█▄▄▄█ ░█──░█ ░█─░█  ░█░█░█ ░█▀▀▀  ░█    ░█     ░█   ░█  ░█░█░█ ░█▀▀▀ " << endl;
     cout << "░█▄▄▄█ ░█▄▄▄ ░█▄▄▄    ░█   ░█▄▄▄█  ▀▄▄▀  ░█  ▀█ ░█▄▄▄ ▄▀░▀▄  ░█     ░█   ▄█▄ ░█  ░█ ░█▄▄▄ " << endl;
+    cout << endl;
+    cout << endl;
+
     
     exit(0);
 }
@@ -369,6 +374,7 @@ void dead(Player &player){
 //when time is up, check whether the coins meet the requirement
 void check_page(Player &player){
     player.if_quit= true;
+    refresh();
     string check[2];
     Map *map=player.map;
     check[0]="You need "+to_string(map->coins_need)+ " coins to pass this level.";
