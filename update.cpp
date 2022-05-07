@@ -64,11 +64,6 @@ void map_update(Player &player){
             for(int j = 0; j < map->len_y; j ++){
                 unit &u = map -> map[i][j]; 
 
-                for(int _i = max(0, i-1); _i < min(map->len_x, i+2); _i ++){
-                    for(int _j = max(0, j-1); _j < min(map -> len_y, j+2); _j ++){
-                        
-                    }
-                }
                 //check if there is any bomb to bang
                 //can add explosion effect here
                 if (u.bomb != NULL){

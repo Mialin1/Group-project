@@ -348,7 +348,7 @@ void dead(Player &player){
     player.initialize();
     string dead[3];
     string c;
-    dead[0]="Sorry, your mr.bomb is dead.";
+    dead[0]="Sorry, your mr.bomber is dead.";
     dead[1]="Cheer up! ";
     dead[2]="Enter 'r' to restart;  Enter 'e' to exit";
     while(1){
@@ -385,12 +385,12 @@ void check_page(Player &player){
         player.level = max(player.level, map->level + 1);
         string win[3];
         string input;
-        win[0]="Congratulations! "+player.name;
-        win[1]="Another game or quit the game?";
-        win[2]="       yes(y)     no(n)";  
+        win[0]="              Another game or quit the game?        ";
+        win[1]="              another game(y)     quit(n)           ";  
         while(1){
             refresh();
-            print_page(win,max(win[0].length(),win[1].length()),3);
+            congratulation_interface();
+            print_page(win,max(win[0].length(),win[1].length()),2);
             cin>>input;
             if(input=="y"||input=="n"){
                 player.initialize();
@@ -472,6 +472,30 @@ void logo_interface(void){
     line[9]= "OOOO                                                                OOOO"; 
     line[10]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"; 
     line[11]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"; 
+    line[12]= " ";
+
+    for(int i=0; i<13; i++){
+        cout<<line[i]<<endl;
+    }
+
+}
+
+//print our logo "MR. BOMBER" is the main interface
+void congratulation_interface(void){
+    string line[13];
+
+    line[0]= " ";
+    line[1]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO000000000000000000000000000000000000000";
+    line[2]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO000000000000000000000000000000000000000";
+    line[3]= "OOOO                                                                                                       OOOO";
+    line[4]= "OOOO                                                                                                       OOOO";
+    line[5]= "OOOO     ░█▀▀█ ░█▀▀▀█ ░█▄ ░█ ░█▀▀█ ░█▀▀█ ░█▀▀█ ▀▀█▀▀ ░█ ░█ ░█    ░█▀▀█ ▀▀█▀▀ ▀█▀ ░█▀▀▀█ ░█▄ ░█ ░█▀▀▀█      OOOO";
+    line[6]= "OOOO     ░█    ░█  ░█ ░█░█░█ ░█ ▄▄ ░█▄▄▀ ░█▄▄█  ░█   ░█ ░█ ░█    ░█▄▄█  ░█   ░█  ░█  ░█ ░█░█░█  ▀▀▀▄▄      OOOO";
+    line[7]= "OOOO     ░█▄▄█ ░█▄▄▄█ ░█  ▀█ ░█▄▄█ ░█ ░█ ░█ ░█  ░█   ░▀▄▄▀ ░█▄▄█ ░█ ░█  ░█   ▄█▄ ░█▄▄▄█ ░█  ▀█ ░█▄▄▄█      OOOO";  
+    line[8]= "OOOO                                                                                                       OOOO";
+    line[9]= "OOOO                                                                                                       OOOO"; 
+    line[10]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO000000000000000000000000000000000000000";
+    line[11]= "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO000000000000000000000000000000000000000";
     line[12]= " ";
 
     for(int i=0; i<13; i++){
