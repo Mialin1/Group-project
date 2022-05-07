@@ -142,9 +142,9 @@ void map_update(Player &player){
                             }
                             if (restart) break;
                         }
-                        u.set("space", i, j);
                         delete u.bomb;
                         u.bomb = NULL;
+                        u.set("space", i, j);
                         if (restart) break;
                     }
                     

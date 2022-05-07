@@ -74,8 +74,6 @@ int main(){
                         continue;
                 case 'e': //quit game
                     leave_page(player);
-
-
             }
             game_page(player);
         }
