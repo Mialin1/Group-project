@@ -49,11 +49,11 @@ int main(){
                     player.move(0, 1);
                 case 'j': //uses shield
                     if (player.package[1].num == 0)
-                        warning();
+                        continue;
                     else player.use_shield();
                 case 'k': //uses spring
                     if (player.package[2].num == 0){
-                        warning();
+                        continue;
                     }
                     else{
                         int __ = get_input();   //the direction he face
@@ -63,12 +63,12 @@ int main(){
                         if (__ == 'a')  _x = 0, _y = -2;
                         if (__ == 'd')  _x = 0,  _y = 2;
                         if (!player.jump(_x, _y))
-                            warning();
+                            continue;
                     }
 
                 case 'l': //uses seed
                     if(player.package[3].num == 0)
-                        warning();
+                        continue;
                     else player.use_seed();
                 case 'b': //user set bomb
                     if(!player.set_bomb())
