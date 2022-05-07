@@ -172,6 +172,15 @@ void room_page(Player &player){
         }
         print_loading();
         player.initialize();
+
+        if(level ==1) player.time_remain.set(1, 30);
+        if(level ==2) player.time_remain.set(1, 45);
+        if(level ==3) player.time_remain.set(2, 00);
+        if(level ==4) player.time_remain.set(2, 15);
+        if(level ==5) player.time_remain.set(2, 30);
+        if(level ==6) player.time_remain.set(2, 45);
+
+
         int x = rand()%3;
         player.map = new Map;
         player.map->build_map(level, x);//randomly select a map
@@ -373,41 +382,46 @@ void dead(Player &player){
 
 //when time is up, check whether the coins meet the requirement
 void check_page(Player &player){
-    player.if_quit= true;
+    player.if_quit = true;
     refresh();
-    string check[2];
+    string check[4];
     Map *map=player.map;
     check[0]="You need "+to_string(map->coins_need)+ " coins to pass this level.";
     check[1]="You have "+to_string(player.coins)+" coins.";
-    print_page(check,check[0].length(),2);
+    check[2]="";
+    check[3]="press M to continue";
+    print_page(check,check[0].length(),4);
 
-    struct timespec ts, ts1;
-    ts.tv_nsec = 0;
-    ts.tv_sec = 5;
-    nanosleep(&ts, &ts1);
+    char x = get_input();
+    while(x != 'm')
+        x = get_input();
+
 
     if (player.coins >= map->coins_need){
-        player.level = max(player.level, map->level + 1);
+        player.level = max(player.level, max(5, map->level + 1));
         string win[3];
         string input;
-        win[0]="              Another game or quit the game?        ";
-        win[1]="              another game(y)     quit(n)           ";  
+        refresh();
+        congratulation_interface();
+        std::cout << "              Another game or quit the game?        " << endl;
+        std::cout << "              another game(y)     quit(n)           " << endl;  
         while(1){
-            refresh();
-            congratulation_interface();
-            print_page(win,max(win[0].length(),win[1].length()),2);
-            cin>>input;
-            if(input=="y"||input=="n"){
-                player.initialize();
+            
+            cin >> input;
+            if(input == "y")
+                return;
+            else if(input == "n"){
+                leave_page(player);
                 break;
             }
-            else
-                win[0]="Invalid input! Please input again: ";
+            else{
+                refresh();
+                congratulation_interface();
+                cout << "           Invalid input! Please input again: " << endl;
+                cout << "              another game(y)     quit(n)           " << endl;  
+            }
+                
         }
-        if(input=="y")
-            return;
-        else
-            leave_page(player);
     }
     else{
         no_pass(player);
@@ -418,26 +432,26 @@ void check_page(Player &player){
 //if coin number doesn't meet the requirement
 void no_pass(Player &player){
     player.if_quit = true;
-    string c;
     string nopass[3];
-    nopass[0]="Sorry, your coin number doesn't meet the requirement.";
-    nopass[1]="Cheer up! ";
-    nopass[2]="Enter 'r' to choose level and restart; Enter'e' to exit";
+    cout << "Sorry, your coin number doesn't meet the requirement." << endl;
+    cout << "Cheer up and try again! " << endl;
+    cout << endl;
+    cout << "Enter 'r' to start a new game; Enter 'e' to exit" << endl;
+    
     while(1){
-        print_page(nopass,nopass[2].length(),3);
-        cin>>c;
-        if(c=="r"||c=="e"){
-            break;
+        string input;
+        cin >> input;
+        if(input == "r"){
+            return;
+        }
+        if(input == "e"){
+            leave_page(player);
         }
         else{
-            nopass[1]="Invalid Input!";
+            refresh();
+            cout << "Invalid Input!" << endl;
+            cout << "Enter 'r' to start a new game; Enter 'e' to exit" << endl;
         }
-    }
-    if(c=="r"){
-        return;
-    }
-    else{
-        leave_page(player);
     }
 }    
 

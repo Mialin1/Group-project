@@ -16,7 +16,6 @@ void map_update(Player &player){
             usleep(100000);
             continue;
         } 
-
         //1 sec
         usleep(1000000);
         
@@ -111,7 +110,7 @@ void map_update(Player &player){
                                             break;
                                         }
                                     }
-                                    else if(u1.image.s[0].length()>4){
+                                    else if(u1.image.s[0][2]=='4' && u1.image.s[0].length() > 12){
                                         u1.image.s[0]=u1.image.s[0].substr(5, 4);
                                         u1.image.s[1]=u1.image.s[1].substr(5, 4);
                                         u1.image.s[2]=u1.image.s[2].substr(5, 4);
@@ -146,7 +145,7 @@ void map_update(Player &player){
                                         u1.set("space", _i, _j); //set to space
                                     }
                                 }
-                                else if(u1.image.s[0][2]=='4'){
+                                else if(u1.image.s[0][2]=='4' && u1.image.s[0].length() > 12){
                                     u1.image.s[0]=u1.image.s[0].substr(5, 4);
                                     u1.image.s[1]=u1.image.s[1].substr(5, 4);
                                     u1.image.s[2]=u1.image.s[2].substr(5, 4);
