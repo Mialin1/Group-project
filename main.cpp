@@ -5,14 +5,16 @@
 
 using namespace std;
 
-vector<vector<Map> > maps;
+string maps[10][5][13];
+int maps_size[10][5][2];
+int maps_coin[10][5];
+
 
 int main(){
 
     Player player;
 
     input_maps();
-    cout << maps[0][0].len_x << endl;
 
     player.initialize();
     player.level = 0;

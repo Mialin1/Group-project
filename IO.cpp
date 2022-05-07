@@ -2,7 +2,6 @@
 #include "structure.h"
 #include <termio.h>
 
-
 void input_level(Player &player){
     ifstream fin;
     string s = player.name + ".txt";
@@ -39,35 +38,15 @@ void input_maps(){
     }
 
     for(int level = 0; level < Max_Level; level ++){ 
-        vector<Map> _map;
         for(int _; _ < 3; _ ++){
-            Map map;
-            
-            fin >> map.len_x >> map.len_y;
-            fin >> map.coins_need;
+            int x, y, c;
+            fin >> x >> y >> c;
+            maps_size[level][_][0] = x;
+            maps_size[level][_][1] = y;
+            maps_coin[level][_] = c;
 
-            map.map = new unit *[map.len_x];
-            for(int i = 0; i < map.len_x; i++)
-                map.map[i] = new unit [map.len_y];
-        
-            for(int i = 0; i < map.len_x; i++){
-                for(int j = 0; j < map.len_y; j++){     //input information of unit [i, j]
-
-                    char c; //denotes what kind of unit it is
-                    fin >> c;
-                    
-                    if(c == 'S')
-                        map.map[i][j].set("space", i, j);
-                    else if (c == 'W')
-                        map.map[i][j].set("wall", i, j);
-                    else if (c == 'B')
-                        map.map[i][j].set("box", i, j);
-                }
-            }
-
-            _map.push_back(map);
+            for(int i = 0; i < x; i ++) fin >> maps[level][_][i];
         }
-        maps.push_back(_map);
     }
 
     fin.close();

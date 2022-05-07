@@ -164,12 +164,12 @@ void room_page(Player &player){
         }
         print_loading();
         player.initialize();
-        cout <<"here" << endl;
+        cout <<"here" << endl;///////////////////////////////////////////////////////////////////////////////////////////to be delete
         int x = rand()%3;
-        player.map = &maps[level][x];//randomly select a map
-        cout <<"here" << endl;
+        player.map->build_map(level, x);//randomly select a map
+        cout <<"here" << endl;///////////////////////////////////////////////////////////////////////////////////////////to be delete
         game_page(player);
-        cout <<"here" << endl;
+        cout <<"here" << endl;///////////////////////////////////////////////////////////////////////////////////////////to be delete
 
     }
 

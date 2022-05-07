@@ -3,7 +3,6 @@
 
 #include "structure.h"
 
-
 void input_level(Player &player);
 void output_level(Player player);
 char get_input();

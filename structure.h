@@ -15,6 +15,10 @@ using namespace std;
 
 #define Max_Level 6
 
+extern string maps[10][5][13];
+extern int maps_size[10][5][2];
+extern int maps_coin[10][5];
+
 //a position on the 2D map
 struct Point{
     int x, y;//coordinates
@@ -133,7 +137,7 @@ struct Box{
 
 //the struct which stores the image of each unit
 struct Image{
-    string s[RANGE_Y];
+    string s[RANGE_X];
     void set_bomb(){
         s[0] = " - ";
         s[1] = "{\u2739}";
@@ -269,6 +273,8 @@ struct Map{
     //print the map
     void print_map(Point position);
 
+    void build_map(int level, int _);
+
     void delete_map();
 
     //set a bomb
@@ -280,9 +286,6 @@ struct Map{
     void set_seed(Point p, Time t);
 
 };
-
-
-extern vector<vector<Map> > maps;
 
 
 //Profile of the player
