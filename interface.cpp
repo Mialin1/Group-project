@@ -3,6 +3,12 @@
 #include "IO.h"
 using namespace std;
 
+void _sleep(int s, int ns){
+    struct timespec ts, ts1;
+    ts.tv_nsec = ns;
+    ts.tv_sec = s;
+    nanosleep(&ts, &ts1);
+}
 
 //all the pages are printed by this function
 void print_page(string passage[], int length, int size){
@@ -164,12 +170,11 @@ void room_page(Player &player){
         }
         print_loading();
         player.initialize();
-        cout <<"here" << endl;///////////////////////////////////////////////////////////////////////////////////////////to be delete
         int x = rand()%3;
         player.map = new Map;
         player.map->build_map(level, x);//randomly select a map
-        cout <<"here" << endl;///////////////////////////////////////////////////////////////////////////////////////////to be delete
         game_page(player);
+        _sleep(0, 10);
         cout <<"here" << endl;///////////////////////////////////////////////////////////////////////////////////////////to be delete
 
     }
@@ -184,11 +189,7 @@ void print_loading(){
     string load[1];
     load[0]="Loading.........";
     print_page(load,sizeof(load[0]),1);
-    struct timespec ts, ts1;
-    ts.tv_nsec = 0;
-    ts.tv_sec = 2;
-    nanosleep(&ts, &ts1);
-    refresh();
+    _sleep(2, 0);
 }
 
 
@@ -257,11 +258,11 @@ void game_page(Player player){
     print_name(player);
     Map *map=player.map;
     cout << endl;
-    for(int i = 0; i < (map -> len_y + 4)*RANGE_Y; i++)
+    for(int i = 0; i < map -> len_y *RANGE_Y + 4; i++)
         cout<<"\u25BA";
     cout<<endl;
     map->print_map(player.position);
-    for(int i = 0; i < (map -> len_y + 4)*RANGE_Y; i++)
+    for(int i = 0; i < map -> len_y *RANGE_Y + 4; i++)
         cout<<"\u25C4";
     cout<<endl;
     cout<<" "<<endl;
