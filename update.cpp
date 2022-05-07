@@ -58,7 +58,7 @@ void map_update(Player &player){
         //check for map units changes
         for(int i = 0; i < map->len_x; i ++){
             for(int j = 0; j < map->len_y; j ++){
-                unit u = map -> map[i][j]; 
+                unit &u = map -> map[i][j]; 
             
                 //check if there is any bomb to bang
                 //can add explosion effect here
@@ -71,28 +71,26 @@ void map_update(Player &player){
                     }
                     //effect2
                     if(u.bomb -> effect2(remain)){
-                        for(int _i = max(0, i-1); _i <= min(RANGE_X, i+1); _i ++){
-                            for(int _j = max(0, j-1); _j <= min(RANGE_Y, j+1); _j ++){
+                        for(int _i = max(0, i-1); _i < min(map->len_x, i+2); _i ++){
+                            for(int _j = max(0, j-1); _j < min(map -> len_y, j+2); _j ++){
 
-                                unit u1 = map -> map[_i][_j];
+                                unit &u1 = map -> map[_i][_j];
 
-                                u.image.s[0]=" \033[45m"+u1.image.s[0]+"\033[0m";
-                                u.image.s[1]=" \033[45m"+u1.image.s[1]+"\033[0m";
-                                u.image.s[2]=" \033[45m"+u1.image.s[2]+"\033[0m";
+                                u1.image.s[0]="\033[45m"+u1.image.s[0]+"\033[0m";
+                                u1.image.s[1]="\033[45m"+u1.image.s[1]+"\033[0m";
+                                u1.image.s[2]="\033[45m"+u1.image.s[2]+"\033[0m";
                             }
                         }
                     }
-                    
-                
 
                     //the moment after explosion(the outcome)
                     if(u.bomb -> explode(remain)){
                         //3*3 all to empty(except for stone walls)
                         //boxes became coins / props
-                        for(int _i = max(0, i-1); _i <= min(RANGE_X, i+1); _i ++){
-                            for(int _j = max(0, j-1); _j <= min(RANGE_Y, j+1); _j ++){
+                        for(int _i = max(0, i-1); _i < min(map->len_x, i+2); _i ++){
+                            for(int _j = max(0, j-1); _j < min(map -> len_y, j+2); _j ++){
                                 
-                                unit u1 = map -> map[_i][_j];
+                                unit &u1 = map -> map[_i][_j];
 
                                 //check if user is in this zone
                                 if (player.position.x == _i && player.position.y == _j){
@@ -136,9 +134,15 @@ void map_update(Player &player){
                                         u1.set("space", _i, _j); //set to space
                                     }
                                 }
+                                else{
+                                    u1.image.s[0]=u1.image.s[0].substr(5, 4);
+                                    u1.image.s[1]=u1.image.s[1].substr(5, 4);
+                                    u1.image.s[2]=u1.image.s[2].substr(5, 4);
+                                }
                             }
                             if (restart) break;
                         }
+                        u.set("space", i, j);
                         delete u.bomb;
                         if (restart) break;
                     }
